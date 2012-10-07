@@ -45,3 +45,5 @@ gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
 gem "email_spec", ">= 1.2.1", :group => :test
 gem "bootstrap-sass", ">= 2.1.0.0"
 gem "devise", ">= 2.1.2"
+gem "quiet_assets", ">= 1.0.1", :group => :development
+gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
