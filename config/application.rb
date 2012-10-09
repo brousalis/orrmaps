@@ -72,5 +72,7 @@ module Orrore
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    CARTOGRAPHER_GMAP_VERSION = 3
   end
 end

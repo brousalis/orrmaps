@@ -1,25 +1,34 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
-*/
+/*= require_self */
 
-.content {
-  background-color: #eee;
-  padding: 20px;
-  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+body { padding-top: 40px; }
+
+#map {
+  position: fixed !important;
+  width: 100%;
+  height: 100%;
+}
+
+.info { 
+  border-radius: 4px; 
+  @include border-radius(4px); 
+  margin-top: 8px; 
+  background: rgba(0,0,0,0.7); 
+  padding: 5px; 
+  width: 53px;
+  a { 
+    @include opacity(0.7); margin-left: 6px; margin-right: 6px }
+    &:hover { @include opacity(1); 
+  }
+}
+.infoBox img { margin: 2px -6px !important; }
+
+.navbar { font-size: 13px; }
+.navbar{
+  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+     -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+          box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);  
+  border-bottom: 1px solid #fff;
 }

@@ -1,14 +1,22 @@
-= link_to "Orrore", root_path, :class => 'brand'
-%ul.nav
-  - if user_signed_in?
-    %li
-      = link_to 'Logout', destroy_user_session_path, :method=>'delete'
-  - else
-    %li
-      = link_to 'Login', new_user_session_path
-  - if user_signed_in?
-    %li
-      = link_to 'Edit account', edit_user_registration_path
-  - else
-    %li
-      = link_to 'Sign up', new_user_registration_path
+.container
+  %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
+    %span.icon-bar
+    %span.icon-bar
+    %span.icon-bar
+  %a.brand{:href => "./index.html"} Bootstrap
+  .nav-collapse.collapse
+    %ul.nav
+      %li
+        %a{:href => "./index.html"} Home
+      %li
+        %a{:href => "./getting-started.html"} Get started
+      %li
+        %a{:href => "./scaffolding.html"} Scaffolding
+      %li
+        %a{:href => "./base-css.html"} Base CSS
+      %li
+        %a{:href => "./components.html"} Components
+      %li.active
+        %a{:href => "./javascript.html"} Javascript
+      %li
+        %a{:href => "./customize.html"} Customize
