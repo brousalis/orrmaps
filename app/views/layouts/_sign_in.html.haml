@@ -1,0 +1,18 @@
+#sign_in.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "sign_in", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Sign in or register
+  .modal-body
+    %p 
+      By registering, you'll be able to maintain your own map daily, share your map with others, rate other maps, and more. The site is still in beta,
+      %a{:href => "orrmaps@gmail.com"} e-mail me
+      if you find any issues. Thanks! 
+      %i.icon-white.icon-heart
+      %strong Brous 
+      on Blackgate
+    = form_for(@user, :url => registration_path(@user)) do |f|
+      %div
+        = f.text_field :name, :placeholder => "username", :class => "username"
+      %div
+        = f.password_field :password, :placeholder => "password", :class => "password"
+      %div= f.submit "Submit", :class => "btn btn-primary btn-large"

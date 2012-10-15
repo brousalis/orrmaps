@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009042059) do
+ActiveRecord::Schema.define(:version => 20121015003657) do
+
+  create_table "likes", :force => true do |t|
+    t.integer  "map_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "maps", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "server_id"
+    t.integer  "point_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "points", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -20,6 +35,14 @@ ActiveRecord::Schema.define(:version => 20121009042059) do
     t.float    "longitude"
     t.boolean  "gmaps"
     t.string   "marker_id"
+    t.integer  "map_id"
+  end
+
+  create_table "servers", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.string   "country"
   end
 
   create_table "users", :force => true do |t|
@@ -36,6 +59,8 @@ ActiveRecord::Schema.define(:version => 20121009042059) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
+    t.integer  "map_id"
+    t.integer  "server_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -15,10 +15,6 @@ module Orrore
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
       g.test_framework :rspec
-      
-      
-      
-      
       g.view_specs false
       g.helper_specs false
     end
@@ -72,7 +68,6 @@ module Orrore
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
-    CARTOGRAPHER_GMAP_VERSION = 3
   end
 end
+ActiveRecord::Base.logger = Logger.new(STDOUT)

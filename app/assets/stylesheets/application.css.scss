@@ -3,32 +3,184 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
-body { padding-top: 40px; }
+* { @include box-sizing(border-box); outline: none; }
+
+body { 
+  font-family: proxima-nova-1, proxima-nova-2, Helvetica;
+  padding-top: 40px; 
+  height: 100%;
+  overflow: hidden;
+}
+
+a:hover { text-decoration: none; }
 
 #map {
   position: fixed !important;
-  width: 100%;
   height: 100%;
+  width: 100%;
+}
+
+#sign_in {
+  @include box-shadow(#{inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2)});
+  border: 1px solid #222;
+  background: rgba(0,0,0,0.5);
+
+  .close { color: #fff; }
+  .modal-header { color: #fff; border-color: #222;}
+  p {                                   color: #999; 
+    color: #555; margin-bottom: 20px; 
+    a { display: inline; color: #999; }
+    strong { color: #999; }
+    i { @include opacity(0.2); margin: 2px 2px; }
+  }
+
+  form {
+    position: relative;
+    margin: 0;
+
+    div {
+      padding: 0;
+      margin: 0 0 10px 0;
+      line-height: 1.4;
+
+      input[type=text], input[type=password] { 
+        font-family: proxima-nova-1, proxima-nova-2;
+        font-size: 16px;
+        background: #fff;
+        width: 100%;
+        padding: 20px;
+        padding-left: 35px;
+        border: none;
+        line-height: 130%;
+        @include border-radius(4px);
+        display: inline-block;
+        &.username { background: #fff image-url("user.png") no-repeat 2% 50% }
+        &.password { background: #fff image-url("password.png") no-repeat 2% 50% }
+      }
+      input[type=submit] {
+        font-family: proxima-nova-1, proxima-nova-2;
+        width: 100%;
+        background-image: none;
+        background: #444;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 .info { 
-  border-radius: 4px; 
   @include border-radius(4px); 
-  margin-top: 8px; 
   background: rgba(0,0,0,0.7); 
+  border-radius: 4px; 
+  margin-top: 8px; 
   padding: 5px; 
   width: 53px;
   a { 
-    @include opacity(0.7); margin-left: 6px; margin-right: 6px }
-    &:hover { @include opacity(1); 
+    @include opacity(0.7); 
+    margin-right: 6px;
+    margin-left: 6px; 
+    i { @include opacity(0.5); }
+    &:hover { @include opacity(1); }
+    &.report, &.report:hover { cursor: default; @include opacity(0.3); }
   }
 }
 .infoBox img { margin: 2px -6px !important; }
 
-.navbar { font-size: 13px; }
-.navbar{
-  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-     -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-          box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);  
-  border-bottom: 1px solid #fff;
+.navbar {
+  font-size: 14px;
+  text-shadow: none;
+  @include box-shadow(#{inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2)});
+
+  &.navbar-inverse {
+    z-index: 666;
+    top: 40px;
+    border-bottom: none;
+    border-bottom: 3px solid #222;
+    margin-bottom: 0;
+
+    .navbar-inner { 
+      background: #000;
+      background-image: none;
+
+      .brand {
+        text-transform: none;
+        color: #fff;
+
+        i {
+          margin-top: 6px;
+          margin-right: 2px;
+        } 
+      }
+
+      .logout {
+        padding: 10px 20px 10px;
+        float: left;  
+        color: #fff;
+        @include opacity(0.6);
+
+        i { margin-top: 6px; }
+        &:hover { @include opacity(0.8); }
+      } 
+    }
+  }
+
+  .navbar-inner {
+    background: #fff;
+    background-image: none;
+
+    .brand { color: #000; }
+    .nav {
+      li {
+        a { 
+          outline: none;
+          text-shadow: none;
+          &:hover { color: inherit; background: none; }
+        }
+
+        i {
+          margin-top: 2px;
+          margin-right: 2px;
+        }
+
+        &.server {
+          padding: 11px 0px 11px 15px;
+        }
+      }
+      & > .active > a { background: none; }
+    }
+
+    
+  }
+
+  .date, .rating {
+    font-weight: bold;
+    float: left;
+    display: block;
+    padding: 10px 20px 10px;
+    margin-left: -20px;
+    font-size: 20px;
+    text-transform: lowercase;
+    color: #fff;
+    @include opacity(0.4);
+
+    i {
+      margin-top: 6px;
+      margin-right: 2px;
+    }
+  }
+  .rating {
+    @include opacity(1);
+
+    i {
+      margin-top: 5px;
+    }
+  }
+
+  .brand { 
+    text-transform: uppercase;
+    font-weight: 800;
+    &:hover { background: none }
+  }
 }
