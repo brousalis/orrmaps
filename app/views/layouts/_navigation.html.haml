@@ -18,6 +18,7 @@
             %a.sign_in{:href => "/users/sign_out"} 
               %i.icon.icon-off
               Sign out
+              %strong= current_user.name
         %li
           %a.dropdown-toggle{:"data-toggle" => "dropdown", :href => "#"} 
             %i.icon.icon-home

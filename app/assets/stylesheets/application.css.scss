@@ -48,7 +48,11 @@ a:hover { text-decoration: none; }
         &.alert {
           margin-bottom: 20px;
           padding: 5px;
-          i { float: left; margin-right: 5px; margin-top: 2px; @include opacity(0.3); }
+          text-shadow: none;
+          background: #B94A48;
+          border: none;
+          color: #fff;
+          i { float: left; margin-right: 5px; margin-top: 3px; @include opacity(0.3); }
           .error { margin: 0; .error { margin: 0; }}
         }
       }
