@@ -13,6 +13,11 @@
             %a.sign_in{:href => "#sign_in", :"data-toggle" => "modal"} 
               %i.icon.icon-user
               Sign in 
+        - else
+          %li
+            %a.sign_in{:href => "/users/sign_out"} 
+              %i.icon.icon-off
+              Sign out
         %li
           %a.dropdown-toggle{:"data-toggle" => "dropdown", :href => "#"} 
             %i.icon.icon-home

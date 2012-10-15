@@ -43,6 +43,16 @@ a:hover { text-decoration: none; }
       margin: 0 0 10px 0;
       line-height: 1.4;
 
+      &.errors { 
+        display: none; 
+        &.alert {
+          margin-bottom: 20px;
+          padding: 5px;
+          i { float: left; margin-right: 5px; margin-top: 2px; @include opacity(0.3); }
+          .error { margin: 0; .error { margin: 0; }}
+        }
+      }
+
       input[type=text], input[type=password] { 
         font-family: proxima-nova-1, proxima-nova-2;
         font-size: 16px;

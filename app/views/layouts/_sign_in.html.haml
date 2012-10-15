@@ -10,7 +10,10 @@
       %i.icon-white.icon-heart
       %strong Brous 
       on Blackgate
-    = form_for(@user, :url => registration_path(@user)) do |f|
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :remote => true) do |f|
+      .errors.alert.alert-error
+        %i.icon.icon-exclamation-sign
+        .error
       %div
         = f.text_field :name, :placeholder => "username", :class => "username"
       %div

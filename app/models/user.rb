@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  validates :name, :uniqueness => true
 
   has_one :server
   has_one :map
@@ -14,5 +15,9 @@ class User < ActiveRecord::Base
 
   def already_likes? map
     self.likes.find(:all, :conditions => ['map_id= ?', map.id]).size > 0
+  end
+
+  def email_required?
+    false
   end
 end

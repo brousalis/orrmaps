@@ -30,13 +30,55 @@ orrmaps.dialog = function() {
     $('#sign_in').modal('hide');    
   };
 
+  var serialize = function() {
+    var values = {}
+    $("#new_user input").each( function(){
+      values[this.name] = $(this).val();
+    });
+    
+    return values;
+  }
+
+  var capitalize = function(string) {  return string.charAt(0).toUpperCase() + string.slice(1); };
+
+  var handle_submit = function() {
+    $("#new_user").submit(function(e){
+      e.preventDefault(); 
+      $.ajax({
+        type: "POST",
+        url: "/users",
+        data: serialize($(this)),
+        success: function(json) {
+          location.reload();
+        },
+        error: function(json){
+          errors = jQuery.parseJSON(json.responseText).errors;
+          error_text = ""
+          for (error in errors) {
+            error_text += capitalize(error) + ' ' + errors[error] + '. ';
+          }
+
+          $('#new_user .error').html(error_text);
+          $('#new_user .errors').fadeIn();
+
+        },
+        dataType: "json"
+      });
+      return false;
+    });
+    
+  };
+
   var init = function() {
     $('input').attr('autocomplete', 'off');
-    open();
+    handle_submit();
   };
 
   return {
     open: open,
+    handle_submit: handle_submit,
+    serialize: serialize,
+    capitalize: capitalize,
     close: close,
     init: init
   };

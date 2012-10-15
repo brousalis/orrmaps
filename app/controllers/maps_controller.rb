@@ -3,7 +3,7 @@ class MapsController < ApplicationController
 
   def index
     if user_signed_in?
-      @map = find_by_or_create_by_created_at(Date.today.to_s)
+      @map = Map.find_or_create_by_created_at(Date.today.to_s)
       @points = @map.points.to_gmaps4rails
     end
 

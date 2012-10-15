@@ -1,10 +1,9 @@
 Orrore::Application.routes.draw do
-  devise_for :users
 
-  resources :users
   resources :points
   resources :servers
   resources :maps
 
   root :to => "home#index"
+  devise_for :users, :controllers => {:sessions => "sessions"}
 end
