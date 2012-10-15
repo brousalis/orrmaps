@@ -35,32 +35,20 @@ orrmaps.dialog = function() {
     $("#new_user input").each( function(){
       values[this.name] = $(this).val();
     });
-    
     return values;
   }
-
-  var capitalize = function(string) {  return string.charAt(0).toUpperCase() + string.slice(1); };
 
   var handle_submit = function() {
     $("#new_user").submit(function(e){
       e.preventDefault(); 
       $.ajax({
-        type: "POST",
+        type: "post",
         url: "/users",
         data: serialize($(this)),
-        success: function(json) {
-          location.reload();
-        },
-        error: function(json){
-          errors = jQuery.parseJSON(json.responseText).errors;
-          error_text = ""
-          for (error in errors) {
-            error_text += capitalize(error) + ' ' + errors[error] + '. ';
-          }
-
-          $('#new_user .error').html(error_text);
+        success: function(json){
+          if(json.location) window.location = json.location
+          $('#new_user .error').html(json.errors);
           $('#new_user .errors').fadeIn();
-
         },
         dataType: "json"
       });
@@ -72,13 +60,13 @@ orrmaps.dialog = function() {
   var init = function() {
     $('input').attr('autocomplete', 'off');
     handle_submit();
+    open();
   };
 
   return {
     open: open,
     handle_submit: handle_submit,
     serialize: serialize,
-    capitalize: capitalize,
     close: close,
     init: init
   };
@@ -188,7 +176,7 @@ orrmaps.map = function() {
 
       var mc = new MarkerClusterer(map, markers); 
 
-      if (data.length > 0) {
+      if (data != null) {
         for (var i=0; i < data.length; i++) {
           add_marker(data[i]); 
         }

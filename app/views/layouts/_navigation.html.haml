@@ -3,19 +3,19 @@
     .container 
       %a.brand{:href => "/"} Orr maps
       %ul.nav
-        %li{:class => ("active" if user_signed_in?)}
+        %li{:class => ("active" if current_user)}
           %a{:href => "/user/map"} Your map
-        %li{:class => ("active" if !user_signed_in?)}
+        %li{:class => ("active" if !current_user)}
           %a{:href => "/maps/top"} Top rated
       %ul.nav.pull-right
-        - unless user_signed_in?
+        - unless current_user
           %li
             %a.sign_in{:href => "#sign_in", :"data-toggle" => "modal"} 
               %i.icon.icon-user
               Sign in 
         - else
           %li
-            %a.sign_in{:href => "/users/sign_out"} 
+            %a.sign_in{:href => "/logout"} 
               %i.icon.icon-off
               Sign out
               %strong= current_user.name

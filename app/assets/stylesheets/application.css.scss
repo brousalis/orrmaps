@@ -3,7 +3,7 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
-* { @include box-sizing(border-box); outline: none; }
+* { border: none; @include box-sizing(border-box); outline: none; }
 
 body { 
   font-family: proxima-nova-1, proxima-nova-2, Helvetica;

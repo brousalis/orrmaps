@@ -6,4 +6,10 @@ class Point < ActiveRecord::Base
                     :process_geocoding => false
 
   belongs_to :map
+
+  before_save :assign_user
+
+  def assign_user 
+    self.map = current_user.map if current_user
+  end
 end

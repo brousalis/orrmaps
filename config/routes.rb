@@ -1,9 +1,9 @@
 Orrore::Application.routes.draw do
-
+  resources :users
   resources :points
   resources :servers
   resources :maps
 
   root :to => "home#index"
-  devise_for :users, :controllers => {:sessions => "sessions"}
+  get "logout" => "users#destroy", :as => "logout"
 end

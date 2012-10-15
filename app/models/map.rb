@@ -1,5 +1,5 @@
 class Map < ActiveRecord::Base
-  attr_accessible :title, :body, :user, :server, :points
+  attr_accessible :user, :server, :points
 
   belongs_to :user
   belongs_to :server

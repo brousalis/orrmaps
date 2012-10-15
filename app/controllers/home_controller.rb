@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   before_filter :set_server
 
   def index
-    @user = User.new unless user_signed_in?
+    @user = User.new unless current_user
   end
 
   def set_server

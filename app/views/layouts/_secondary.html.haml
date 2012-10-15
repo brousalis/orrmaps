@@ -1,7 +1,7 @@
 %div.navbar.navbar-inverse.navbar-fixed-top
   %nav.navbar-inner
     .container 
-      - if user_signed_in?
+      - if current_user
         .brand{:href => "#"}
           %i.icon.icon-white.icon-user
           = current_user.name

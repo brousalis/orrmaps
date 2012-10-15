@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015064527) do
+ActiveRecord::Schema.define(:version => 20121015203606) do
 
   create_table "likes", :force => true do |t|
     t.integer  "map_id"
@@ -29,40 +29,29 @@ ActiveRecord::Schema.define(:version => 20121015064527) do
   end
 
   create_table "points", :force => true do |t|
+    t.float    "latitude",   :null => false
+    t.float    "longitude",  :null => false
+    t.string   "marker_id",  :null => false
+    t.integer  "map_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.float    "latitude"
-    t.float    "longitude"
-    t.boolean  "gmaps"
-    t.string   "marker_id"
-    t.integer  "map_id"
   end
 
   create_table "servers", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "country",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "name"
-    t.string   "country"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => ""
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "name",                                   :null => false
+    t.string   "name",          :null => false
+    t.string   "password_hash", :null => false
+    t.string   "password_salt", :null => false
     t.integer  "map_id"
     t.integer  "server_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
-
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end
