@@ -61,6 +61,6 @@ Server.create(:name => "Elona Reach", :country => "GE")
 Server.create(:name => "Kodash", :country => "GE") 
 Server.create(:name => "Miller's Sound", :country => "GE") 
 Server.create(:name => "Riverside", :country => "GE") 
-Server.create(:name => "", :country => "GE") 
-Server.create(:name => "Spanish", :country => "GE") 
-Server.create(:name => "Baruch Bay", :country => "GE") 
+
+Server.create(:name => "Baruch Bay", :country => "MX") 
+

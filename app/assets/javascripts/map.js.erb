@@ -1,0 +1,83 @@
+orrmaps.map = function() {
+  var map
+  var markers = [];
+  var current_marker, current_marker_id, current_info_box;
+  var image = "<%= asset_path 'tiles/ore.png' %>";
+
+  var add_marker = function(point) {
+    var _point = new google.maps.LatLng(point.lat, point.lng)
+
+    var marker = new google.maps.Marker({
+      position: _point,
+      animation: google.maps.Animation.DROP,
+      map: map,
+      icon: image
+    }); 
+  };
+
+  var init = function() { 
+    var url = '/' + $('#map').attr('name').replace('_','\/');
+    $.post(url, function(data) {
+      var map_options = {
+        zoom: 4,
+        center: new google.maps.LatLng(46.558860303117164, 10.37109375),
+        disableDefaultUI: true,
+      }
+
+      var customMapType = new google.maps.ImageMapType({
+        getTileUrl: function(coord, zoom) {
+          var normalizedCoord = normalize(coord, zoom);
+          if(normalizedCoord && (normalizedCoord.x < Math.pow(2, zoom)) && (normalizedCoord.x > -1) && (normalizedCoord.y < Math.pow(2, zoom)) && (normalizedCoord.y > -1)) {
+            var tile = "" + zoom + '_' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
+            return "<%= asset_path 'tiles/"+ tile +"' %>";
+          } else {
+            return "<%= asset_path 'tiles/_empty.jpg' %>";
+          }
+        },
+        tileSize: new google.maps.Size(256, 256),
+        maxZoom: 4,
+        minZoom: 2
+      });
+
+      map = new google.maps.Map(document.getElementById("map"), map_options);
+
+      map.mapTypes.set('custom', customMapType);
+      map.setMapTypeId('custom'); 
+
+      var mc = new MarkerClusterer(map, markers); 
+
+      if (data != null) {
+        for (var i=0; i < data.length; i++) {
+          add_marker(data[i]); 
+        }
+      }
+
+    });
+  };
+
+  var normalize = function(coord, zoom) {
+     var y = coord.y;
+     var x = coord.x;
+     var tileRange = 1 << zoom;
+
+     if (y < 0 || y >= tileRange) {
+       return null;
+     }
+
+     if (x < 0 || x >= tileRange) {
+       x = (x % tileRange + tileRange) % tileRange;
+     }
+
+     return {
+       x: x,
+       y: y
+     };
+  };
+   
+  return {
+    add_marker: add_marker,
+    normalize: normalize,
+    init: init
+  };
+}();
+ 

@@ -5,11 +5,13 @@ class Point < ActiveRecord::Base
                     :lng => 'longitude',
                     :process_geocoding => false
 
+  after_create :update_map
+  after_update :update_map
   belongs_to :map
 
-  before_save :assign_user
-
-  def assign_user 
-    self.map = current_user.map if current_user
+  def update_map
+    m = self.map
+    m.updated = Time.now
+    m.save
   end
 end

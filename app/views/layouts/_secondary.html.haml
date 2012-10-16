@@ -1,14 +1,19 @@
 %div.navbar.navbar-inverse.navbar-fixed-top
   %nav.navbar-inner
     .container 
-      - if current_user
-        .brand{:href => "#"}
+      - if map
+        .brand.logo{:href => "#"}
           %i.icon.icon-white.icon-user
-          = current_user.name
+          = map.user.name
         %a.date{:href => "#"}
           %i.icon.icon-white.icon-calendar
           = Date.today.strftime("%b %e")
-        %a.rating{:href => "#"}
-          %i.icon.icon-white.icon-thumbs-up
-          233
+        %a.like{:href => "#", :title => "#{map.id}"}
+          %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user.already_likes?(map))}
+          %span= map.likes.count
           likes
+        %a.date{:href => map_path(map)}
+          %i.icon.icon-white.icon-share
+          = "/maps/#{map.id}"
+
+

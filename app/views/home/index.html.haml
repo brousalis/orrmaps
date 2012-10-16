@@ -1,1 +1,5 @@
-#map
+= render :partial => 'layouts/secondary', :locals => {:map => @map} if current_user
+#main{:role => "main"} 
+  #map
+:javascript
+  orrmaps.index.init();

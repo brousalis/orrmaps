@@ -324,8 +324,6 @@ InfoBox.prototype.addClickHandler_ = function () {
 
     closeBox = this.div_.firstChild;
     this.closeListener_ = google.maps.event.addDomListener(closeBox, 'click', this.getCloseClickHandler_());
-    alert(0);
-
   } else {
 
     this.closeListener_ = null;

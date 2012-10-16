@@ -1,0 +1,7 @@
+= render :partial => 'layouts/secondary', :locals => {:map => @map}
+#main{:role => "main"} 
+  #map{:name => "map_#{@map.id}"}
+  :javascript
+    orrmaps.map.init();
+
+

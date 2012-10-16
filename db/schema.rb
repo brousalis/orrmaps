@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(:version => 20121015203606) do
   end
 
   create_table "maps", :force => true do |t|
+    t.datetime "updated"
     t.integer  "user_id"
+    t.integer  "likes_id"
     t.integer  "server_id"
     t.integer  "point_id"
     t.datetime "created_at", :null => false
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20121015203606) do
   create_table "servers", :force => true do |t|
     t.string   "name",       :null => false
     t.string   "country",    :null => false
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

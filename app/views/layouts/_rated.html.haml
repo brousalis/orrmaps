@@ -1,0 +1,21 @@
+#pageslide
+  #modal
+    %h2 Top rated
+    .meta
+      %span for #{session[:server]}
+      %span 
+        on
+        %strong= Date.today.strftime("%b %e")
+    %ul.top
+      - @rated.each do |map|
+        %li
+          %a{:href => "/maps/#{map[:map].id}"}
+            .map
+              %i.icon.icon-white.icon-user
+              =map[:map].user.name
+            .likes 
+              #{map[:count]}
+              - if current_user
+                %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user.already_likes?(map[:map]))}
+            .clearfix
+

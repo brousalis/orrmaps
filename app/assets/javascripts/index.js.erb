@@ -1,94 +1,21 @@
-//= require jquery
-//= require jquery_ujs
-//= require bootstrap-dropdown
-//= require bootstrap-modal
-//= require bootstrap-transition
-//= require_tree .
-
-var orrmaps = (function(orrmaps, $) {
-   $.fn.preload = function() {
-    this.each(function() {
-      $('<img/>')[0].src = this;
-    });
-  };
-
-  $(function() {
-    orrmaps.map.init(); 
-    orrmaps.dialog.init();
-  });
-
-  return orrmaps;
-
-}(orrmaps || {}, jQuery));
-
-orrmaps.dialog = function() {
-  var open = function() { 
-    $('#sign_in').modal('show');    
-  };
-
-  var close = function() { 
-    $('#sign_in').modal('hide');    
-  };
-
-  var serialize = function() {
-    var values = {}
-    $("#new_user input").each( function(){
-      values[this.name] = $(this).val();
-    });
-    return values;
-  }
-
-  var handle_submit = function() {
-    $("#new_user").submit(function(e){
-      e.preventDefault(); 
-      $.ajax({
-        type: "post",
-        url: "/users",
-        data: serialize($(this)),
-        success: function(json){
-          if(json.location) window.location = json.location
-          $('#new_user .error').html(json.errors);
-          $('#new_user .errors').fadeIn();
-        },
-        dataType: "json"
-      });
-      return false;
-    });
-    
-  };
-
-  var init = function() {
-    $('input').attr('autocomplete', 'off');
-    handle_submit();
-    open();
-  };
-
-  return {
-    open: open,
-    handle_submit: handle_submit,
-    serialize: serialize,
-    close: close,
-    init: init
-  };
-}();
-
-orrmaps.map = function() {
-  var map
+orrmaps.index = function() {
+  var map, map_id;
   var markers = [];
   var current_marker, current_marker_id, current_info_box;
-  var image = '/assets/tiles/ore.png';
+  var image = "<%= asset_path 'tiles/ore.png' %>";
 
-  var get_marker_id = function(lat, lng) {
-    return String(lat).replace(/\./g, "").replace(/\-/g, "")  + '_' + String(lng).replace(/\./g, "").replace(/\-/g, ""); 
+  var get_marker_id = function(latlng) {
+    return latlng.toUrlValue(); 
   };
 
   var remove_current_marker = function() {
     current_marker.setMap(null);
     current_info_box.close();
     delete markers[current_marker_id];
-    $.ajax({ url: '/points/'+marker_id, 
+    $.ajax({ url: '/points', 
              type: 'DELETE', 
              data: { 
+               marker_id: current_marker_id,
                latitude: current_marker.position.Xa, 
                longitude: current_marker.position.Ya
              }
@@ -96,20 +23,21 @@ orrmaps.map = function() {
   };
 
   var update_marker = function(marker) {
-    marker_id = get_marker_id(marker.Xa, marker.Ya);
+    marker_id = get_marker_id(marker.getPosition());
     $.ajax({ url: '/points', 
              type: 'PUT', 
              data: {
-               latitude: marker.Xa, 
-               longitude: marker.Ya, 
-               marker_id: marker_id
+               latitude: marker.position.Xa, 
+               longitude: marker.position.Ya, 
+               marker_id: current_marker_id,
+               new_marker_id: marker_id
              }
     });
   };
 
   var add_marker = function(point) {
     var _point = new google.maps.LatLng(point.lat, point.lng)
-    var marker_id = get_marker_id(point.lat, point.lng);    
+    var marker_id = get_marker_id(_point);    
 
     var marker = new google.maps.Marker({
       position: _point,
@@ -125,26 +53,32 @@ orrmaps.map = function() {
   };
 
   var place_marker = function(location) {
-    marker_id = get_marker_id(location.Xa, location.Ya);
+    marker_id = get_marker_id(location);
+    $.ajax({
+      url: 'points', 
+      type: 'post',
+      data: {map_id: map_id, latitude: location.Xa, longitude: location.Ya, marker_id: marker_id},
+      success: function(json) {
+        if(json.status == "failure") {
+          
+        } else {
+          var marker = new google.maps.Marker({
+            position: location, 
+            animation: google.maps.Animation.DROP,
+            map: map,
+            icon: image,
+            draggable: true,
+            id: 'marker_' + marker_id
+          });
 
-    $.post('/points', {latitude: location.Xa, longitude: location.Ya, marker_id: marker_id});
-
-    var marker = new google.maps.Marker({
-      position: location, 
-      animation: google.maps.Animation.DROP,
-      map: map,
-      icon: image,
-      draggable: true,
-      id: 'marker_' + marker_id
+          add_info_box(marker);
+          markers[marker_id] = marker; 
+        }
+      }
     });
-
-    add_info_box(marker);
-    markers[marker_id] = marker;
   };
 
   var init = function() { 
-    $('.dropdown-toggle').dropdown();
-
     $.get('/maps', function(data) {
       var map_options = {
         zoom: 4,
@@ -156,9 +90,10 @@ orrmaps.map = function() {
         getTileUrl: function(coord, zoom) {
           var normalizedCoord = normalize(coord, zoom);
           if(normalizedCoord && (normalizedCoord.x < Math.pow(2, zoom)) && (normalizedCoord.x > -1) && (normalizedCoord.y < Math.pow(2, zoom)) && (normalizedCoord.y > -1)) {
-            return 'assets/tiles/' + zoom + '_' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
+            var tile = "" + zoom + '_' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
+            return "<%= asset_path 'tiles/"+ tile +"' %>";
           } else {
-            return 'assets/tiles/_empty.jpg';
+            return "<%= asset_path 'tiles/_empty.jpg' %>";
           }
         },
         tileSize: new google.maps.Size(256, 256),
@@ -175,10 +110,12 @@ orrmaps.map = function() {
       map.setMapTypeId('custom'); 
 
       var mc = new MarkerClusterer(map, markers); 
+      map_id = data.map_id;
 
-      if (data != null) {
-        for (var i=0; i < data.length; i++) {
-          add_marker(data[i]); 
+      points = $.parseJSON(data.points);
+      if (points != "[]") {
+        for (var i=0; i < points.length; i++) {
+          add_marker(points[i]); 
         }
       }
 
@@ -186,10 +123,8 @@ orrmaps.map = function() {
   };
 
   var add_info_box = function(marker) {
-    marker_id = get_marker_id(marker.position.Xa, marker.position.Ya);
-
     var box = document.createElement("div");
-    box.className = marker_id + " info";
+    box.className = "info";
     box.innerHTML = "<a class='delete' href='#'><i class='icon icon-white icon-trash'></i></a><a class='report' href='#'><i class='icon icon-white icon-flag'></i></a>";
 
     $(box).find('.delete').click(function() { 
@@ -201,17 +136,17 @@ orrmaps.map = function() {
       content: box,
       disableAutoPan: false,
       maxWidth: 0,
-      pixelOffset: new google.maps.Size(-30, 0),
+      pixelOffset: new google.maps.Size(-25, 0),
       zIndex: null,
       boxStyle: { 
-        background: "url('/assets/tiles/tipbox.png') no-repeat 48% 1px"
+        background: "url('<%= asset_path 'tiles/tipbox.png'%>') no-repeat 48% 1px"
       },
-      closeBoxURL: "/assets/tiles/close.png",
+      closeBoxURL: "<%= asset_path 'tiles/close.png' %>",
       infoBoxClearance: new google.maps.Size(1, 1),
       isHidden: false,
       pane: "floatPane",
       enableEventPropagation: false,
-      id: 'marker_' + marker_id
+      id: 'marker_' + marker.id
     }
      
     var ib = new InfoBox(box_options);
@@ -220,9 +155,14 @@ orrmaps.map = function() {
       update_marker(marker);
     });
 
+    google.maps.event.addListener(marker, 'dragstart', function() {
+      current_marker = marker;
+      current_marker_id = marker.id.replace("marker_","");
+    }); 
+
     google.maps.event.addListener(marker, "click", function(event) {
       current_marker = marker;
-      current_marker_id = marker_id;
+      current_marker_id = marker.id.replace("marker_","");
       current_info_box = ib;
       ib.open(map, this);
     });
@@ -257,4 +197,4 @@ orrmaps.map = function() {
   };
 }();
 
-
+ 

@@ -1,12 +1,12 @@
 %div.navbar.navbar-fixed-top
   %nav.navbar-inner
     .container 
-      %a.brand{:href => "/"} Orr maps
+      %a.brand.logo{:href => "/"} Orr maps
       %ul.nav
-        %li{:class => ("active" if current_user)}
-          %a{:href => "/user/map"} Your map
-        %li{:class => ("active" if !current_user)}
-          %a{:href => "/maps/top"} Top rated
+        %li.your
+          %a{:href => "/"} Your map
+        %li.rated
+          %a.top_rated{:href => "#"} Top rated
       %ul.nav.pull-right
         - unless current_user
           %li
@@ -20,30 +20,6 @@
               Sign out
               %strong= current_user.name
         %li
-          %a.dropdown-toggle{:"data-toggle" => "dropdown", :href => "#"} 
+          %a{:href => "#servers", :"data-toggle" => "modal"} 
             %i.icon.icon-home
-            %strong= @server 
-          %ul.dropdown-menu{:"role" => "menu"}
-            %li.nav-header United States
-            - Server.find_all_by_country("US").each do |server|
-              %li
-                %a{:href => "#"}= server.name
-            %li.nav-header Europe
-            - Server.find_all_by_country("EU").each do |server|
-              %li
-                %a{:href => "#"}= server.name     
-            %li.nav-header France
-            - Server.find_all_by_country("FR").each do |server|
-              %li
-                %a{:href => "#"}= server.name 
-            %li.nav-header Germany
-            - Server.find_all_by_country("GE").each do |server|
-              %li
-                %a{:href => "#"}= server.name 
-            %li.nav-header Mexico
-            - Server.find_all_by_country("GE").each do |server|
-              %li
-                %a{:href => "#"}= server.name  
-            %li.nav-header Spanish
-            %li
-              %a{:href => "#"} Baruch Bay 
+            %span.server= @server 

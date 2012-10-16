@@ -1,15 +1,11 @@
-#sign_in.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "sign_in", :role => "dialog", :tabindex => "-1"}
+#sign_in.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "sign_in", :role => "dialog", :tabindex => "-1"}
   .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3 Sign in or register
   .modal-body
     %p 
-      By registering, you'll be able to maintain your own map daily, share your map with others, rate other maps, and more. The site is still in beta,
+      By registering you'll can maintain your own map daily, share your map with others, rate other maps, and more. The site is in beta,
       %a{:href => "orrmaps@gmail.com"} e-mail me
-      if you find any issues. Thanks! 
-      %i.icon-white.icon-heart
-      %strong Brous 
-      on Blackgate
+      if you find any issues.
     = form_for(@user, :remote => true) do |f|
       .errors.alert.alert-error
         %i.icon.icon-exclamation-sign

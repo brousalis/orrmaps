@@ -7,7 +7,8 @@
 
 body { 
   font-family: proxima-nova-1, proxima-nova-2, Helvetica;
-  padding-top: 40px; 
+  padding-top: 40px;
+  background: #222;
   height: 100%;
   overflow: hidden;
 }
@@ -20,7 +21,7 @@ a:hover { text-decoration: none; }
   width: 100%;
 }
 
-#sign_in {
+#sign_in, #servers {
   @include box-shadow(#{inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2)});
   border: 1px solid #222;
   background: rgba(0,0,0,0.5);
@@ -83,6 +84,8 @@ a:hover { text-decoration: none; }
     }
   }
 }
+#servers .modal-body { max-height: 600px !important; }
+#servers { width: 660px !important; margin: -350px 0 0 -280px }
 
 .info { 
   @include border-radius(4px); 
@@ -93,8 +96,7 @@ a:hover { text-decoration: none; }
   width: 53px;
   a { 
     @include opacity(0.7); 
-    margin-right: 6px;
-    margin-left: 6px; 
+    margin-left: 5px; 
     i { @include opacity(0.5); }
     &:hover { @include opacity(1); }
     &.report, &.report:hover { cursor: default; @include opacity(0.3); }
@@ -150,11 +152,13 @@ a:hover { text-decoration: none; }
         a { 
           outline: none;
           text-shadow: none;
-          &:hover { color: inherit; background: none; }
+          font-size: 14px;
+          &:hover { color: #000; background: none; }
         }
 
         i {
-          margin-top: 2px;
+          @include opacity(0.4);
+          margin-top: 1px;
           margin-right: 2px;
         }
 
@@ -162,13 +166,15 @@ a:hover { text-decoration: none; }
           padding: 11px 0px 11px 15px;
         }
       }
-      & > .active > a { background: none; }
+      & > .active > a { position: relative; top: 1px; background: none; }
+      & > .rated.active > a { color: #000; position: relative; top: 1px; @include box-shadow(none); background: none; }
+
     }
 
     
   }
 
-  .date, .rating {
+  .date, .like{
     font-weight: bold;
     float: left;
     display: block;
@@ -184,11 +190,11 @@ a:hover { text-decoration: none; }
       margin-right: 2px;
     }
   }
-  .rating {
+  .like {
     @include opacity(1);
-
     i {
-      margin-top: 5px;
+      margin-top: 6px;
+      &.liked { background: image-url('liked.png') no-repeat; }
     }
   }
 
@@ -198,3 +204,62 @@ a:hover { text-decoration: none; }
     &:hover { background: none }
   }
 }
+
+#servers {
+  .servers {
+    float: left;
+    margin-right: 3px;
+    ul {
+      margin: 0;
+      padding: 0;
+      &.nav-header { text-shadow: none }
+      li {
+        list-style: none;
+        margin-right: 17px;
+        text-shadow: none;
+        &.active a { color: #fff; }
+      }
+    }
+  }
+}
+
+#pageslide {
+  display: none;
+  position: absolute;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: 999999;
+  width: 250px;
+  color: #FFF;
+  border-right: #000 5px solid;
+  background: #2e2e2e;
+  @include box-shadow(inset 2px 5px 10px #000);
+}
+#modal {
+  h2 { background: #000; padding: 5px 10px; text-align: center; font-size: 24px; text-transform: uppercase;  text-shadow: 0px 1px 0px #000; margin: 0; }
+  .meta { background: rgba(0,0,0,0.7); padding: 2px 0px; text-align: center; margin: 0 }
+  .top {
+    margin: 0; padding: 0;
+    li {
+      list-style: none;
+      margin-bottom: 5px;
+      &:nth-child(odd) { background: rgba(0,0,0,0.3); }
+      padding: 3px;
+      a { color: #fff; clear: both; font-size: 18px; padding: 2px 5px; display: block; }
+      a:hover .map { padding-left: 3px; }
+      div {
+        &.map { @include transition(0.1s all linear);font-weight: bold; float: left; i { margin-top: 3px; margin-right: 1px; }}
+        &.likes { 
+          opacity: 0.4;
+          i { margin-top: 3px; 
+            &.liked { margin-top: 5px; margin-left: 2px; background: image-url('liked.png') no-repeat; }
+          }
+          float: right;
+        }
+      }
+    }
+  }
+}
+
+
