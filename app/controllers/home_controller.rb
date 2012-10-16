@@ -4,8 +4,8 @@ class HomeController < ApplicationController
   def index
     @user = User.new unless current_user
     @map = Map.new unless current_user
-    @rated = Map.all.collect{|m|{:map=>m,:count=>m.likes.count}}.sort{|a,b| b[:count] <=> a[:count]}
     server = Server.find_by_name(session[:server])
+    @rated = Map.find_all_by_server_id(server.id).collect{|m|{:map=>m,:count=>m.likes.count}}.sort{|a,b| b[:count] <=> a[:count]}
 
     if current_user
       if !current_user.map

@@ -1,12 +1,17 @@
 #pageslide
   #modal
-    %h2 Top rated
+    %h2 
+      Top rated
+      %a.close{:href => "#"} ×
     .meta
       %span for #{session[:server]}
       %span 
         on
         %strong= Date.today.strftime("%b %e")
     %ul.top
+      - if @rated.count == 0
+        %li{:style => "padding: 3px 8px"}
+          No liked maps yet!
       - @rated.each do |map|
         %li
           %a{:href => "/maps/#{map[:map].id}"}
@@ -18,4 +23,5 @@
               - if current_user
                 %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user.already_likes?(map[:map]))}
             .clearfix
+
 

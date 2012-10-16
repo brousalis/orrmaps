@@ -41,7 +41,7 @@ orrmaps.dialog = function() {
 
   var init = function() {
     $('#sign_in').modal({keyboard: false, backdrop: "static"});
-    $('.top_rated').live('click', function() {
+    $('.top_rated, #pageslide .close').live('click', function() {
       $('#pageslide').toggle('slide', {direction: 'left'}, 500);
       $('.rated').toggleClass('active');
     });

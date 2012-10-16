@@ -6,7 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Server.create(:name => "Borlis Pass", :country => "US")
 Server.create(:name => "Anvil Rock", :country => "US") 
 Server.create(:name => "Blackgate", :country => "US") 
 Server.create(:name => "Borlis Pass", :country => "US") 
