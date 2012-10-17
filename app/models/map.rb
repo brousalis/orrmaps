@@ -5,5 +5,4 @@ class Map < ActiveRecord::Base
   belongs_to :server
   has_many :likes
   has_many :points
-
 end

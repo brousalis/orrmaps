@@ -31,7 +31,7 @@ class MapsController < ApplicationController
 
   def like
     map = Map.find_by_id(params[:map_id])
-    if current_user.map != map
+    if current_user && current_user.map != map
       if current_user.already_likes?(map)
         like = map.likes.find_by_user_id(current_user.id)
         like.destroy

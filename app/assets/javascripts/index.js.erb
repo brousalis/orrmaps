@@ -59,8 +59,8 @@ orrmaps.index = function() {
       type: 'post',
       data: {map_id: map_id, latitude: location.Xa, longitude: location.Ya, marker_id: marker_id},
       success: function(json) {
-        if(json.status == "failure") {
-          
+        if(json.status == "unauthorized") {
+          orrmaps.dialog.open();
         } else {
           var marker = new google.maps.Marker({
             position: location, 

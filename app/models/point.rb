@@ -11,7 +11,7 @@ class Point < ActiveRecord::Base
 
   def update_map
     m = self.map
-    m.updated = Time.now
+    m.updated_at = Time.now
     m.save
   end
 end

@@ -12,5 +12,4 @@ class ServersController < ApplicationController
     end
     render :json => { "location" => "/" } #{@server.name.downcase.strip.gsub(' ', '_').gsub(/[^\w-]/, '')}
   end
-
 end

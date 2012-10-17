@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Server.destroy_all
+
 Server.create(:name => "Anvil Rock", :country => "US") 
 Server.create(:name => "Blackgate", :country => "US") 
 Server.create(:name => "Borlis Pass", :country => "US") 
@@ -25,7 +27,7 @@ Server.create(:name => "Jade Quarry", :country => "US")
 Server.create(:name => "Kaineng", :country => "US") 
 Server.create(:name => "Maguuma", :country => "US") 
 Server.create(:name => "Northern Shiverpeaks", :country => "US") 
-Server.create(:name => "Sanctum of Rall2", :country => "US") 
+Server.create(:name => "Sanctum of Rall", :country => "US") 
 Server.create(:name => "Sea of Sorrows", :country => "US") 
 Server.create(:name => "Sorrow's Furnace", :country => "US") 
 Server.create(:name => "Stormbluff Isle", :country => "US") 
@@ -40,7 +42,7 @@ Server.create(:name => "Fissure of Woe", :country => "EU")
 Server.create(:name => "Gandara", :country => "EU") 
 Server.create(:name => "Gunnar's Hold", :country => "EU") 
 Server.create(:name => "Piken Square", :country => "EU") 
-Server.create(:name => "Ring of Fir", :country => "EU")
+Server.create(:name => "Ring of Fire", :country => "EU")
 Server.create(:name => "Ruins of Surmi", :country => "EU")
 Server.create(:name => "Seafarer's Rest", :country => "EU")
 Server.create(:name => "Underworld", :country => "EU") 
@@ -61,5 +63,5 @@ Server.create(:name => "Kodash", :country => "GE")
 Server.create(:name => "Miller's Sound", :country => "GE") 
 Server.create(:name => "Riverside", :country => "GE") 
 
-Server.create(:name => "Baruch Bay", :country => "MX") 
+Server.create(:name => "Baruch Bay", :country => "SP") 
 

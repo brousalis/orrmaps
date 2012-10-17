@@ -2,16 +2,19 @@ class PointsController < ApplicationController
   respond_to :json
 
   def create
-    @map = Map.find_by_id(params[:map_id])
-    puts params[:marker_id]
-    @point = Point.new(:latitude => params[:latitude],
-                       :longitude => params[:longitude],
-                       :marker_id => params[:marker_id])
-    @point.map = @map
-    if @point.save
-      respond_with @point
+    if current_user
+      @map = Map.find_by_id(params[:map_id])
+      @point = Point.new(:latitude => params[:latitude],
+                         :longitude => params[:longitude],
+                         :marker_id => params[:marker_id])
+      @point.map = @map
+      if @point.save
+        respond_with @point
+      else
+        render :json => { "status" => "failure" }
+      end
     else
-      render :json => { "status" => "failure" }
+      render :json => { "status" => "unauthorized" }
     end
   end
 

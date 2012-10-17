@@ -1,10 +1,11 @@
-#sign_in.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "sign_in", :role => "dialog", :tabindex => "-1"}
+#sign_in.modal.fade.hide{:role => "dialog", :tabindex => "-1"}
   .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3 Sign in or register
   .modal-body
     %p 
       By registering you can maintain your own map daily, share your map with others, rate other maps, and more. The site is in beta,
-      %a{:href => "orrmaps@gmail.com"} e-mail me
+      %a{:href => "mailto:orrmaps@gmail.com"} e-mail me
       if you find any issues.
     = form_for(@user, :remote => true) do |f|
       .errors.alert.alert-error
