@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if @user
       if @user.authenticate(params[:user][:name], params[:user][:password])
         session[:user_id] = @user.id
-        session[:server] = @user.server
+        session[:server] = @user.server.name
         render :json => {:location => '/'}
       else
         render :json => {:errors => "Wrong password"}
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       @user.server = @server
       if @user.save
         session[:user_id] = @user.id
-        session[:server] = @server
+        session[:server] = @server.name
         render :json => {:location => '/'}
       else
         render :json => {:errors => @user.errors.full_messages.join(', ')}
