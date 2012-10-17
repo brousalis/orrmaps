@@ -34,7 +34,7 @@ Server.create(:name => "Yak's Bend", :country => "US")
 
 Server.create(:name => "Aurora Glade", :country => "EU") 
 Server.create(:name => "Blacktide", :country => "EU") 
-Server.create(:name => "Desolation", :country => "Eu") 
+Server.create(:name => "Desolation", :country => "EU") 
 Server.create(:name => "Far Shiverpeak", :country => "EU")
 Server.create(:name => "Fissure of Woe", :country => "EU")
 Server.create(:name => "Gandara", :country => "EU") 
