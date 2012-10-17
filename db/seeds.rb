@@ -63,5 +63,5 @@ Server.create(:name => "Kodash", :country => "GE")
 Server.create(:name => "Miller's Sound", :country => "GE") 
 Server.create(:name => "Riverside", :country => "GE") 
 
-Server.create(:name => "Baruch Bay", :country => "SP") 
+Server.create(:name => "Baruch Bay", :country => "MX") 
 
