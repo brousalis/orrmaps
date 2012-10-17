@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password
 
+  validates :name, :length => { :maximum => 16 }
   validates_presence_of :name
   validates_uniqueness_of :name
   validates_confirmation_of :password

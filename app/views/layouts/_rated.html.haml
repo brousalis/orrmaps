@@ -17,7 +17,7 @@
           %a{:href => "/maps/#{map[:map].id}"}
             .map
               %i.icon.icon-white.icon-user
-              =map[:map].user.name
+              = map[:map].user.name.slice(0,16)
             .likes 
               #{map[:count]}
               - if current_user
