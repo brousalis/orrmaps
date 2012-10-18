@@ -20,7 +20,8 @@ class MapsController < ApplicationController
     @user = User.new
     @server = Server.find_by_name(session[:server])
     @map = Map.find(params[:id])
-    @rated = Map.find_all_by_server_id(@server.id).collect{|m|{:map=>m,:count=>m.likes.count}}.sort{|a,b| b[:count] <=> a[:count]}
+    #@rated = Map.find_all_by_server_id(@server.id).collect{|m|{:map=>m,:count=>m.likes.count}}.sort{|a,b| b[:count] <=> a[:count]}
+    @rated = Map.find_all_by_server_id(@server.id, :order => "updated_at DESC")
   end
 
   def update

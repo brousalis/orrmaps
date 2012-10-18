@@ -7,7 +7,8 @@ class HomeController < ApplicationController
     @server = Server.find_by_name("Jade Quarry") if !session[:server]
     session[:server] = @server.name if !session[:server]
 
-    @rated = Map.find_all_by_server_id(@server.id).collect{|m|{:map=>m,:count=>m.likes.count}}.sort{|a,b| b[:count] <=> a[:count]}
+    #@rated = Map.find_all_by_server_id(@server.id).collect{|m|{:map=>m,:count=>m.likes.count}}.sort{|a,b| b[:count] <=> a[:count]}
+    @rated = Map.find_all_by_server_id(@server.id, :order => "updated_at DESC")
 
     if current_user
       if !current_user.map

@@ -11,7 +11,7 @@
           likes 
         %a.date{:href => "#"}
           %i.icon.icon-white.icon-calendar
-          = Date.today.strftime("%b %e")
+          #{time_ago_in_words(map.updated_at).sub("minute", "min").sub("less than a minute", "< 1 min")} ago
         %a.date{:href => "#"}
           %i.icon.icon-white.icon-home
           = map.server.name 

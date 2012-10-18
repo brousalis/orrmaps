@@ -231,10 +231,11 @@ a:hover { text-decoration: none; }
   top: 0;
   height: 100%;
   z-index: 999999;
-  width: 250px;
+  width: 280px;
   color: #FFF;
   border-right: #000 5px solid;
   background: #2e2e2e;
+  overflow-y: scroll;
   @include box-shadow(inset 2px 5px 10px #000);
 }
 #modal {
@@ -242,7 +243,7 @@ a:hover { text-decoration: none; }
     background: #000; padding: 0px 10px; text-align: center; font-size: 24px; text-transform: uppercase;  text-shadow: 0px 1px 0px #000; margin: 0; 
     .close { color: #fff; margin-top: 10px; &:active { top: 1px; position: relative} }
   }
-  .meta { background: rgba(0,0,0,0.7); padding: 2px 0px; text-align: center; margin: 0 }
+  .meta { background: rgba(0,0,0,0.5); padding: 2px 0px; text-align: center; margin: 0 }
   .top {
     margin: 0; padding: 0;
     li {
@@ -256,7 +257,8 @@ a:hover { text-decoration: none; }
         &.map { @include transition(0.1s all linear);font-weight: bold; float: left; i { margin-top: 3px; margin-right: 1px; }}
         &.likes { 
           opacity: 0.4;
-          i { margin-top: 3px; 
+          font-size: 13px;
+          i { 
             &.liked { margin-top: 5px; margin-left: 2px; background: image-url('liked.png') no-repeat; }
           }
           float: right;
