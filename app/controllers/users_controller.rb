@@ -4,7 +4,8 @@ class UsersController < ApplicationController
     if @user
       if @user.authenticate(params[:user][:name], params[:user][:password])
         session[:user_id] = @user.id
-        session[:server] = @user.server.name
+        session[:server] = @user.server.name if @user.server
+        session[:serevr] = "Jade Quarry" if !@user.server
         render :json => {:location => '/'}
       else
         render :json => {:errors => "Wrong password"}
