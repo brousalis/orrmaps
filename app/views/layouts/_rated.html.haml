@@ -16,7 +16,7 @@
               %i.icon.icon-white.icon-user
               = map.user.name.slice(0,16)
             .likes 
-              #{time_ago_in_words(map.updated_at).sub("minute", "min").sub("less than a min", "< 1 min")} ago
+              #{time_ago_in_words(map.updated_at).sub("minute", "min").sub("less than a min", "< 1 min").sub("about", "~")} ago
               %i.icon.icon-white.icon-map-marker
               #{map.points.count}
             .clearfix
