@@ -5,6 +5,8 @@
       %ul.nav
         %li.your
           %a{:href => "/"} Your map
+        %li.serv
+          %a{:href => "/server/#{session[:server].downcase.strip.gsub(' ', '_').gsub(/[^\w-]/, '')}"} Server map 
         %li.rated
           %a.top_rated{:href => "#"} Map list
       %ul.nav.pull-right
@@ -19,6 +21,10 @@
               %i.icon.icon-off
               Sign out
               %strong= current_user.name
+          %li
+            %a.delete{:href => "/user/delete"}
+              %i.icon.icon-remove 
+              Delete account
         %li
           %a{:href => "#servers", :"data-toggle" => "modal"} 
             %i.icon.icon-home

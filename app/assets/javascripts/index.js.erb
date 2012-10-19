@@ -2,7 +2,10 @@ orrmaps.index = function() {
   var map, map_id;
   var markers = [];
   var current_marker, current_marker_id, current_info_box;
-  var image = "<%= asset_path 'tiles/ore.png' %>";
+
+  var ore = "<%= asset_path 'tiles/ore.png' %>";
+  var wood = "<%= asset_path 'tiles/wood.png' %>";
+  var image = ore;
 
   var get_marker_id = function(latlng) {
     return latlng.toUrlValue(); 
@@ -57,7 +60,7 @@ orrmaps.index = function() {
     $.ajax({
       url: 'points', 
       type: 'post',
-      data: {map_id: map_id, latitude: location.Xa, longitude: location.Ya, marker_id: marker_id},
+      data: {icon: image, map_id: map_id, latitude: location.Xa, longitude: location.Ya, marker_id: marker_id},
       success: function(json) {
         if(json.status == "unauthorized") {
           orrmaps.dialog.open();
@@ -172,15 +175,7 @@ orrmaps.index = function() {
      var y = coord.y;
      var x = coord.x;
      var tileRange = 1 << zoom;
-
-     if (y < 0 || y >= tileRange) {
-       return null;
-     }
-
-     if (x < 0 || x >= tileRange) {
-       x = (x % tileRange + tileRange) % tileRange;
-     }
-
+     
      return {
        x: x,
        y: y

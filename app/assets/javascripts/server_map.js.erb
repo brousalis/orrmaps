@@ -1,0 +1,174 @@
+orrmaps.server_map = function() {
+  var map
+  var markers = [];
+  var current_marker, current_marker_id, current_info_box;
+  var image = "<%= asset_path 'tiles/ore.png' %>";
+  var image80 = "<%= asset_path 'tiles/ore80.png' %>";
+  var image60 = "<%= asset_path 'tiles/ore60.png' %>";
+  var image40 = "<%= asset_path 'tiles/ore40.png' %>";
+  var image20 = "<%= asset_path 'tiles/ore20.png' %>";
+
+  var get_marker_id = function(latlng) {
+    return latlng.toUrlValue(); 
+  };     
+
+  var icon = function(votes) {
+    var icon;
+    if(votes == 5) icon = image;
+    if(votes == 4) icon = image80;
+    if(votes == 3) icon = image60;
+    if(votes == 2) icon = image40;
+    if(votes == 1) icon = image20;
+    if(votes < 1) icon = image20;
+    return icon;
+  };
+
+  var add_marker = function(point) {
+    var _point = new google.maps.LatLng(point.latitude, point.longitude)
+    var marker_id = get_marker_id(_point);    
+    var _icon = icon(point.votes);
+
+    var marker = new google.maps.Marker({
+      position: _point,
+      animation: google.maps.Animation.DROP,
+      map: map,
+      icon: _icon,
+      id: 'marker_' + marker_id
+    }); 
+
+    add_info_box(marker); 
+    markers[marker_id] = marker;
+  };
+
+  var init = function(server) {
+    $.ajax({
+      url: '/server_maps',
+      type: 'post',
+      data: {name: server},
+      success: function(data) {
+        var map_options = {
+          zoom: 4,
+          center: new google.maps.LatLng(46.558860303117164, 10.37109375),
+          disableDefaultUI: true,
+        }
+        var customMapType = new google.maps.ImageMapType({
+          getTileUrl: function(coord, zoom) {
+            var normalizedCoord = normalize(coord, zoom);
+            if(normalizedCoord && (normalizedCoord.x < Math.pow(2, zoom)) && (normalizedCoord.x > -1) && (normalizedCoord.y < Math.pow(2, zoom)) && (normalizedCoord.y > -1)) {
+              var tile = "" + zoom + '_' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
+              return "<%= asset_path 'tiles/"+ tile +"' %>";
+            } else {
+              return "<%= asset_path 'tiles/_empty.jpg' %>";
+            }
+          },
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 4,
+          minZoom: 2
+        });
+
+        map = new google.maps.Map(document.getElementById("map"), map_options);
+
+        map.mapTypes.set('custom', customMapType);
+        map.setMapTypeId('custom'); 
+
+        var mc = new MarkerClusterer(map, markers); 
+
+        if (data != null) {
+          for (var i=0; i < data.length; i++) {
+            add_marker(data[i]); 
+          }
+        }
+
+      }
+    });
+  };
+
+  var normalize = function(coord, zoom) {
+     var y = coord.y;
+     var x = coord.x;
+     var tileRange = 1 << zoom;
+
+     return {
+       x: x,
+       y: y
+     };
+  };
+   
+  var add_info_box = function(marker) {
+    var box = document.createElement("div");
+    box.className = "person";
+    box.innerHTML = "<a class='up' href='#'><i class='icon icon-white icon-arrow-up'></i></a><a class='down' href='#'><i class='icon icon-white icon-arrow-down'></i></a><a class='user' href='#'><i class='icon icon-white icon-user'></i></a>";
+
+    $(box).find('.up').click(function() { 
+      $.ajax({
+        url: '/up',
+        type: 'post',
+        data: {marker_id: current_marker_id},
+        success: function(data) {
+          var _icon = icon(data.votes);
+          current_marker.setIcon(_icon);
+        }
+      });
+      return false;
+    });
+
+    $(box).find('.down').click(function() { 
+      $.ajax({
+        url: '/down',
+        type: 'post',
+        data: {marker_id: current_marker_id},
+        success: function(data) {
+          var _icon = icon(data.votes);
+          current_marker.setIcon(_icon);
+        }
+      }); 
+      return false;
+    }); 
+
+
+    var box_options = {
+      content: box,
+      disableAutoPan: false,
+      maxWidth: 0,
+      pixelOffset: new google.maps.Size(-34, 0),
+      zIndex: null,
+      boxStyle: { 
+        background: "url('<%= asset_path 'tiles/tipbox.png'%>') no-repeat 48% 1px"
+      },
+      closeBoxURL: "<%= asset_path 'tiles/close.png' %>",
+      infoBoxClearance: new google.maps.Size(1, 1),
+      isHidden: false,
+      pane: "floatPane",
+      enableEventPropagation: false,
+      id: 'marker_' + marker.id
+    }
+     
+    var ib = new InfoBox(box_options);
+
+    google.maps.event.addListener(marker, 'dragend', function() {
+      update_marker(marker);
+    });
+
+    google.maps.event.addListener(marker, 'dragstart', function() {
+      current_marker = marker;
+      current_marker_id = marker.id.replace("marker_","");
+    }); 
+
+    google.maps.event.addListener(marker, "click", function(event) {
+      current_marker = marker;
+      current_marker_id = marker.id.replace("marker_","");
+      current_info_box = ib;
+      ib.open(map, this);
+    });
+  }; 
+ 
+
+  return {
+    add_marker: add_marker,
+    normalize: normalize,
+    icon: icon,
+    add_info_box: add_info_box,
+    init: init
+  };
+}();
+  

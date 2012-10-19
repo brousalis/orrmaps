@@ -1,0 +1,5 @@
+= render :partial => 'layouts/server_secondary', :locals => {:server => @server}
+#main{:role => "main"} 
+  #map
+  :javascript
+    orrmaps.server_map.init("#{@server.name.downcase.strip.gsub(' ', '_').gsub(/[^\w-]/, '')}");

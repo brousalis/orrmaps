@@ -1,6 +1,7 @@
 orrmaps.servers = function() {
   var init = function() {
     if(window.location.pathname == '/') $('.your').addClass('active');
+    if(window.location.pathname.indexOf('server') > -1) $('.serv').addClass('active');
     $('.servers li a').live('click', function() {
       $.ajax({
         type: "post",

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015203606) do
+ActiveRecord::Schema.define(:version => 20121019043715) do
 
   create_table "likes", :force => true do |t|
     t.integer  "map_id"
@@ -31,12 +31,14 @@ ActiveRecord::Schema.define(:version => 20121015203606) do
   end
 
   create_table "points", :force => true do |t|
-    t.float    "latitude",   :null => false
-    t.float    "longitude",  :null => false
-    t.string   "marker_id",  :null => false
+    t.float    "latitude",                  :null => false
+    t.float    "longitude",                 :null => false
+    t.string   "marker_id",                 :null => false
     t.integer  "map_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "votes",      :default => 5, :null => false
+    t.string   "icon"
   end
 
   create_table "servers", :force => true do |t|

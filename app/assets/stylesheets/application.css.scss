@@ -88,7 +88,7 @@ a:hover { text-decoration: none; }
 #servers .modal-body { max-height: 600px !important; }
 #servers { width: 660px !important; margin: -350px 0 0 -280px }
 
-.info { 
+.info, .person { 
   @include border-radius(4px); 
   background: rgba(0,0,0,0.7); 
   border-radius: 4px; 
@@ -102,6 +102,10 @@ a:hover { text-decoration: none; }
     &:hover { @include opacity(1); }
     &.report, &.report:hover { cursor: default; @include opacity(0.3); }
   }
+}
+.person { width: 72px !important;}
+.person { 
+  .user, .user:hover { opacity: 0.3; cursor: default; }
 }
 .infoBox img { margin: 2px -6px !important; }
 

@@ -60,14 +60,6 @@ orrmaps.map = function() {
      var x = coord.x;
      var tileRange = 1 << zoom;
 
-     if (y < 0 || y >= tileRange) {
-       return null;
-     }
-
-     if (x < 0 || x >= tileRange) {
-       x = (x % tileRange + tileRange) % tileRange;
-     }
-
      return {
        x: x,
        y: y
