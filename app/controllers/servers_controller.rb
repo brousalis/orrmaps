@@ -12,14 +12,15 @@ class ServersController < ApplicationController
       @user.save
       current_user = @user
     end
-    render :json => { "location" => "/" } #{@server.name.downcase.strip.gsub(' ', '_').gsub(/[^\w-]/, '')}
+    render :json => { "location" => "/" }
   end
 
   def show
     name = params[:name].titleize
     @user = User.new
     @server = Server.find_by_name(name)
-    @rated = Map.find_all_by_server_id(@server.id, :order => "updated_at DESC")
+    puts @server.inspect
+    @rated = rated(@server)
   end
 
   def points

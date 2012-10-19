@@ -65,3 +65,5 @@ Server.create(:name => "Riverside", :country => "GE")
 
 Server.create(:name => "Baruch Bay", :country => "MX") 
 
+Server.all.each {|s| s.name = s.name.sub("'","");s.save}
+

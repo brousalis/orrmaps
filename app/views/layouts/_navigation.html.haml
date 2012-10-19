@@ -6,7 +6,10 @@
         %li.your
           %a{:href => "/"} Your map
         %li.serv
-          %a{:href => "/server/#{session[:server].downcase.strip.gsub(' ', '_').gsub(/[^\w-]/, '')}"} Server map 
+          - if session[:server]
+            %a{:href => "/server/#{underscore(session[:server])}"} Server map 
+          - else
+            %a{:href => "/server/jade_quarry"} Server map 
         %li.rated
           %a.top_rated{:href => "#"} Map list
       %ul.nav.pull-right
