@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_filter :log_additional_data
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -13,4 +14,11 @@ class ApplicationController < ActionController::Base
   def underscore(server)
     return server.downcase.strip.gsub(' ', '_').gsub(/[^\w-]/, '')
   end 
+
+  protected
+    def log_additional_data
+      request.env["exception_notifier.exception_data"] = {
+        :user => current_user,
+      }
+    end
 end

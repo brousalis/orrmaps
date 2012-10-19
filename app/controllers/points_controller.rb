@@ -40,13 +40,13 @@ class PointsController < ApplicationController
     @point = Point.find_by_marker_id(params[:marker_id])
     @point.votes = @point.votes + 1 unless @point.votes == 5
     @point.save
-    render :json => { "votes" => @point.votes }
+    render :json => { "icon" => @point.icon, "votes" => @point.votes }
   end
 
   def down
     @point = Point.find_by_marker_id(params[:marker_id])
     @point.votes = @point.votes.to_i - 1 unless @point.votes == 0
     @point.save
-    render :json => { "votes" => @point.votes } 
+    render :json => { "icon" => @point.icon, "votes" => @point.votes }
   end
 end

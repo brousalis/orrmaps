@@ -5,13 +5,13 @@ orrmaps.map = function() {
   var image = "<%= asset_path 'tiles/ore.png' %>";
 
   var add_marker = function(point) {
-    var _point = new google.maps.LatLng(point.lat, point.lng)
+    var _point = new google.maps.LatLng(point.latitude, point.longitude)
 
     var marker = new google.maps.Marker({
       position: _point,
       animation: google.maps.Animation.DROP,
       map: map,
-      icon: image
+      icon: point.icon
     }); 
   };
 

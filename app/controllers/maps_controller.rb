@@ -4,15 +4,15 @@ class MapsController < ApplicationController
   def index
     if current_user
       map = current_user.map
-      points = map.points.to_gmaps4rails
-      render :json => {:map_id => map.id, :points => points.html_safe}
+      points = map.points.flatten.to_json
+      render :json => {:map_id => map.id, :points => points}
     end
     render :json => {:points => []} if !current_user
   end
 
   def map
     map = Map.find(params[:id])
-    points = map.points.to_gmaps4rails
+    points = map.points.flatten.to_json
     render :json => points
   end
 

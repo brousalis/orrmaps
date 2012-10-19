@@ -2,31 +2,27 @@ orrmaps.server_map = function() {
   var map
   var markers = [];
   var current_marker, current_marker_id, current_info_box;
-  var image = "<%= asset_path 'tiles/ore.png' %>";
-  var image80 = "<%= asset_path 'tiles/ore80.png' %>";
-  var image60 = "<%= asset_path 'tiles/ore60.png' %>";
-  var image40 = "<%= asset_path 'tiles/ore40.png' %>";
-  var image20 = "<%= asset_path 'tiles/ore20.png' %>";
+  var icon_type = "ore";
 
   var get_marker_id = function(latlng) {
     return latlng.toUrlValue(); 
-  };     
+  };
 
-  var icon = function(votes) {
-    var icon;
-    if(votes == 5) icon = image;
-    if(votes == 4) icon = image80;
-    if(votes == 3) icon = image60;
-    if(votes == 2) icon = image40;
-    if(votes == 1) icon = image20;
-    if(votes < 1) icon = image20;
-    return icon;
+  var icon = function(img, votes) {
+    var icon = "";
+    var type = img.replace("/assets/tiles/","").replace(".png", "")
+    if(votes == 4) icon = "80";
+    if(votes == 3) icon = "60";
+    if(votes == 2) icon = "40";
+    if(votes == 1) icon = "20";
+    if(votes < 1) icon = "20";
+    return "/assets/tiles/" + type + icon + ".png";
   };
 
   var add_marker = function(point) {
     var _point = new google.maps.LatLng(point.latitude, point.longitude)
-    var marker_id = get_marker_id(_point);    
-    var _icon = icon(point.votes);
+    var marker_id = get_marker_id(_point);
+    var _icon = icon(point.icon, point.votes);
 
     var marker = new google.maps.Marker({
       position: _point,
@@ -105,7 +101,7 @@ orrmaps.server_map = function() {
         type: 'post',
         data: {marker_id: current_marker_id},
         success: function(data) {
-          var _icon = icon(data.votes);
+          var _icon = icon(data.icon, data.votes);
           current_marker.setIcon(_icon);
         }
       });
@@ -118,7 +114,7 @@ orrmaps.server_map = function() {
         type: 'post',
         data: {marker_id: current_marker_id},
         success: function(data) {
-          var _icon = icon(data.votes);
+          var _icon = icon(data.icon, data.votes);
           current_marker.setIcon(_icon);
         }
       }); 

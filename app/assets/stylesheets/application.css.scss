@@ -272,4 +272,22 @@ a:hover { text-decoration: none; }
   }
 }
 
-
+.tools {
+  margin: 0;
+  li {
+    list-style: none;
+    float: left;
+    a {
+      width: 30px;
+      height: 30px;
+      display: block;
+      padding: 21px;
+      background-position: 6px !important;
+      margin-right: 5px;
+      &.ore { background: image-url('tiles/ore.png') no-repeat}
+      &.wood { background: image-url('tiles/wood.png') no-repeat}
+      &.active { background-color: #222; }
+      &.delete_all { width: auto; }
+    }
+  }
+}

@@ -2,10 +2,18 @@ orrmaps.index = function() {
   var map, map_id;
   var markers = [];
   var current_marker, current_marker_id, current_info_box;
+  var icon_type = "ore";
 
-  var ore = "<%= asset_path 'tiles/ore.png' %>";
-  var wood = "<%= asset_path 'tiles/wood.png' %>";
-  var image = ore;
+  var icon = function(img, votes) {
+    var icon = "";
+    var type = img.replace("/assets/tiles/","").replace(".png", "")
+    if(votes == 4) icon = "80";
+    if(votes == 3) icon = "60";
+    if(votes == 2) icon = "40";
+    if(votes == 1) icon = "20";
+    if(votes < 1) icon = "20";
+    return "/assets/tiles/" + type + icon + ".png";
+  };
 
   var get_marker_id = function(latlng) {
     return latlng.toUrlValue(); 
@@ -39,14 +47,14 @@ orrmaps.index = function() {
   };
 
   var add_marker = function(point) {
-    var _point = new google.maps.LatLng(point.lat, point.lng)
-    var marker_id = get_marker_id(_point);    
+    _point = new google.maps.LatLng(point.latitude, point.longitude)
+    marker_id = get_marker_id(_point);
 
     var marker = new google.maps.Marker({
       position: _point,
       animation: google.maps.Animation.DROP,
       map: map,
-      icon: image,
+      icon: point.icon,
       draggable: true,
       id: 'marker_' + marker_id
     }); 
@@ -57,10 +65,12 @@ orrmaps.index = function() {
 
   var place_marker = function(location) {
     marker_id = get_marker_id(location);
+    icon = "/assets/tiles/" + icon_type + ".png"
+
     $.ajax({
       url: 'points', 
       type: 'post',
-      data: {icon: image, map_id: map_id, latitude: location.Xa, longitude: location.Ya, marker_id: marker_id},
+      data: {icon: icon, map_id: map_id, latitude: location.Xa, longitude: location.Ya, marker_id: marker_id},
       success: function(json) {
         if(json.status == "unauthorized") {
           orrmaps.dialog.open();
@@ -69,7 +79,7 @@ orrmaps.index = function() {
             position: location, 
             animation: google.maps.Animation.DROP,
             map: map,
-            icon: image,
+            icon: icon,
             draggable: true,
             id: 'marker_' + marker_id
           });
@@ -82,6 +92,9 @@ orrmaps.index = function() {
   };
 
   var init = function() { 
+    $('.ore').live('click', function() { $('.tools a').removeClass('active'); $(this).addClass('active'); icon_type = "ore"; });
+    $('.wood').live('click', function() { $('.tools a').removeClass('active'); $(this).addClass('active'); icon_type = "wood"; });
+
     $.get('/maps', function(data) {
       var map_options = {
         zoom: 4,
