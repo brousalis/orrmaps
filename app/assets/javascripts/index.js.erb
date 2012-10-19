@@ -94,6 +94,7 @@ orrmaps.index = function() {
   var init = function() { 
     $('.ore').live('click', function() { $('.tools a').removeClass('active'); $(this).addClass('active'); icon_type = "ore"; });
     $('.wood').live('click', function() { $('.tools a').removeClass('active'); $(this).addClass('active'); icon_type = "wood"; });
+    $('.toolshed').fadeIn();
 
     $.get('/maps', function(data) {
       var map_options = {
