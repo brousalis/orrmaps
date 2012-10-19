@@ -75,7 +75,7 @@ Orrore::Application.configure do
     :domain => "gmail.com",
     :authentication => "plain",
     :user_name => "orrmaps@gmail.com",
-    :password => "",
+    :password => "!password",
     :enable_starttls_auto => true
   }
 
