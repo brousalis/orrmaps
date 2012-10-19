@@ -37,7 +37,7 @@ orrmaps.server_map = function() {
     }); 
 
     add_info_box(marker); 
-    markers[marker_id] = marker;
+    markers.push(marker);
   };
 
   var init = function(server) {
@@ -124,7 +124,6 @@ orrmaps.server_map = function() {
       }); 
       return false;
     }); 
-
 
     var box_options = {
       content: box,

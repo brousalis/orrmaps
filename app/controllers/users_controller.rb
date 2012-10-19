@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def create
-    @user = User.find_by_name(params[:user][:name].downcase)
+    @user = User.find_by_name(params[:user][:name])
     if @user
       if @user.authenticate(params[:user][:name], params[:user][:password])
         session[:user_id] = @user.id
@@ -11,15 +11,19 @@ class UsersController < ApplicationController
         render :json => {:errors => "Wrong password"}
       end
     else
-      @user = User.new(params[:user])
-      @server = Server.find_by_name(params[:server])
-      @user.server = @server
-      if @user.save
-        session[:user_id] = @user.id
-        session[:server] = @server.name
-        render :json => {:location => '/'}
+      if User.find_by_name(params[:user][:name].downcase)
+        render :json => {:errors => "User already exists"}
       else
-        render :json => {:errors => @user.errors.full_messages.join(', ')}
+        @user = User.new(params[:user])
+        @server = Server.find_by_name(params[:server])
+        @user.server = @server
+        if @user.save
+          session[:user_id] = @user.id
+          session[:server] = @server.name
+          render :json => {:location => '/'}
+        else
+          render :json => {:errors => @user.errors.full_messages.join(', ')}
+        end
       end
     end
   end
