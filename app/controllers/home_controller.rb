@@ -4,6 +4,7 @@ class HomeController < ApplicationController
     @server = Server.find_by_name(session[:server])
     if !@server
       @server = "Jade Quarry"
+    end
     @rated = rated(@server)
 
     if current_user
