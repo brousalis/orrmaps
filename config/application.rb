@@ -70,4 +70,4 @@ module Orrore
     config.assets.version = '1.0'
   end
 end
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+#ActiveRecord::Base.logger = Logger.new(STDOUT)

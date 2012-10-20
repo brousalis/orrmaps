@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :password, :server, :map, :likes
   attr_accessor :password
 
-  has_one :server
-  has_one :map
+  belongs_to :server
+  belongs_to :map
   has_many :likes
 
   before_save :encrypt_password

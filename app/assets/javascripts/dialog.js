@@ -38,6 +38,12 @@ orrmaps.dialog = function() {
       $('#pageslide').toggle('slide', {direction: 'left'}, 500);
       $('.rated').toggleClass('active');
     });
+    $('#footer .close').live('click', function() {
+      $('#footer').fadeOut();
+    });
+    setTimeout(function() {
+      $('#footer').fadeOut();
+    }, 12000);
   };
 
   return {

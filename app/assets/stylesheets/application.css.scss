@@ -292,3 +292,10 @@ a:hover { text-decoration: none; }
     }
   }
 }
+
+#footer {
+  top: 85px;
+  .navbar-inner { background: transparent }
+  .container { width: 500px; padding: 10px; background: rgba(139,0,0,0.8); color: #fff; @include border-radius(0px 0px 8px 8px)}
+  .close { color: #fff; }
+}

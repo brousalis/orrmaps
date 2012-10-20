@@ -19,7 +19,6 @@ class ServersController < ApplicationController
     name = params[:name].titleize
     @user = User.new
     @server = Server.find_by_name(name)
-    puts @server.inspect
     @rated = rated(@server)
   end
 
