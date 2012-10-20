@@ -16,18 +16,17 @@ class ServersController < ApplicationController
   end
 
   def show
-    name = params[:name].titleize
+    name = params[:name].titleize.sub("Of", "of")
     @user = User.new
+    puts name
     @server = Server.find_by_name(name)
     @rated = rated(@server)
   end
 
   def points
-    name = params[:name].titleize
+    name = params[:name].titleize.sub("Of", "of") 
     server = Server.find_by_name(name)
     points = server.maps.collect(&:points).flatten.to_json
     render :json => points
   end
-
-
 end
