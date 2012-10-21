@@ -1,17 +1,16 @@
 orrmaps.map = function() {
-  var map, map_id;
-  var markers = [];
+  var map, map_id, marks = [], markers = [];
   var current_marker, current_marker_id, current_info_box;
   var icon_type = "ore";
+  var prev_id, counter = "0"; // my god. what have I done.
 
-  var icon = function(img, votes) {
+  var icon = function(img) {
     var icon = "";
     var type = img.replace("/assets/tiles/","").replace(".png", "")
-    if(votes == 4) icon = "80";
-    if(votes == 3) icon = "60";
-    if(votes == 2) icon = "40";
-    if(votes == 1) icon = "20";
-    if(votes < 1) icon = "20";
+
+    if(counter == 1) icon = "";
+    else if(counter == 2) icon = "60";
+    else if(counter >= 3) icon = "20";
     return "/assets/tiles/" + type + icon + ".png";
   };
 
@@ -52,10 +51,34 @@ orrmaps.map = function() {
     });
   };
 
-  var add_marker = function(data) {
+  var add_server_marker = function(data, likes) {
     point = new google.maps.LatLng(data.latitude, data.longitude)
     marker_id = get_marker_id(point);
 
+    // muahahahaha
+    if(data.map_id != prev_id) counter++;
+    prev_id = data.map_id;
+    image = icon(data.icon)
+
+    var marker = new google.maps.Marker({
+      position: point,
+      animation: google.maps.Animation.DROP,
+      map: map,
+      icon: image,
+      id: 'marker_' + marker_id
+    }); 
+    markers[marker_id] = marker; 
+    if(counter <= 2) marks.push(marker);
+  };
+
+  var cluster_markers = function() {
+    console.log(marks);
+    var mc = new MarkerClusterer(map, marks); 
+  };
+
+  var add_marker = function(data) {
+    point = new google.maps.LatLng(data.latitude, data.longitude)
+    marker_id = get_marker_id(point);
     var marker = new google.maps.Marker({
       position: point,
       animation: google.maps.Animation.DROP,
@@ -66,7 +89,6 @@ orrmaps.map = function() {
 
     markers[marker_id] = marker;
   };
- 
 
   var add_draggable_marker = function(data) {
     point = new google.maps.LatLng(data.latitude, data.longitude)
@@ -88,7 +110,6 @@ orrmaps.map = function() {
   var place_marker = function(location) {
     marker_id = get_marker_id(location);
     icon = "/assets/tiles/" + icon_type + ".png"
-    console.log(location);
     $.ajax({
       url: 'points', 
       type: 'post',
@@ -96,6 +117,8 @@ orrmaps.map = function() {
       success: function(json) {
         if(json.status == "unauthorized") {
           orrmaps.ui.open();
+        } else if(json.status == "failure"){
+          orrmaps.alert.init("Too many markers on the map");
         } else {
           var marker = new google.maps.Marker({
             position: location, 
@@ -176,7 +199,6 @@ orrmaps.map = function() {
    
        map.setCenter(new google.maps.LatLng(Y,X));
     }
-    //var mc = new MarkerClusterer(map, markers); 
   };
 
   var set_map_id = function(id) {
@@ -226,9 +248,11 @@ orrmaps.map = function() {
   return {
     add_marker: add_marker,
     add_draggable_marker: add_draggable_marker,
+    add_server_marker: add_server_marker,
     remove_current_marker: remove_current_marker,
     place_marker: place_marker,
     get_marker_id: get_marker_id,
+    cluster_markers: cluster_markers,
     click_handler: click_handler,
     set_map_id: set_map_id,
     icon: icon,

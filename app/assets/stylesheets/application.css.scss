@@ -201,6 +201,7 @@ a:hover { text-decoration: none; }
       margin-top: 6px;
       &.liked { background: image-url('liked.png') no-repeat; }
     }
+    &:hover i { background: image-url('liked.png') no-repeat 1px 0px; }
   }
 
   .brand { 
@@ -237,7 +238,6 @@ a:hover { text-decoration: none; }
   z-index: 999999;
   width: 340px;
   color: #FFF;
-  border-right: #000 5px solid;
   background: #2e2e2e;
   overflow-y: scroll;
   @include box-shadow(inset 2px 5px 10px #000);
@@ -263,7 +263,7 @@ a:hover { text-decoration: none; }
           opacity: 0.4;
           font-size: 13px;
           i { 
-            &.liked { margin-top: 5px; margin-left: 2px; background: image-url('liked.png') no-repeat; }
+            &.liked { margin-top: 3px; margin-left: 2px; background: image-url('liked.png') no-repeat; }
           }
           float: right;
         }
@@ -295,7 +295,8 @@ a:hover { text-decoration: none; }
 
 #footer {
   top: 85px;
+  display: none;
   .navbar-inner { background: transparent }
-  .container { width: 500px; padding: 10px; background: rgba(139,0,0,0.8); color: #fff; @include border-radius(0px 0px 8px 8px)}
+  .container { width: 500px; padding: 5px 10px; background: rgba(139,0,0,0.8); color: #fff; @include border-radius(0px 0px 8px 8px)}
   .close { color: #fff; }
 }

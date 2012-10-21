@@ -1,6 +1,5 @@
 orrmaps.index = function() {
   var init = function() { 
-
     $.get('/maps', function(data) {
       orrmaps.map.init();
       orrmaps.map.click_handler();
@@ -13,6 +12,7 @@ orrmaps.index = function() {
         }
       }
     });
+
   };
 
   return {

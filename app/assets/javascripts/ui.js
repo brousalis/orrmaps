@@ -43,15 +43,6 @@ orrmaps.ui = function() {
     });  
   };
 
-  var alerts = function() {
-    $('#footer .close').live('click', function() {
-      $('#footer').fadeOut();
-    });
-    setTimeout(function() {
-      $('#footer').fadeOut();
-    }, 12000); 
-  };
-
   var sidebar = function() {
    $('.top_rated, #pageslide .close').live('click', function() {
       $('#pageslide').toggle('slide', {direction: 'left'}, 500);
@@ -80,7 +71,6 @@ orrmaps.ui = function() {
     $('input').attr('autocomplete', 'off');
 
     handle_submit();
-    alerts();
     sidebar();
     servers();
     likes();
@@ -103,4 +93,23 @@ orrmaps.ui = function() {
     init: init
   };
 }();
- 
+
+orrmaps.alert = function() {
+  var init = function(message) {
+    $('#footer .msg').html(message);
+    $('#footer').fadeIn();
+
+    $('#footer .close').live('click', function() {
+      $('#footer').fadeOut();
+    });
+
+    setTimeout(function() {
+      $('#footer').fadeOut();
+    }, 5000);  
+  };
+
+  return {
+    init: init
+  };
+}();
+   
