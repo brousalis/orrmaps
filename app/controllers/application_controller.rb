@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def rated(server)
     #@rated = Map.find_all_by_server_id(@server.id).collect{|m|{:map=>m,:count=>m.likes.count}}.sort{|a,b| b[:count] <=> a[:count]}
-    Map.all.sort_by { |u| [ u.likes.count, u.points.count, u.updated_at ] }.reverse
+    Map.find_all_by_server_id(@server.id).sort_by { |u| [ u.likes.count, u.points.count, u.updated_at ] }.reverse
   end
   helper_method :rated
 
