@@ -19,7 +19,7 @@ orrmaps.server = function() {
           }
         }
 
-        orrmaps.map.cluster_markers();
+        //orrmaps.map.cluster_markers();
         orrmaps.alert.init("Like server maps with accurate nodes to highlight them on this map.")
       }
     });
