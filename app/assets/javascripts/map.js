@@ -72,7 +72,6 @@ orrmaps.map = function() {
   };
 
   var cluster_markers = function() {
-    console.log(marks);
     var mc = new MarkerClusterer(map, marks); 
   };
 
