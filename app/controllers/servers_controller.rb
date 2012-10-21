@@ -18,7 +18,6 @@ class ServersController < ApplicationController
   def show
     name = params[:name].titleize.sub("Of", "of")
     @user = User.new
-    puts name
     @server = Server.find_by_name(name)
     @rated = rated(@server)
   end

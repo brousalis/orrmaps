@@ -9,9 +9,7 @@
 
 var orrmaps = (function(orrmaps, $) {
   $(function() {
-    orrmaps.dialog.init();
-    orrmaps.servers.init();
-    orrmaps.likes.init();
+    orrmaps.ui.init();
   });
   return orrmaps;
 }(orrmaps || {}, jQuery));
