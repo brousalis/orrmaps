@@ -9,7 +9,7 @@ orrmaps.map = function() {
     var type = img.replace("/assets/tiles/","").replace(".png", "")
 
     if(counter == 1) icon = "";
-    else if(counter == 2) icon = "60";
+    else if(counter == 2) icon = "40";
     else if(counter >= 3) icon = "20";
     return "/assets/tiles/" + type + icon + ".png";
   };
