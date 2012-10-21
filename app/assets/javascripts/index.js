@@ -4,6 +4,7 @@ orrmaps.index = function() {
       orrmaps.map.init();
       orrmaps.map.click_handler();
       orrmaps.map.set_map_id(data.map_id)
+      orrmaps.map.toolshed();
 
       points = $.parseJSON(data.points);
       if (points != "[]") {

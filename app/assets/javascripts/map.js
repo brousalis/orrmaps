@@ -169,8 +169,6 @@ orrmaps.map = function() {
     map.mapTypes.set('custom', customMapType);
     map.setMapTypeId('custom'); 
 
-    toolshed();
-
     google.maps.event.addListener(map, 'center_changed', function() {
       checkBounds();
     });
@@ -255,6 +253,7 @@ orrmaps.map = function() {
     cluster_markers: cluster_markers,
     click_handler: click_handler,
     set_map_id: set_map_id,
+    toolshed: toolshed,
     icon: icon,
     init: init
   };
