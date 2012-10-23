@@ -17,6 +17,7 @@ orrmaps.map = function() {
   var toolshed = function() {
     $('.ore').live('click', function() { $('.tools a').removeClass('active'); $(this).addClass('active'); icon_type = "ore"; });
     $('.wood').live('click', function() { $('.tools a').removeClass('active'); $(this).addClass('active'); icon_type = "wood"; });
+    $('.omnom').live('click', function() { $('.tools a').removeClass('active'); $(this).addClass('active'); icon_type = "omnom"; });
     $('.toolshed').fadeIn();
   };
 
