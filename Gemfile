@@ -22,3 +22,4 @@ gem "thin"
 gem "bcrypt-ruby"
 gem "exception_notification"
 gem 'letter_opener'
+gem 'newrelic_rpm'
