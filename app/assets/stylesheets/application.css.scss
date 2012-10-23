@@ -285,6 +285,7 @@ a:hover { text-decoration: none; }
       padding: 21px;
       background-position: 6px !important;
       margin-right: 5px;
+      &.mithril { background: image-url('tiles/mithril.png') no-repeat}
       &.ore { background: image-url('tiles/ore.png') no-repeat}
       &.omnom { background: image-url('tiles/omnom.png') no-repeat}
       &.wood { background: image-url('tiles/wood.png') no-repeat}

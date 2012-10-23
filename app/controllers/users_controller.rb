@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       else
         render :json => {:errors => "Wrong password"}
       end
-    elsif !@user 
+    elsif !@user
       if User.find_by_name(params[:user][:name].downcase)
         render :json => {:errors => "User already exists"}
       else
