@@ -1,27 +1,22 @@
 class HomeController < ApplicationController
   def index
     session[:server] = "Jade Quarry" if !session[:server]
-    @server = Server.find_by_name(session[:server])
-    if !@server
-      @server = "Jade Quarry"
-    end
+    @server = Server.find_by_name(session[:server]) || "Jade Quarry"
     @rated = rated(@server)
 
     if current_user
       if !current_user.map
-        map = Map.new(:user => current_user, :server => @server)
-        map.save
-        @map = map
+        @map = Map.create(:user => current_user, :server => @server)
 
-        user = current_user
-        user.map = map
-        user.save
+        current_user.update_attributes(:map => @map)
+      else
+        @map = current_user.map
       end
-      @map = current_user.map
+
       session[:server] = current_user.server.name
     else
-      @user = User.new unless current_user
-      @map = Map.new unless current_user
+      @user = User.new
+      @map = Map.new
     end
   end
 end
