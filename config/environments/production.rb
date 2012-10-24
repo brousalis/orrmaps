@@ -6,7 +6,6 @@ Orrore::Application.configure do
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
@@ -18,7 +17,6 @@ Orrore::Application.configure do
   config.assets.compile = false
 
   # Generate digests for assets URLs
-  config.assets.digest = true
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
@@ -72,6 +70,17 @@ Orrore::Application.configure do
     :password => "!password",
     :enable_starttls_auto => true
   }
+
+  config.action_dispatch.rack_cache = {
+    :metastore    => Dalli::Client.new,
+    :entitystore  => 'file:tmp/cache/rack/body',
+    :allow_reload => false
+  }
+
+  config.serve_static_assets = true
+  config.static_cache_control = "public, max-age=2592000"
+  config.assets.digest = true
+  config.action_controller.perform_caching = true
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
