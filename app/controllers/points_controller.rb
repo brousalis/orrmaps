@@ -26,10 +26,9 @@ class PointsController < ApplicationController
   def update
     @point = Point.find_by_marker_id(params[:marker_id])
     if @point 
-      @point.marker_id = params[:new_marker_id]
-      @point.latitude = params[:latitude]
-      @point.longitude = params[:longitude]
-      @point.save
+      @point.update_attributes(:marker_id => params[:new_marker_id],
+                                :latitude => params[:latitude],
+                                :longitude => params[:longitude])
       render :json => @point
     end
   end
