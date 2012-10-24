@@ -237,6 +237,15 @@ orrmaps.map = function() {
      
     var ib = new InfoBox(box_options);
 
+    google.maps.event.addListener(marker, 'dragend', function() {
+      update_marker(marker);
+    });
+
+    google.maps.event.addListener(marker, 'dragstart', function() {
+      current_marker = marker;
+      current_marker_id = marker.id.replace("marker_","");
+    }); 
+
     google.maps.event.addListener(marker, "click", function(event) {
       current_marker = marker;
       current_marker_id = marker.id.replace("marker_","");
