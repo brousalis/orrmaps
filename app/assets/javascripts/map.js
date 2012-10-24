@@ -35,8 +35,8 @@ orrmaps.map = function() {
              type: 'DELETE', 
              data: { 
                marker_id: current_marker_id,
-               latitude: current_marker.position.Xa, 
-               longitude: current_marker.position.Ya
+               latitude: current_marker.position.lat(), 
+               longitude: current_marker.position.lng()
              }
     });
   };
@@ -46,8 +46,8 @@ orrmaps.map = function() {
     $.ajax({ url: '/points', 
              type: 'PUT', 
              data: {
-               latitude: marker.position.Xa, 
-               longitude: marker.position.Ya, 
+               latitude: marker.position.lat(), 
+               longitude: marker.position.lng(), 
                marker_id: current_marker_id,
                new_marker_id: marker_id
              }
@@ -110,12 +110,13 @@ orrmaps.map = function() {
   };
 
   var place_marker = function(location) {
+    console.log(location);
     marker_id = get_marker_id(location);
     icon = "/assets/tiles/" + icon_type + ".png"
     $.ajax({
       url: 'points', 
       type: 'post',
-      data: {icon: icon, map_id: map_id, latitude: location.Xa, longitude: location.Ya, marker_id: marker_id},
+      data: {icon: icon, map_id: map_id, latitude: location.lat(), longitude: location.lng(), marker_id: marker_id},
       success: function(json) {
         if(json.status == "unauthorized") {
           orrmaps.ui.open();
