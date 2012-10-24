@@ -30,14 +30,14 @@ class PointsController < ApplicationController
       @point.latitude = params[:latitude]
       @point.longitude = params[:longitude]
       @point.save
-      respond_with @point
+      render :json => @point
     end
   end
 
   def destroy
     @point = Point.find_by_marker_id(params[:marker_id])
-    @point.destroy
-    respond_with @point
+    @point.destroy if @point
+    render :json => @point
   end
 
   def up

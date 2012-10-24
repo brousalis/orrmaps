@@ -26,7 +26,7 @@ class MapsController < ApplicationController
   def update
     map = Map.find(params[:id])
     points = map.points.to_gmaps4rails
-    respond_with points
+    render :json => points
   end
 
   def like
