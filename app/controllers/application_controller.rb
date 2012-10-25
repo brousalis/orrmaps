@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def rated(server)
-    Map.find_all_by_server_id(server.id, :include => [:points, :likes]).sort_by { |m| [ m.likes.count, m.points.count, m.updated_at ] }.reverse
+    Rails.cache.fetch("sorted", :expires_in => 5.minutes) do
+      Map.find_all_by_server_id(server.id, :include => [:points, :likes]).sort_by { |m| [ m.likes.count, m.points.count, m.updated_at ] }.reverse
+    end
   end
   helper_method :rated
 
