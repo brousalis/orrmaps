@@ -24,3 +24,4 @@ gem "exception_notification"
 gem 'letter_opener'
 gem 'newrelic_rpm'
 gem 'dalli'
+gem 'figgy'

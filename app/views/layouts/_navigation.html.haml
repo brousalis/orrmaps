@@ -11,7 +11,7 @@
           - else
             %a{:href => "/server/jade_quarry"} Server map 
         %li.rated
-          %a.top_rated{:href => "#"} Map list
+          %a.top_rated{:href => "#rated", :"data-toggle" => "modal"} Map list
       %ul.nav.pull-right
         - unless current_user
           %li

@@ -71,7 +71,6 @@ orrmaps.ui = function() {
     $('input').attr('autocomplete', 'off');
 
     handle_submit();
-    sidebar();
     servers();
     likes();
   };

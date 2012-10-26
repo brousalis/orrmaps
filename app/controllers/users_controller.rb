@@ -17,6 +17,8 @@ class UsersController < ApplicationController
         @user = User.new(params[:user])
         @server = Server.find_by_name(params[:server])
         @user.server = @server
+        @map = Map.create(:user => @user, :server => @server)
+        @user.map = @map
         if @user.save
           session[:user_id] = @user.id
           session[:server] = @server.name
