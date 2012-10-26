@@ -172,9 +172,9 @@ orrmaps.map = function() {
     map.mapTypes.set('custom', customMapType);
     map.setMapTypeId('custom'); 
 
-    google.maps.event.addListener(map, 'center_changed', function() {
-      checkBounds();
-    });
+    //google.maps.event.addListener(map, 'center_changed', function() {
+    //  checkBounds();
+    //});
 
     var allowedBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(-68.98992503056701,3.369140625),
