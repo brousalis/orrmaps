@@ -4,14 +4,12 @@ class ApplicationController < ActionController::Base
   end
 
   def rated(server)
-    Rails.cache.fetch("maps/all/sorted", :expires_in => 5.minutes) do
-      User.find_all_by_server_id(server.id)
-    end
+    User.find_all_by_server_id(server.id)
   end
 
   def servers
     Rails.cache.fetch("servers/all/sorted", :expires_in => 9999.minutes) do
-      Server.find(:all).group_by { |server| server.country }
+      Server.find(:all).group_by { |server| server.country }.
     end
   end
 
