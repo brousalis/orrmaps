@@ -6,31 +6,31 @@
     .servers
       %ul.nav-header.us
         United States
-        - Server.find_all_by_country("US").sort.each do |server|
+        - @servers[:US].each do |server|
           %li
             %a{:href => "#", :title => "#{server.name}"}= server.name  
     .servers
       %ul.nav-header 
         Europe
-        - Server.find_all_by_country("EU").sort.each do |server|
+        - @servers[:EU].each do |server|
           %li
             %a{:href => "#", :title => "#{server.name}"}= server.name  
     .servers
       %ul.nav-header 
         France
-        - Server.find_all_by_country("FR").sort.each do |server|
+        - @servers[:FR].each do |server|
           %li
             %a{:href => "#", :title => "#{server.name}"}= server.name  
     .servers
       %ul.nav-header 
         Germany
-        - Server.find_all_by_country("GE").sort.each do |server|
+        - @servers[:GE].each do |server|
           %li
             %a{:href => "#", :title => "#{server.name}"}= server.name  
     .servers
       %ul.nav-header 
         Spain
-        - Server.find_all_by_country("MX").sort.each do |server|
+        - @servers[:MX].each do |server|
           %li
             %a{:href => "#", :title => "#{server.name}"}= server.name  
 
