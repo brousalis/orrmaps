@@ -19,6 +19,11 @@ class ServersController < ApplicationController
     name = params[:name].titleize.sub("Of", "of")
     @user = User.new
     @server = Server.find_by_name(name)
+         @servers = {:US => Server.select(:name).where(:country => 'US').order(:name),
+                :EU => Server.select(:name).where(:country => 'EU').order(:name),
+                :FR => Server.select(:name).where(:country => 'FR').order(:name),
+                :GE => Server.select(:name).where(:country => 'GE').order(:name),
+                :MX => Server.select(:name).where(:country => 'MX').order(:name)} 
     @rated = rated(@server)
   end
 
