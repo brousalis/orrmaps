@@ -1,7 +1,7 @@
 class Map < ActiveRecord::Base
   attr_accessible :user, :server, :points, :likes
 
-  has_many :user
+  has_many :users
   belongs_to :server
   has_many :likes
   has_many :points
