@@ -26,3 +26,8 @@ gem 'newrelic_rpm'
 gem 'dalli'
 gem 'figgy'
 gem 'taps'
+
+
+group :test, :development do
+  gem 'pry'
+end

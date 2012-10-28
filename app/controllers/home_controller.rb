@@ -2,8 +2,8 @@ class HomeController < ApplicationController
   def index
     session[:server] = "Jade Quarry" if !session[:server]
     @server = Server.find_by_name(session[:server]) || "Jade Quarry"
-    @rated = rated(@server)
     @servers = servers
+    fetch_rated_maps!(@server)
 
     if current_user
       if !current_user.map
