@@ -1,4 +1,6 @@
 class PointsController < ApplicationController
+  include ApplicationHelper
+
   respond_to :json
 
   def create

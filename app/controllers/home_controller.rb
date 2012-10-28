@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  include ApplicationHelper
+
   def index
     session[:server] = "Jade Quarry" if !session[:server]
     @server = Server.find_by_name(session[:server]) || "Jade Quarry"
@@ -14,7 +16,6 @@ class HomeController < ApplicationController
 
       session[:server] = current_user.server.name
     else
-      @user = User.new
       @map = Map.new
     end
   end

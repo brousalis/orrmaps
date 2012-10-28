@@ -1,4 +1,6 @@
 class MapsController < ApplicationController
+  include ApplicationHelper
+
   respond_to :json
 
   def index
@@ -17,7 +19,6 @@ class MapsController < ApplicationController
   end
 
   def show
-    @user = User.new
     @server = Server.find_by_name(session[:server]) || Server.find_by_name("Jade Quarry")
     @map = Map.find(params[:id])
     @servers = servers

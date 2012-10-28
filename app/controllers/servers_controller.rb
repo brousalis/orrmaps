@@ -1,4 +1,6 @@
 class ServersController < ApplicationController
+  include ApplicationHelper
+
   respond_to :json
 
   def create
@@ -17,18 +19,15 @@ class ServersController < ApplicationController
 
   def show
     name = params[:name].titleize.sub("Of", "of")
-    @user = User.new
     @server = Server.find_by_name(name)
     @servers = servers
-    fetch_rated_maps!(@server)
   end
 
   def points
     name = params[:name].titleize.sub("Of", "of") 
     server = Server.find_by_name(name)
-    fetch_rated_maps!(server)
-    data = server.maps.includes(:points).sort_by { |m| @like_counts[m.id] || 0 }.reverse.collect do |map|
-      {:likes => @like_counts[map.id] || 0, :points => map.points.flatten.to_json}
+    data = server.maps.includes(:points).sort_by { |m| likes_for_map(m) || 0 }.reverse.collect do |map|
+      {:likes => likes_for_map(map) || 0, :points => map.points.flatten.to_json}
     end
     render :json => data
   end

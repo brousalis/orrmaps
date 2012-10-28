@@ -7,7 +7,7 @@
           #{map.user.name}'s map
         %a.like{:href => "#", :title => "#{map.id}"}
           %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user && current_user.already_likes?(map))}
-          %span= map.likes.count
+          %span= likes_for_map(map)
           likes 
         %a.date{:href => "#"}
           %i.icon.icon-white.icon-calendar

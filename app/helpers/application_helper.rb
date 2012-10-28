@@ -1,8 +1,4 @@
 module ApplicationHelper
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-
   def servers
     @servers ||= YAML.load_file('config/servers.yml')
   end
@@ -18,7 +14,7 @@ module ApplicationHelper
   end
 
   def likes_for_map(map)
-    Rails.cache.fetch("maps/#{map.id}/points", :expires_in => 5.minutes) do
+    Rails.cache.fetch("maps/#{map.id}/likes", :expires_in => 5.minutes) do
       Like.where(:map_id => map.id).count
     end
   end

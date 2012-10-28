@@ -6,31 +6,31 @@
     .servers
       %ul.nav-header.us
         United States
-        - @servers["US"].each do |server|
+        - @servers["us"].each do |server|
           %li
-            %a{:href => "#", :title => "#{server["name"]}"}= server["name"]
+            %a{:href => "#", :title => "#{server}"}= server
     .servers
       %ul.nav-header 
         Europe
-        - @servers["EU"].each do |server|
+        - @servers["eu"].each do |server|
           %li
-            %a{:href => "#", :title => "#{server.name}"}= server.name  
+            %a{:href => "#", :title => "#{server}"}= server
     .servers
       %ul.nav-header 
         France
-        - @servers["FR"].each do |server|
+        - @servers["fr"].each do |server|
           %li
-            %a{:href => "#", :title => "#{server.name}"}= server.name  
+            %a{:href => "#", :title => "#{server}"}= server
     .servers
       %ul.nav-header 
         Germany
-        - @servers["GE"].each do |server|
+        - @servers["ge"].each do |server|
           %li
-            %a{:href => "#", :title => "#{server.name}"}= server.name  
+            %a{:href => "#", :title => "#{server}"}= server
     .servers
       %ul.nav-header 
         Spain
-        - @servers["MX"].each do |server|
+        - @servers["mx"].each do |server|
           %li
-            %a{:href => "#", :title => "#{server.name}"}= server.name  
+            %a{:href => "#", :title => "#{server}"}= server
 

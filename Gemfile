@@ -26,7 +26,7 @@ gem 'newrelic_rpm'
 gem 'dalli'
 gem 'figgy'
 gem 'taps'
-
+gem 'metamagic'
 
 group :test, :development do
   gem 'pry'

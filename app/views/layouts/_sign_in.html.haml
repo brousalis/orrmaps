@@ -7,7 +7,7 @@
       By registering you can maintain your own map daily, share your map with others, rate other maps, and more. The site is in beta,
       %a{:href => "mailto:orrmaps@gmail.com"} e-mail me
       if you find any issues.
-    = form_for(@user, :remote => true) do |f|
+    = form_for(User.new, :remote => true) do |f|
       .errors.alert.alert-error
         %i.icon.icon-exclamation-sign
         .error

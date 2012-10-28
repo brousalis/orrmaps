@@ -1,9 +1,7 @@
 !!!
 %html
   %head
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %title= content_for?(:title) ? yield(:title) : "Orr Maps"
-    %meta{:content => content_for?(:description) ? yield(:description) : "Orr maps", :name => "description"}
+    = metamagic :title => "Orr Maps", :description => "Create, share, and rate orichalcum and ancient wood maps for Guild Wars 2 by server", :keywords => %w(orichalcum ancient wood ori orr orrmaps orrmap orr maps gw2)
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "http://use.typekit.com/pgq1wgn.js"
     :javascript
