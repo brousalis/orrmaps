@@ -8,13 +8,13 @@ module ApplicationHelper
   end
 
   def points_for_map(map)
-    Rails.cache.fetch("maps/#{map.id}/points", :expires_in => 5.minutes) do
+    Rails.cache.fetch("maps/#{map.id}/points", :expires_in => 15.minutes) do
       Point.where(:map_id => map.id).count
     end
   end
 
   def likes_for_map(map)
-    Rails.cache.fetch("maps/#{map.id}/likes", :expires_in => 5.minutes) do
+    Rails.cache.fetch("maps/#{map.id}/likes", :expires_in => 15.minutes) do
       Like.where(:map_id => map.id).count
     end
   end
