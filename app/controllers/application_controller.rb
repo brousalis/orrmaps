@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   end
 
   def rated(server)
-    Rails.cache.fetch("server/#{server.id}/maps/all/sortedservers/all/sorted", :expires_in => 9999.minutes) do
+    Rails.cache.fetch("server/#{server.id}/maps/all/sorted", :expires_in => 5.minutes) do
       User.find_all_by_server_id(server.id)
     end
   end
