@@ -507,7 +507,7 @@ div.DTFC_LeftFootWrapper table {
     line-height: 130%;
     @include border-radius(4px);
     display: inline-block;
-    background: #fff image-url("search.png") no-repeat 3% 50%;
+    background: rgba(0,0,0,0.7) image-url("search.png") no-repeat 3% 50%;
     border: 1px solid #222;
     &:focus { border: 1px solid #202020; @include box-shadow(none); @include background-clip(padding-box); }
   }
@@ -529,4 +529,4 @@ border: 1px solid #222;
 background: #000;
 @include background-clip(padding-box);
 }
-.pagination a:hover, .pagination .active a, .pagination .active span { background: #222; }
+.pagination a:hover, .pagination .active a, .pagination .active span { background: #111; }

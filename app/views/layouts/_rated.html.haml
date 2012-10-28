@@ -21,10 +21,10 @@
             %td
               .likes{:style => "margin-left: 5px;"}
                 %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user && current_user.already_likes?(user.map))}
-                #{likes_for_map(user.map)} 
+                #{likes_for_map(user.map.id)} 
             %td
               %i.icon.icon-white.icon-map-marker
-              #{points_for_map(user.map)} 
+              #{points_for_map(user.map.id)} 
             %td
               .likes 
                 #{time_ago_in_words(user.map.updated_at).sub("minute", "min").sub("less than a min", "< 1 min").sub("about", "")} ago 
