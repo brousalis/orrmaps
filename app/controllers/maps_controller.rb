@@ -20,7 +20,6 @@ class MapsController < ApplicationController
     @user = User.new
     @server = Server.find_by_name(session[:server]) || Server.find_by_name("Jade Quarry")
     @map = Map.find(params[:id])
-    fetch_rated_maps!(@server)
     @servers = servers
   end
 
