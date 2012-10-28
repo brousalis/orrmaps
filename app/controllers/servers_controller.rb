@@ -20,7 +20,7 @@ class ServersController < ApplicationController
     @user = User.new
     @server = Server.find_by_name(name)
     @servers = servers
-    @rated = rated(@server)
+    fetch_rated_maps!(@server)
   end
 
   def points
