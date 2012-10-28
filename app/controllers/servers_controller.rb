@@ -25,7 +25,7 @@ class ServersController < ApplicationController
 
   def points
     name = params[:name].titleize.sub("Of", "of") 
-    server = Server.where(:name => name).first
+    server = Server.find_by_name(name)
     fetch_rated_maps!(server)
     data = server.maps.includes(:points).sort_by { |m| @like_counts[m.id] || 0 }.reverse.collect do |map|
       {:likes => @like_counts[map.id] || 0, :points => map.points.flatten.to_json}
