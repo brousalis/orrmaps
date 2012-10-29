@@ -27,6 +27,7 @@ gem 'dalli'
 gem 'figgy'
 gem 'taps'
 gem 'metamagic'
+gem 'heroku'
 
 group :test, :development do
   gem 'pry'
