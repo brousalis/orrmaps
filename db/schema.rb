@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019043715) do
+ActiveRecord::Schema.define(:version => 20121028204736) do
 
   create_table "likes", :force => true do |t|
     t.integer  "map_id"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20121019043715) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "likes", ["map_id"], :name => "map_id_likes_ix"
 
   create_table "maps", :force => true do |t|
     t.datetime "updated"
@@ -40,6 +42,8 @@ ActiveRecord::Schema.define(:version => 20121019043715) do
     t.integer  "votes",      :default => 5, :null => false
     t.string   "icon"
   end
+
+  add_index "points", ["map_id"], :name => "map_id_points_ix"
 
   create_table "servers", :force => true do |t|
     t.string   "name",       :null => false
