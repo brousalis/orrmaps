@@ -28,7 +28,7 @@ module ApplicationHelper
   private
 	
   def cache_counts(rel)
-    Rails.cache.fetch("maps/#{rel.class.name.downcase}", :expires_in => 5.minutes) do
+    Rails.cache.fetch("maps/#{rel.name.downcase}", :expires_in => 5.minutes) do
       rel.select("map_id, COUNT(*) as count").group('map_id').inject({}) do |cache, item|
         cache.merge(item.map_id => item.count.to_i)
       end
