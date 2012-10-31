@@ -9,6 +9,7 @@ orrmaps.index = function() {
       points = $.parseJSON(data.points);
       if (points != []) {
         for (var i=0; i < points.length; i++) {
+          console.log(points[i]);
           orrmaps.map.add_draggable_marker(points[i]); 
         }
       }

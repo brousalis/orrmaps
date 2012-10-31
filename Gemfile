@@ -30,5 +30,6 @@ gem 'metamagic'
 gem 'heroku'
 
 group :test, :development do
+  gem 'sqlite3'
   gem 'pry'
 end

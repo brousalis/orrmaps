@@ -1,6 +1,6 @@
-#rated.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "servers", :role => "dialog", :tabindex => "-1"}
+#rated.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
     %h3 Map list for #{@server.name}
   .modal-body
     %table.table
@@ -10,23 +10,4 @@
           %th Likes
           %th Points
           %th Updated at
-      %tbody
-        - users_on_server(@server).each do |user|
-          %tr
-            %td
-              %a{:href => "/maps/#{user.map.id}"}
-                .map
-                  %i.icon.icon-white.icon-user
-                  = user.name.slice(0,16)
-            %td
-              .likes{:style => "margin-left: 5px;"}
-                %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user && current_user.already_likes?(user.map))}
-                #{likes_for_map(user.map)}
-            %td
-              %i.icon.icon-white.icon-map-marker
-              #{points_for_map(user.map)}
-            %td
-              .likes 
-                #{time_ago_in_words(user.map.updated_at).sub("minute", "min").sub("less than a min", "< 1 min").sub("about", "")} ago 
-              .clearfix
 

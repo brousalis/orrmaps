@@ -155,6 +155,7 @@ $(document).ready(function() {
     "bSort": true,
     "bInfo": false,
     "bAutoWidth": false,
+    "sAjaxSource": "/rated",
     "aoColumns": [
             { "asSorting": [ "desc", "asc" ] }, //first sort desc, then asc
             { "asSorting": [ "desc", "asc" ] }, //first sort desc, then asc

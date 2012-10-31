@@ -24,18 +24,18 @@ orrmaps.map = function() {
   };
 
   var get_marker_id = function(latlng) {
-    return latlng.toUrlValue(); 
+    return latlng.toUrlValue();
   };
 
   var remove_current_marker = function() {
     current_marker.setMap(null);
     current_info_box.close();
     delete markers[current_marker_id];
-    $.ajax({ url: '/points', 
-             type: 'DELETE', 
-             data: { 
+    $.ajax({ url: '/points',
+             type: 'DELETE',
+             data: {
                marker_id: current_marker_id,
-               latitude: current_marker.position.lat(), 
+               latitude: current_marker.position.lat(),
                longitude: current_marker.position.lng()
              }
     });
@@ -43,11 +43,11 @@ orrmaps.map = function() {
 
   var update_marker = function(marker) {
     marker_id = get_marker_id(marker.getPosition());
-    $.ajax({ url: '/points', 
-             type: 'PUT', 
+    $.ajax({ url: '/points',
+             type: 'PUT',
              data: {
-               latitude: marker.position.lat(), 
-               longitude: marker.position.lng(), 
+               latitude: marker.position.lat(),
+               longitude: marker.position.lng(),
                marker_id: current_marker_id,
                new_marker_id: marker_id
              }
@@ -69,13 +69,13 @@ orrmaps.map = function() {
       map: map,
       icon: image,
       id: 'marker_' + marker_id
-    }); 
-    markers[marker_id] = marker; 
+    });
+    markers[marker_id] = marker;
     if(counter <= 2) marks.push(marker);
   };
 
   var cluster_markers = function() {
-    var mc = new MarkerClusterer(map, marks); 
+    var mc = new MarkerClusterer(map, marks);
   };
 
   var add_marker = function(data) {
@@ -86,8 +86,9 @@ orrmaps.map = function() {
       animation: google.maps.Animation.DROP,
       map: map,
       icon: data.icon,
+      note: data.note,
       id: 'marker_' + marker_id
-    }); 
+    });
 
     markers[marker_id] = marker;
   };
@@ -102,19 +103,20 @@ orrmaps.map = function() {
       map: map,
       icon: data.icon,
       draggable: true,
+      note: data.note,
       id: 'marker_' + marker_id
-    }); 
+    });
 
-    add_delete_box(marker); 
+    add_box(marker);
+
     markers[marker_id] = marker;
   };
 
   var place_marker = function(location) {
-    console.log(location);
     marker_id = get_marker_id(location);
     icon = "/assets/tiles/" + icon_type + ".png"
     $.ajax({
-      url: 'points', 
+      url: 'points',
       type: 'post',
       data: {icon: icon, map_id: map_id, latitude: location.lat(), longitude: location.lng(), marker_id: marker_id},
       success: function(json) {
@@ -124,7 +126,7 @@ orrmaps.map = function() {
           orrmaps.alert.init("Too many markers on the map");
         } else {
           var marker = new google.maps.Marker({
-            position: location, 
+            position: location,
             animation: google.maps.Animation.DROP,
             map: map,
             icon: icon,
@@ -135,25 +137,25 @@ orrmaps.map = function() {
           google.maps.event.addListener(marker, 'dragstart', function() {
             current_marker = marker;
             current_marker_id = marker_id;
-          }); 
+          });
 
           google.maps.event.addListener(marker, 'dragend', function() {
             update_marker(marker);
           });
-                                         
-          add_delete_box(marker);
-          markers[marker_id] = marker; 
+
+          add_box(marker);
+          markers[marker_id] = marker;
         }
       }
     });
   };
 
-  var init = function() { 
+  var init = function() {
     var map_options = {
       zoom: 4,
       center: new google.maps.LatLng(46.558860303117164, 10.37109375),
       disableDefaultUI: true,
-    } 
+    }
     var customMapType = new google.maps.ImageMapType({
       getTileUrl: function(coord, zoom) {
         if(coord && (coord.x < Math.pow(2, zoom)) && (coord.x > -1) && (coord.y < Math.pow(2, zoom)) && (coord.y > -1)) {
@@ -170,7 +172,7 @@ orrmaps.map = function() {
 
     map = new google.maps.Map(document.getElementById('map'), map_options);
     map.mapTypes.set('custom', customMapType);
-    map.setMapTypeId('custom'); 
+    map.setMapTypeId('custom');
 
     //google.maps.event.addListener(map, 'center_changed', function() {
     //  checkBounds();
@@ -197,7 +199,7 @@ orrmaps.map = function() {
       if (X > AmaxX) {X = AmaxX;}
       if (Y < AminY) {Y = AminY;}
       if (Y > AmaxY) {Y = AmaxY;}
-   
+
        map.setCenter(new google.maps.LatLng(Y,X));
     }
   };
@@ -209,7 +211,88 @@ orrmaps.map = function() {
   var click_handler = function() {
     google.maps.event.addListener(map, "click", function(event) {
       place_marker(event.latLng);
-    }); 
+    });
+  };
+
+  var add_note_box = function(marker) {
+    var box = document.createElement("div");
+    box.className = "note";
+    box.innerHTML = '<div class="popover fade right in" style="top: -48px; left: 60px; display: block; "><div class="arrow"></div><div class="popover-inner"><div class="popover-content"><textarea name="note" class="note" /></textarea><a class="close" href="#">&times;</a><a class="delete" href="#"><i class="icon icon-white icon-trash"></i></a><a class="status" href="#"><i class="icon icon-white icon-ok"></i></a></div></div>';
+
+    $(box).find('.note').autosize({append: "\n"});
+
+    $(box).find('.delete').click(function() {
+      remove_current_marker();
+      return false;
+    });
+
+    console.log(marker);
+    $(box).find('.note').val(marker.note);
+
+    var timeout;
+    $(box).find('.note').bind('textchange', function () {
+      clearTimeout(timeout);
+      $('.note .status').fadeIn();
+      timeout = setTimeout(function () {
+        $.ajax({ 
+          url: '/notes',
+          type: 'PUT',
+          data: {
+            marker_id: current_marker_id,
+            content: $(box).find('.note').val()
+          }, 
+          success: function() {
+            $('.note .status').fadeOut();
+          }
+        });
+      }, 1000);
+    });
+
+    var box_options = {
+      content: box,
+      disableAutoPan: false,
+      maxWidth: 0,
+      pixelOffset: new google.maps.Size(-35, 0),
+      zIndex: null,
+      closeBoxURL: "",
+      infoBoxClearance: new google.maps.Size(1, 1),
+      isHidden: false,
+      pane: "floatPane",
+      enableEventPropagation: false,
+      id: 'marker_' + marker.id
+    }
+
+    var ib = new InfoBox(box_options);
+
+    google.maps.event.addListener(marker, 'dragend', function() {
+      update_marker(marker);
+    });
+
+    google.maps.event.addListener(marker, 'dragstart', function() {
+      current_marker = marker;
+      current_marker_id = marker.id.replace("marker_","");
+    });
+
+    google.maps.event.addListener(marker, "click", function(event) {
+      current_marker = marker;
+      current_marker_id = marker.id.replace("marker_","");
+      current_info_box = ib;
+      ib.open(map, this);
+    });
+
+    $(box).find('.close').click(function() {
+      ib.close(map, marker);
+      return false;
+    });
+
+  };
+
+  var add_box = function(marker) {
+    type = marker.icon.replace("/assets/tiles/","").replace(".png", "")
+    if(type == "note")
+      add_note_box(marker);
+    else
+      add_delete_box(marker);
   };
 
   var add_delete_box = function(marker) {
@@ -217,7 +300,7 @@ orrmaps.map = function() {
     box.className = "info";
     box.innerHTML = "<a class='delete' href='#'><i class='icon icon-white icon-trash'></i></a><a class='report' href='#'><i class='icon icon-white icon-flag'></i></a>";
 
-    $(box).find('.delete').click(function() { 
+    $(box).find('.delete').click(function() {
       remove_current_marker();
       return false;
     });
@@ -235,7 +318,7 @@ orrmaps.map = function() {
       enableEventPropagation: false,
       id: 'marker_' + marker.id
     }
-     
+
     var ib = new InfoBox(box_options);
 
     google.maps.event.addListener(marker, 'dragend', function() {
@@ -245,7 +328,7 @@ orrmaps.map = function() {
     google.maps.event.addListener(marker, 'dragstart', function() {
       current_marker = marker;
       current_marker_id = marker.id.replace("marker_","");
-    }); 
+    });
 
     google.maps.event.addListener(marker, "click", function(event) {
       current_marker = marker;
@@ -253,8 +336,8 @@ orrmaps.map = function() {
       current_info_box = ib;
       ib.open(map, this);
     });
-  }; 
-   
+  };
+
   return {
     add_marker: add_marker,
     add_draggable_marker: add_draggable_marker,

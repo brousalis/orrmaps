@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028204736) do
+ActiveRecord::Schema.define(:version => 20121031030800) do
 
   create_table "likes", :force => true do |t|
     t.integer  "map_id"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(:version => 20121028204736) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "notes", :force => true do |t|
+    t.string   "content"
+    t.integer  "point_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "points", :force => true do |t|
     t.float    "latitude",                  :null => false
     t.float    "longitude",                 :null => false
@@ -41,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20121028204736) do
     t.datetime "updated_at",                :null => false
     t.integer  "votes",      :default => 5, :null => false
     t.string   "icon"
+    t.integer  "note_id"
   end
 
   add_index "points", ["map_id"], :name => "map_id_points_ix"

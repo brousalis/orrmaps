@@ -14,7 +14,7 @@ class MapsController < ApplicationController
 
   def map
     map = Map.find(params[:id])
-    points = map.points.flatten.to_json
+    points = map.points
     render :json => points
   end
 

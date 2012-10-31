@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include ActionView::Helpers::DateHelper
+
   def servers
     @servers ||= YAML.load_file('config/servers.yml')
   end
@@ -21,12 +23,16 @@ module ApplicationHelper
 
   def users_on_server(server)
     Rails.cache.fetch("servers/#{server.id}/maps", :expires_in => 5.minutes) do
-      User.includes(:map).where(:server_id => server.id)
+      User.joins(:map => [:points]).where(:server_id => server.id).uniq
     end
   end
 
+  def time_ago(updated)
+    time_ago_in_words(updated).sub("minute", "min").sub("less than a min", "< 1 min").sub("about", "")
+  end
+
   private
-	
+
   def cache_counts(rel)
     Rails.cache.fetch("maps/#{rel.name.downcase}", :expires_in => 5.minutes) do
       rel.select("map_id, COUNT(*) as count").group('map_id').inject({}) do |cache, item|
