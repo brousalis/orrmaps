@@ -14,8 +14,10 @@ class MapsController < ApplicationController
 
   def map
     map = Map.find(params[:id])
-    points = map.points
-    render :json => points
+    points = Point.include(:note).where(:map_id => params[:id])
+    data = points.map { |point| [point, point.note.content] }
+    puts data.inspect
+    render :json => data
   end
 
   def show
