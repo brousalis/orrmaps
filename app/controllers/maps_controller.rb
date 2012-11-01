@@ -14,11 +14,9 @@ class MapsController < ApplicationController
   end
 
   def map
-    map = Map.find(params[:id])
-    points = map.points.flatten.to_json
-    render :json => points
-
-
+    points = Point.includes(:note).where(:map_id => params[:id])
+    data = points.collect { |point| point.to_hash }.to_json
+    render :json => data
   end
 
   def show

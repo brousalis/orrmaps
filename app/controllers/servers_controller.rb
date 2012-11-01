@@ -24,8 +24,8 @@ class ServersController < ApplicationController
   end
 
   def rated
-    @server = Server.find_by_name(current_user.server.name)
-    rated = users_on_server(Server.find_by_name("Jade Quarry")).collect do |user|
+    @server = Server.find_by_name(session[:server]) || Server.find_by_name("Jade Quarry")
+    sorted = users_on_server(@server).collect do |user|
       [
         "<a href='/maps/#{user.map.id}'>#{user.name}</a>",
         likes_for_map(user.map),
@@ -33,7 +33,7 @@ class ServersController < ApplicationController
         time_ago(user.map.updated_at)
       ]
     end
-    render :json => { "aaData" => rated }
+    render :json => { "aaData" => sorted }
   end
 
   def points

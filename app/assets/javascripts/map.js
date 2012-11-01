@@ -93,6 +93,9 @@ orrmaps.map = function() {
       id: 'marker_' + marker_id
     });
 
+    if(data.note)
+      add_note_box(marker, false);
+
     markers[marker_id] = marker;
   };
 
@@ -154,11 +157,13 @@ orrmaps.map = function() {
   };
 
   var init = function() {
+
     var map_options = {
       zoom: 4,
       center: new google.maps.LatLng(46.558860303117164, 10.37109375),
       disableDefaultUI: true,
     }
+
     var customMapType = new google.maps.ImageMapType({
       getTileUrl: function(coord, zoom) {
         if(coord && (coord.x < Math.pow(2, zoom)) && (coord.x > -1) && (coord.y < Math.pow(2, zoom)) && (coord.y > -1)) {
@@ -217,46 +222,57 @@ orrmaps.map = function() {
     });
   };
 
-  var add_note_box = function(marker) {
+  var add_note_box = function(marker, enabled) {
+    enabled  = typeof enabled !== 'undefined' ? enabled : true;
+    
+    var disabled = "", del = "";
+
+    if(enabled == false)
+      disabled = "disabled=disabled"
+    else
+      del = '<a class="delete" href="#"><i class="icon icon-white icon-trash"></i></a>';
+
     var box = document.createElement("div");
     box.className = "note_box";
-    box.innerHTML = '<div class="popover fade right in" style="top: -48px; left: 60px; display: block; "><div class="arrow"></div><div class="popover-inner"><div class="popover-content"><textarea name="note" class="note" /></textarea><a class="close" href="#">&times;</a><a class="delete" href="#"><i class="icon icon-white icon-trash"></i></a><a class="status" href="#"><i class="icon icon-white icon-ok"></i></a></div></div>';
-
-    $(box).find('.note').keypress(function(e) {
-      if (e.which == 13) {
-        e.preventDefault();
-        return false;
-      }
-    }).keyup(function(e) {
-      if($(this).val().length > 92)
-        $(this).val($(this).val().substr(0, 92));
-    });
-
-    $(box).find('.delete').click(function() {
-      remove_current_marker();
-      return false;
-    });
+    box.innerHTML = '<div class="popover fade right in" style="top: -48px; left: 60px; display: block; "><div class="arrow"></div><div class="popover-inner"><div class="popover-content"><textarea ' + disabled + ' name="note" class="note" /></textarea><a class="close" href="#">&times;</a>' + del + '<a class="status" href="#"><i class="icon icon-white icon-ok"></i></a></div></div>';
 
     $(box).find('.note').val(marker.note);
 
-    var timeout;
-    $(box).find('.note').bind('textchange', function () {
-      clearTimeout(timeout);
-      $(box).find('.status').fadeIn();
-      timeout = setTimeout(function () {
-        $.ajax({ 
-          url: '/notes',
-          type: 'PUT',
-          data: {
-            marker_id: current_marker_id,
-            content: $(box).find('.note').val()
-          }, 
-          success: function() {
-            $(box).find('.status').fadeOut();
-          }
-        });
-      }, 1000);
-    });
+    if(enabled) {
+      $(box).find('.note').keypress(function(e) {
+        if (e.which == 13) {
+          e.preventDefault();
+          return false;
+        }
+      }).keyup(function(e) {
+        if($(this).val().length > 92)
+          $(this).val($(this).val().substr(0, 92));
+      });
+
+      $(box).find('.delete').click(function() {
+        remove_current_marker();
+        return false;
+      });
+
+      var timeout;
+      $(box).find('.note').bind('textchange', function () {
+        clearTimeout(timeout);
+        $(box).find('.status').fadeIn();
+        timeout = setTimeout(function () {
+          $.ajax({ 
+            url: '/notes',
+            type: 'PUT',
+            data: {
+              marker_id: current_marker_id,
+              content: $(box).find('.note').val()
+            }, 
+            success: function() {
+              $(box).find('.status').fadeOut();
+            }
+          });
+        }, 1000);
+      });
+    }
 
     var box_options = {
       content: box,
@@ -297,7 +313,7 @@ orrmaps.map = function() {
 
   };
 
-  var add_box = function(marker) {
+  var add_box = function(marker, enabled) {
     type = marker.icon.replace("/assets/tiles/","").replace(".png", "")
     if(type == "note")
       add_note_box(marker);
