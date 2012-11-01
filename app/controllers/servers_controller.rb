@@ -28,8 +28,8 @@ class ServersController < ApplicationController
     sorted = users_on_server(@server).collect do |user|
       [
         "<a href='/maps/#{user.map.id}'>#{user.name}</a>",
-        likes_for_map(user.map),
         points_for_map(user.map),
+        likes_for_map(user.map),
         time_ago(user.map.updated_at)
       ]
     end
