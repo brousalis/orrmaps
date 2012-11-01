@@ -4,7 +4,7 @@ orrmaps.ui = function() {
 
   var handle_submit = function() {
     $("#new_user").submit(function(e){
-      e.preventDefault(); 
+      e.preventDefault();
       $.ajax({
         type: "post",
         url: "/users",
@@ -39,8 +39,8 @@ orrmaps.ui = function() {
           }
         },
         dataType: "json"
-      }); 
-    });  
+      });
+    });
   };
 
   var sidebar = function() {
@@ -62,8 +62,8 @@ orrmaps.ui = function() {
           if(json.location) window.location = json.location
         },
         dataType: "json"
-      }); 
-    });  
+      });
+    });
   };
 
   var init = function() {
@@ -104,11 +104,10 @@ orrmaps.alert = function() {
 
     setTimeout(function() {
       $('#footer').fadeOut();
-    }, 5000);  
+    }, 5000);
   };
 
   return {
     init: init
   };
 }();
-   

@@ -332,13 +332,14 @@ a:hover { text-decoration: none; }
   display: none;
 }
 textarea.note { 
-  overflow: hidden; 
+  overflow: hidden;
   padding: 0;
   font-family: proxima-nova-1, proxima-nova-2;
   resize: none !important;
   border: none;
   margin: 0;
-  margin-bottom: 22px;
+  margin-bottom: 8px;
+  height: 60px;
   float: left;
   @include box-shadow(none);
   background: transparent;

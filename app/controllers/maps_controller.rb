@@ -6,18 +6,19 @@ class MapsController < ApplicationController
   def index
     if current_user
       map = current_user.map
-      points = map.points.flatten.to_json
-      render :json => {:map_id => map.id, :points => points}
+      points = Point.includes(:note).where(:map_id => map.id)
+      data = points.collect { |point| point.to_hash }.to_json
+      render :json => {:map_id => map.id, :points => data}
     end
     render :json => {:points => []} if !current_user
   end
 
   def map
     map = Map.find(params[:id])
-    points = Point.include(:note).where(:map_id => params[:id])
-    data = points.map { |point| [point, point.note.content] }
-    puts data.inspect
-    render :json => data
+    points = map.points.flatten.to_json
+    render :json => points
+
+
   end
 
   def show

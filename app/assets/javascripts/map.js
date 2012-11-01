@@ -58,6 +58,8 @@ orrmaps.map = function() {
     point = new google.maps.LatLng(data.latitude, data.longitude)
     marker_id = get_marker_id(point);
 
+    if(data.icon == "/assets/tiles/note.png") return false;
+
     // muahahahaha
     if(data.map_id != prev_id) counter++;
     prev_id = data.map_id;
@@ -81,6 +83,7 @@ orrmaps.map = function() {
   var add_marker = function(data) {
     point = new google.maps.LatLng(data.latitude, data.longitude)
     marker_id = get_marker_id(point);
+
     var marker = new google.maps.Marker({
       position: point,
       animation: google.maps.Animation.DROP,
@@ -216,23 +219,30 @@ orrmaps.map = function() {
 
   var add_note_box = function(marker) {
     var box = document.createElement("div");
-    box.className = "note";
+    box.className = "note_box";
     box.innerHTML = '<div class="popover fade right in" style="top: -48px; left: 60px; display: block; "><div class="arrow"></div><div class="popover-inner"><div class="popover-content"><textarea name="note" class="note" /></textarea><a class="close" href="#">&times;</a><a class="delete" href="#"><i class="icon icon-white icon-trash"></i></a><a class="status" href="#"><i class="icon icon-white icon-ok"></i></a></div></div>';
 
-    $(box).find('.note').autosize({append: "\n"});
+    $(box).find('.note').keypress(function(e) {
+      if (e.which == 13) {
+        e.preventDefault();
+        return false;
+      }
+    }).keyup(function(e) {
+      if($(this).val().length > 92)
+        $(this).val($(this).val().substr(0, 92));
+    });
 
     $(box).find('.delete').click(function() {
       remove_current_marker();
       return false;
     });
 
-    console.log(marker);
     $(box).find('.note').val(marker.note);
 
     var timeout;
     $(box).find('.note').bind('textchange', function () {
       clearTimeout(timeout);
-      $('.note .status').fadeIn();
+      $(box).find('.status').fadeIn();
       timeout = setTimeout(function () {
         $.ajax({ 
           url: '/notes',
@@ -242,7 +252,7 @@ orrmaps.map = function() {
             content: $(box).find('.note').val()
           }, 
           success: function() {
-            $('.note .status').fadeOut();
+            $(box).find('.status').fadeOut();
           }
         });
       }, 1000);

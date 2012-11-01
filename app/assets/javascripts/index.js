@@ -7,14 +7,12 @@ orrmaps.index = function() {
       orrmaps.map.toolshed();
 
       points = $.parseJSON(data.points);
-      console.log(data.points);
-      if (points != []) {
+      if (points != null) {
         for (var i=0; i < points.length; i++) {
           orrmaps.map.add_draggable_marker(points[i]); 
         }
       }
     });
-
   };
 
   return {
