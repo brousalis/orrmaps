@@ -16,7 +16,9 @@ class HomeController < ApplicationController
 
       session[:server] = current_user.server.name
     else
+      redirect_to "/server/#{underscore(session[:server])}"
       @map = Map.new
     end
   end
+
 end

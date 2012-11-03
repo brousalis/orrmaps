@@ -22,6 +22,14 @@
         .brand.logo{:href => "#", :style => "font-weight:bold;"}
           %i.icon.icon-white.icon-home
           = server.name  
+        .pull-right.faq
+          - if current_user
+            Points from the maps with the most likes will be more visible. View the 
+            %a.top_rated{:href => "#rated", :"data-toggle" => "modal"} map list
+          - else
+            %a.sign_in{:href => "#sign_in", :"data-toggle" => "modal"} Sign in
+            to create your own map.
+            Switch servers by clicking above
       .pull-right.toolshed
         %ul.tools
           %li

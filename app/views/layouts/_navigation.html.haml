@@ -1,34 +1,35 @@
 %div.navbar.navbar-fixed-top
   %nav.navbar-inner
-    .container 
+    .container
       %a.brand.logo{:href => "/"} Orr maps
       %ul.nav
         %li.your
           %a{:href => "/"} Your map
         %li.serv
           - if session[:server]
-            %a{:href => "/server/#{underscore(session[:server])}"} Server map 
+            %a{:href => "/server/#{underscore(session[:server])}"} Server map
           - else
-            %a{:href => "/server/jade_quarry"} Server map 
+            %a{:href => "/server/jade_quarry"} Server map
         %li.rated
           %a.top_rated{:href => "#rated", :"data-toggle" => "modal"} Map list
       %ul.nav.pull-right
+        
         - unless current_user
           %li
-            %a.sign_in{:href => "#sign_in", :"data-toggle" => "modal"} 
+            %a.sign_in{:href => "#sign_in", :"data-toggle" => "modal"}
               %i.icon.icon-user
-              Sign in 
+              Sign in
         - else
           %li
-            %a.sign_in{:href => "/logout"} 
+            %a.sign_in{:href => "/logout"}
               %i.icon.icon-off
               Sign out
               %strong= current_user.name
           %li
             %a.delete{:href => "/user/delete"}
-              %i.icon.icon-remove 
+              %i.icon.icon-remove
               Delete account
         %li
-          %a{:href => "#servers", :"data-toggle" => "modal"} 
+          %a{:href => "#servers", :"data-toggle" => "modal"}
             %i.icon.icon-home
             %span.server= @server.name
