@@ -5,6 +5,12 @@ module ApplicationHelper
     @servers ||= YAML.load_file('config/servers.yml')
   end
 
+  def find_server(name)
+    Rails.cache.fetch("servers/#{name}", :expires_in => 5.minutes) do
+      Server.find_by_name(name)
+    end
+  end
+
   def underscore(server)
     return server.downcase.strip.gsub(' ', '_').gsub(/[^\w-]/, '')
   end
