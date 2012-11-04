@@ -21,7 +21,7 @@ a:hover { text-decoration: none; }
   width: 100%;
 }
 
-#rated, #sign_in, #servers {
+#faq, #rated, #sign_in, #servers {
   @include box-shadow(#{inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2)});
   border: 1px solid #222;
   background: rgba(0,0,0,0.5);
@@ -571,11 +571,134 @@ div.DTFC_LeftFootWrapper table {
 .page { float:right; width:auto; }
 .search { float:left; }
 .pagination a, .pagination span {
-float: left;
-line-height: 30px;
-padding: 0 8px;
-border: 1px solid #222;
-background: #000;
-@include background-clip(padding-box);
+  float: left;
+  line-height: 30px;
+  padding: 0 8px;
+  border: 1px solid #222;
+  background: #000;
+  @include background-clip(padding-box);
 }
 .pagination a:hover, .pagination .active a, .pagination .active span { background: #111; }
+
+#faq {
+  width: 700px;
+  background: rgba(0,0,0,0.4);
+  .modal-header {
+    padding: 0;
+    h1 {
+      position: absolute;
+      top: 5px;
+      padding: 0;
+      font-size: 22px;
+      text-transform: uppercase;
+      left: 15px;
+      line-height: normal;
+      text-shadow: 0px 2px 0px #000;
+    }
+  }
+  .nav-tabs {
+    border: none;
+    margin: 10px 0px 0px 0px;
+    &>li { float: right; margin-right: 10px; }
+    &> .active > a, &> .active > a:hover {
+      background: #000;
+      color: #fff;
+      border-color:#222;
+      border-bottom-color: transparent;
+      i { opacity: 0.8; margin-right: 2px }
+    }
+    &> li > a {
+      color: #666;
+      background: #000;
+      border-color: #111;
+      border-bottom-color: #222;
+      i { opacity: 0.1; margin-right: 2px }
+      &:hover {
+        i { opacity: 0.5; margin-right: 2px }
+        background: #000;
+        color: #aaa;
+      }
+    }
+  }
+  .modal-body {
+    background: #000;
+    border-bottom: 1px solid #444;
+    padding: 10px 0px;
+    #questions {
+      margin: 0;
+      padding: 0;
+      li {
+        list-style: none;
+        border-bottom: 1px solid #111;
+        &:last-child { border-bottom: none; }
+        a {
+          padding: 10px 15px;
+          padding-left: 33px;
+          background: image-url('closed.png') no-repeat 15px;
+          opacity: 0.6;
+          color: #fff;
+          font-weight: bold;
+          display: block;
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+        .answer {
+          display: none;
+          color: rgba(255,255,255,0.4);
+          padding: 10px 33px;
+        }
+        &.open {
+          background: #080808;
+          a {
+            opacity: 1;
+            color: #fff;
+            padding-bottom: 0px;
+            background: image-url('open.png') no-repeat 15px 16px;
+          }
+          .answer { 
+            display: block;
+          }
+        }
+      }
+    }
+
+  } 
+  .modal-footer { 
+    background: #191919;
+    border-top: #333;
+    @include box-shadow(inset 0px 0px 6px #111);
+    padding: 8px 15px;
+
+    a {
+      color: #fff;
+      font-weight: bold;
+      opacity: 0.8;
+      i { background: image-url('email.png') no-repeat; width: 16px; height: 16px; margin-right: 2px; }
+      &:hover { opacity: 1 }
+      &:active { top: 1px; position: relative; }
+    }
+    .progress {
+      margin-bottom: 0;
+      border: 1px solid #1C1C1C;
+      background-color: #313131;
+      background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);
+      background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);
+      background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);
+      @include box-shadow(inset 0 4px 8px #222);
+      .bar {
+        background-color: #5387BA;
+        border-right: 1px solid #282828;
+        -webkit-box-shadow: inset 0 0 1px #ddd;
+        -moz-box-shadow: inset 0 0 1px #ddd;
+        -o-box-shadow: inset 0 0 1px #ddd;
+        box-shadow: inset 0 0 1px #ddd;
+        background-image: -webkit-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87);
+        background-image: -moz-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87);
+        background-image: -o-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87);
+      }
+    }
+
+  }
+  .close { margin-right: 15px; opacity: 0.7; text-shadow: none }
+}

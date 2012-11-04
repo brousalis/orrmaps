@@ -182,34 +182,21 @@ orrmaps.map = function() {
     map.mapTypes.set('custom', customMapType);
     map.setMapTypeId('custom');
 
-    //google.maps.event.addListener(map, 'center_changed', function() {
-    //  checkBounds();
-    //});
-
     var allowedBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(-68.98992503056701,3.369140625),
-      new google.maps.LatLng(76.89074547194515, 47.060546875));
+      new google.maps.LatLng(-78.98992503056701,-83.369140625),
+      new google.maps.LatLng(86.89074547194515, 137.060546875));
 
-    function checkBounds() {
-      if(allowedBounds.contains(map.getCenter())) {
-        return;
-      }
-      var mapCenter = map.getCenter();
-      var X = mapCenter.lng();
-      var Y = mapCenter.lat();
+    var lastValidCenter = map.getCenter();
 
-      var AmaxX = allowedBounds.getNorthEast().lng();
-      var AmaxY = allowedBounds.getNorthEast().lat();
-      var AminX = allowedBounds.getSouthWest().lng();
-      var AminY = allowedBounds.getSouthWest().lat();
+    google.maps.event.addListener(map, 'center_changed', function() {
+        if (allowedBounds.contains(map.getCenter())) {
+            lastValidCenter = map.getCenter();
+            return; 
+        }
 
-      if (X < AminX) {X = AminX;}
-      if (X > AmaxX) {X = AmaxX;}
-      if (Y < AminY) {Y = AminY;}
-      if (Y > AmaxY) {Y = AmaxY;}
-
-       map.setCenter(new google.maps.LatLng(Y,X));
-    }
+        map.panTo(lastValidCenter);
+    });
+    
   };
 
   var set_map_id = function(id) {

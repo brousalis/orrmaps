@@ -4,6 +4,7 @@
 //= require jquery.effects.slide
 //= require bootstrap-modal
 //= require bootstrap-transition
+//= require bootstrap-tab
 //= require_self
 //= require_tree .
 

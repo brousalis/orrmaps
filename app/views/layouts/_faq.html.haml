@@ -1,0 +1,72 @@
+#faq.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %h1 Orrmaps
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %ul.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#faqs"} 
+          %i.icon-white.icon-question-sign
+          FAQ
+      %li
+        %a{"data-toggle" => "tab", :href => "#updates"} 
+          %i.icon-white.icon-tasks
+          Updates
+      %li
+        %a{"data-toggle" => "tab", :href => "#suggestions"} 
+          %i.icon-white.icon-plus-sign
+          Suggestions
+      %li
+        %a{"data-toggle" => "tab", :href => "#donate"} 
+          %i.icon-white.icon-heart
+          Donate
+      
+
+  .modal-body
+    .tabbable
+      .tab-content
+        #faqs.tab-pane.active
+          %ul#questions
+            %li.open
+              %a{:href => "#"} What's this all for?
+              .answer 
+                When you hit 80, most of the end game exotics as well as legendary require 
+                %strong Orichalcum ore
+                and
+                %strong Ancient Wood.
+                These materials can be gathered in the Machlor's Leap, Cursed Shore, and Frostgorge Sound. They can also be found in WvW, but I have not finished this feature yet. The locations of these materials change every week and are different by server.
+            %li
+              %a{:href => "#"} How do I make my own map?
+              .answer Just sign in! If you are not registered, it will automatically make an account for you with a new map. Once you log in, you'll see an empty map where you can add markers to it by selecting a marker from the toolbox at the top right and clicking on the map.
+            %li
+              %a{:href => "#"} How does the Server map work?
+              .answer 
+                Each map on a server keeps track of
+                %strong likes.
+                The points on the maps with the most likes will be more visible than the other maps on the server map. To like a map, visit it's individual page and click on the thumbs up icon.
+            %li
+              %a{:href => "#"} Who made this?
+              .answer 
+            %li
+              %a{:href => "#"} Why should I donate?
+              .answer 
+            %li
+              %a{:href => "#"} How can I contact you?
+              .answer Just sign in! If you are not registered, it will automatically make an account for you with a new map. Once you log in, you'll see an empty map where you can add markers to it by selecting a marker from the toolbox at the top right and clicking on the map.
+        #updates.tab-pane
+        #suggestions.tab-pane
+          %p Howdy, I'm in Section 2.
+        #donate.tab-pane
+          %p Howdy, I'm in Section 2.
+  .modal-footer
+    %a{:href => "mailto:orrmaps@gmail.com"}
+      %i.icon-white.icon-envelope 
+      email
+    :javascript
+      google_ad_client = "ca-pub-8553243631007251";
+      google_ad_slot = "0977153374";
+      google_ad_width = 234;
+      google_ad_height = 60;
+
+= javascript_include_tag "http://pagead2.googlesyndication.com/pagead/show_ads.js" 
+:javascript
+  $("#faq").modal('show');

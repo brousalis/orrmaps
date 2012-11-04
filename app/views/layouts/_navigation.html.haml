@@ -13,7 +13,10 @@
         %li.rated
           %a.top_rated{:href => "#rated", :"data-toggle" => "modal"} Map list
       %ul.nav.pull-right
-        
+        %li
+          %a.faq{:href => "#faq", :"data-toggle" => "modal"}
+            %i.icon.icon-question-sign
+            FAQ
         - unless current_user
           %li
             %a.sign_in{:href => "#sign_in", :"data-toggle" => "modal"}

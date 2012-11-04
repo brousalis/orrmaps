@@ -157,10 +157,11 @@ $(document).ready(function() {
     "bAutoWidth": false,
     "sAjaxSource": "/rated",
     "aoColumns": [
-            { "asSorting": [ "desc", "asc" ] }, //first sort desc, then asc
-            { "asSorting": [ "desc", "asc" ] }, //first sort desc, then asc
-            { "asSorting": [ "desc", "asc" ] }, //first sort desc, then asc
-            { "asSorting": [ "desc", "asc" ] }, //first sort desc, then asc
+            { "asSorting": [ "desc", "asc" ] },
+            { "asSorting": [ "desc", "asc" ] },
+            { "asSorting": [ "desc", "asc" ] },
+            { "bVisible": false, "asSorting": [ "desc", "asc" ] }, 
+            { "iDataSort": 3, "asSorting": [ "desc", "asc" ] }
     ],
     "oLanguage": {
       "sLengthMenu": "_MENU_ records per page",

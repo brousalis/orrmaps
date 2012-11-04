@@ -30,6 +30,7 @@ class ServersController < ApplicationController
         "<a href='/maps/#{user.map.id}'>#{user.name}</a>",
         points_for_map(user.map),
         likes_for_map(user.map),
+        (Time.now-user.map.updated_at).to_i,
         time_ago(user.map.updated_at)
       ]
     end
