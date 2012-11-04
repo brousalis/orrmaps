@@ -4,7 +4,7 @@ class ServersController < ApplicationController
   respond_to :json
 
   def create
-    @server = Server.find_by_name(params[:server])
+    @server = find_server(params[:server])
     session[:server] = @server.name
     if current_user
       @user = current_user
@@ -19,12 +19,13 @@ class ServersController < ApplicationController
 
   def show
     name = params[:name].titleize.sub("Of", "of")
-    @server = Server.find_by_name(name)
+    @server = find_server(name)
     @servers = servers
   end
 
   def rated
-    @server = Server.find_by_name(session[:server]) || Server.find_by_name("Jade Quarry")
+    @server = find_server(session[:server] || "Jade Quarry")
+
     sorted = users_on_server(@server).collect do |user|
       [
         "<a href='/maps/#{user.map.id}'>#{user.name}</a>",
@@ -39,7 +40,8 @@ class ServersController < ApplicationController
 
   def points
     name = params[:name].titleize.sub("Of", "of")
-    server = Server.find_by_name(name)
+    server = find_server(name)
+
     data = server.maps.includes(:points).sort_by { |m| likes_for_map(m) || 0 }.reverse.collect do |map|
       {:likes => likes_for_map(map) || 0, :points => map.points.flatten.to_json}
     end

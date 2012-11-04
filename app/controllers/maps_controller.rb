@@ -20,7 +20,7 @@ class MapsController < ApplicationController
   end
 
   def show
-    @server = Server.find_by_name(session[:server]) || Server.find_by_name("Jade Quarry")
+    @server = find_server(session[:server] || "Jade Quarry")
     @map = Map.find(params[:id])
     @servers = servers
   end

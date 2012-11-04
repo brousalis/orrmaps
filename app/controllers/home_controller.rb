@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   def index
     session[:server] = "Jade Quarry" if !session[:server]
-    @server = Server.find_by_name(session[:server]) || "Jade Quarry"
+    @server = find_server(session[:server] || "Jade Quarry")
     @servers = servers
 
     if current_user
