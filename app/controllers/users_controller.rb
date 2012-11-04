@@ -15,7 +15,7 @@ class UsersController < ApplicationController
         render :json => {:errors => "User already exists"}
       else
         @user = User.new(params[:user])
-        @server = Server.find_by_name(params[:server])
+        @server = find_server(params[:server])
         @user.server = @server
         @map = Map.create(:user => @user, :server => @server)
         @user.map = @map
