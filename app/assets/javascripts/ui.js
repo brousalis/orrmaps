@@ -80,6 +80,9 @@ orrmaps.ui = function() {
     $('#questions li a.question').live('click', function() {
       $(this).parent().toggleClass('open');
     });
+    $('.heart a').live('click', function() {
+      $("a[href='#donate']").tab('show')
+    });
   }
 
   var serialize = function() {
