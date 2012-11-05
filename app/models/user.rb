@@ -1,11 +1,10 @@
 require 'bcrypt'
 class User < ActiveRecord::Base
-  attr_accessible :name, :password, :server, :map, :likes
+  attr_accessible :name, :password, :server, :map
   attr_accessor :password
 
   belongs_to :server
   belongs_to :map
-  has_many :likes
 
   before_save :encrypt_password
 
@@ -29,9 +28,5 @@ class User < ActiveRecord::Base
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
-  end
-
-  def already_likes? map
-    self.likes.find(:all, :conditions => ['map_id= ?', map.id]).size > 0
   end
 end

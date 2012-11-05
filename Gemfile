@@ -20,14 +20,13 @@ gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem "gmaps4rails"
 gem "thin"
 gem "bcrypt-ruby"
-gem "exception_notification"
-gem 'letter_opener'
 gem 'newrelic_rpm'
 gem 'dalli'
 gem 'figgy'
 gem 'taps'
 gem 'metamagic'
 gem 'heroku'
+gem 'redis'
 
 group :test, :development do
   gem 'sqlite3'
