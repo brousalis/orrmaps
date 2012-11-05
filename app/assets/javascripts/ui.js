@@ -70,10 +70,17 @@ orrmaps.ui = function() {
     $('#sign_in').modal({keyboard: false, show: false});
     $('input').attr('autocomplete', 'off');
 
+    faqs();
     handle_submit();
     servers();
     likes();
   };
+
+  var faqs = function() {
+    $('#questions li a.question').live('click', function() {
+      $(this).parent().toggleClass('open');
+    });
+  }
 
   var serialize = function() {
     var values = {}
