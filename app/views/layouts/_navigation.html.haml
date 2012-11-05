@@ -24,14 +24,14 @@
               Sign in
         - else
           %li
+            %a.delete{:href => "/user/delete"}
+              %i.icon.icon-remove
+              Delete account 
+          %li
             %a.sign_in{:href => "/logout"}
               %i.icon.icon-off
               Sign out
               %strong= current_user.name
-          %li
-            %a.delete{:href => "/user/delete"}
-              %i.icon.icon-remove
-              Delete account
         %li
           %a{:href => "#servers", :"data-toggle" => "modal"}
             %i.icon.icon-home

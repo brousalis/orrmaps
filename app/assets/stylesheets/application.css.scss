@@ -209,8 +209,9 @@ a:hover { text-decoration: none; }
     padding: 12px 20px 10px 0px;
     margin-left: -20px;
     a {
-      color: #fff;
+      color: #ddd;
       font-weight: bold;
+      &:hover { color: #fff }
     }
   }
 
@@ -657,6 +658,7 @@ div.DTFC_LeftFootWrapper table {
           text-shadow: 0px 2px 0px #000;
           font-size: 25px;
           padding: 15px 15px 0 15px;
+          margin: 5px 0px;
           color: #fff;
         }
         p { 
