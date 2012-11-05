@@ -1,6 +1,4 @@
 class ServersController < ApplicationController
-  include ApplicationHelper
-
   respond_to :json
 
   def create

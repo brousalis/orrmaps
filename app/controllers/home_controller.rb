@@ -1,6 +1,4 @@
 class HomeController < ApplicationController
-  include ApplicationHelper
-
   def index
     session[:server] = "Jade Quarry" if !session[:server]
     @server = find_server(session[:server] || "Jade Quarry")

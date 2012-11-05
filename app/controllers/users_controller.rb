@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  include ApplicationHelper
-
   def create
     @user = User.find_by_name(params[:user][:name])
     if @user

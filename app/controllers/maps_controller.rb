@@ -1,6 +1,4 @@
 class MapsController < ApplicationController
-  include ApplicationHelper
-
   respond_to :json
 
   def index
