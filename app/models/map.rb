@@ -9,19 +9,29 @@ class Map < ActiveRecord::Base
     self.points.find_all_by_icon("/assets/tiles/#{node}.png")
   end
 
+  def likes
+    $redis.get(self.redis_key(:score))
+  end
+
   def like(user)
     $redis.multi do
       $redis.incr(self.redis_key(:score))
-      $redis.sadd(self.redis_key(:user), user.id)
+      $redis.hset(self.redis_key(:user), user.id, 1)
     end
   end
 
   def unlike(user)
-
+    if score = $redis.hexists(redis_key(:user), user.id)
+      $redis.incr(redis_key(:score)) if score == 1
+      $redis.decr(redis_key(:score)) if score == -1
+    end
   end
 
   def dislike(user)
-
+    $redis.multi do
+      $redis.decr(self.redis_key(:score))
+      $redis.hset(self.redis_key(:user), user.id, -1)
+    end
   end
 
   def redis_key(str)
