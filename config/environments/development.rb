@@ -53,5 +53,5 @@ Orrore::Application.configure do
   config.assets.debug = true
 end
 
-$redis = Redis.new(:host => "localhost", :port => "6789")
+$redis = Redis.new(:host => "localhost", :port => "6739")
 
