@@ -25,9 +25,9 @@ class Map < ActiveRecord::Base
   end
 
   def unlike(user)
-    if score = $redis.hexists(redis_key(:user), user.id)
-      $redis.decr(self.redis_key(:score)) if score == 1
-      $redis.incr(self.redis_key(:score)) if score == -1
+    if score = $redis.hget(redis_key(:user), user.id)
+      $redis.decr(self.redis_key(:score)) if score == '1'
+      $redis.incr(self.redis_key(:score)) if score == '-1'
       $redis.hdel(self.redis_key(:user), user.id)
     end
   end
