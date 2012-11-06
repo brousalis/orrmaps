@@ -13,6 +13,10 @@ class Map < ActiveRecord::Base
     $redis.get(self.redis_key(:score))
   end
 
+  def already_liked?(user)
+    $redis.hexists(self.redis_key(:user), user.id)
+  end
+
   def like(user)
     $redis.multi do
       $redis.incr(self.redis_key(:score))
@@ -22,8 +26,9 @@ class Map < ActiveRecord::Base
 
   def unlike(user)
     if score = $redis.hexists(redis_key(:user), user.id)
-      $redis.incr(redis_key(:score)) if score == 1
-      $redis.decr(redis_key(:score)) if score == -1
+      $redis.decr(self.redis_key(:score)) if score == 1
+      $redis.incr(self.redis_key(:score)) if score == -1
+      $redis.hdel(self.redis_key(:user), user.id)
     end
   end
 
