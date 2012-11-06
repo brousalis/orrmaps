@@ -8,7 +8,8 @@ Orrore::Application.routes.draw do
 
   get "rated" => "servers#rated", :as => "rated"
   get "logout" => "users#destroy", :as => "logout"
-  post "likes" => "maps#like", :as => "likes"
+  post "like" => "maps#like", :as => "like"
+  post "dislike" => "maps#dislike", :as => "dislike"
   post "server_maps" => "servers#points", :as => "servers"
   put "points" => "points#update", :as => "points"
   delete "points" => "points#destroy", :as => "points"

@@ -173,13 +173,10 @@ a:hover { text-decoration: none; }
       }
       & > .active > a { color: #000; background: none; }
       & > .rated.active > a { color: #000; position: relative; top: 1px; @include box-shadow(none); background: none; }
-
     }
-
-
   }
 
-  .date, .like{
+  .date, .likes{
     font-weight: bold;
     float: left;
     display: block;
@@ -195,14 +192,9 @@ a:hover { text-decoration: none; }
       margin-right: 2px;
     }
   }
-  .like {
-    @include opacity(1);
-    i {
-      margin-top: 6px;
-      &.liked { background: image-url('liked.png') no-repeat; }
-    }
-    &:hover i { background: image-url('liked.png') no-repeat 1px 0px; }
-  }
+  .likes { @include opacity(0.7) };
+  .like:hover i, .like i.liked { background: url('liked.png') no-repeat 1px 0px }
+  .dislike:hover i, .dislike i.disliked { background: url('disliked.png') no-repeat 1px 3px}
 
   .faq {
     display: block;

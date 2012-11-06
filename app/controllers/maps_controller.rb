@@ -32,8 +32,13 @@ class MapsController < ApplicationController
   def dislike
     map = Map.find_by_id(params[:map_id])
     if current_user && current_user.map != map
-      map.dislike(current_user)
-      render :json => { "status" => "success", "count" => map.likes }
+      if map.already_likes?(current_user)
+        map.unlike(current_user)
+        render :json => { "status" => "success", "count" => map.likes }
+      else
+        map.dislike(current_user)
+        render :json => { "status" => "success", "count" => map.likes }
+      end
     else
       render :json => { "status" => "own" }
     end 
