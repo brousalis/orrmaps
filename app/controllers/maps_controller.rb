@@ -29,20 +29,25 @@ class MapsController < ApplicationController
     render :json => points
   end
 
+  def dislike
+    map = Map.find_by_id(params[:map_id])
+    if current_user && current_user.map != map
+      map.dislike(current_user)
+      render :json => { "status" => "success", "count" => map.likes }
+    else
+      render :json => { "status" => "own" }
+    end 
+  end
+
   def like
     map = Map.find_by_id(params[:map_id])
     if current_user && current_user.map != map
-      if current_user.already_likes?(map)
-        like = map.likes.find_by_user_id(current_user.id)
-        like.destroy
-        render :json => { "status" => "failure", "count" => map.likes.count }
+      if map.already_likes?(current_user)
+        map.unlike(current_user)
+        render :json => { "status" => "success", "count" => map.likes }
       else
-        like = Like.create(:map => map, :user => current_user)
-        if like
-          render :json => { "status" => "success", "count" => map.likes.count }
-        else
-          render :json => { "status" => "failure" }
-        end
+        map.like(current_user)
+        render :json => { "status" => "success", "count" => map.likes }
       end
     else
       render :json => { "status" => "own" }
