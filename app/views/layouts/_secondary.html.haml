@@ -5,14 +5,17 @@
         .brand.logo{:href => "#"}
           %i.icon.icon-white.icon-user
           #{map.user.name}'s map
-        %a.like{:href => "#", :title => "#{map.id}"}
-          %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user && current_user.already_likes?(map))}
+        .likes
+          %a.like{:href => "#", :title => "#{map.id}"}
+            %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user && map.already_likes?(current_user))}
+          %a.dislike{:href => "#", :title => "#{map.id}"}
+            %i.icon.icon-white.icon-thumbs-down{:class => ("liked" if current_user && map.already_likes?(current_user))} 
           %span= likes_for_map(map)
           likes 
-        %a.date{:href => "#"}
+        .date{:href => "#"}
           %i.icon.icon-white.icon-calendar
           #{time_ago_in_words(map.updated_at).sub("minute", "min").sub("less than a minute", "< 1 min").sub("about","")} ago
-        %a.date{:href => "#"}
+        .date{:href => "#"}
           %i.icon.icon-white.icon-home
           = map.server.name 
         %a.date{:href => map_path(map)}

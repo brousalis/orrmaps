@@ -21,26 +21,42 @@ orrmaps.ui = function() {
   };
 
   var likes = function() {
-   $('.like').live('click', function() {
+    $('.like').live('click', function() {
       $.ajax({
         type: "post",
-        url: "/likes",
+        url: "/like",
         data: { map_id: $(this).attr("title") },
         success: function(json) {
-          $('.like span').html(json.count);
+          $('.likes span').html(json.count);
           if(json.status == "success") {
             $('.like').effect("bounce", { times:1, distance: 5 }, 100);
             $('.like i').addClass('liked');
-          } else if(json.status == "failure") {
-            $('.like').effect("bounce", { direction: "down", times:1, distance: 5 }, 100);
-            $('.like i').removeClass('liked');
+            $('.dislike i').removeClass('disliked');
           } else if(json.status == "own") {
-            $('.like').effect("shake", { times:3, distance: 2 }, 50);
+            $('.likes').effect("shake", { times:3, distance: 2 }, 50);
           }
         },
         dataType: "json"
       });
     });
+    $('.dislike').live('click', function() {
+      $.ajax({
+        type: "post",
+        url: "/dislike",
+        data: { map_id: $(this).attr("title") },
+        success: function(json) {
+          $('.likes span').html(json.count);
+          if(json.status == "success") {
+            $('.dislike').effect("bounce", { direction: "down", times:1, distance: 5 }, 100);
+            $('.dislike i').addClass('disliked');
+            $('.like i').removeClass('liked');
+          } else if(json.status == "own") {
+            $('.likes').effect("shake", { times:3, distance: 2 }, 50);
+          }
+        },
+        dataType: "json"
+      });
+    }); 
   };
 
   var sidebar = function() {
