@@ -30,7 +30,9 @@ orrmaps.ui = function() {
           $('.likes span').html(json.count);
           if(json.status == "success") {
             $('.like').effect("bounce", { times:1, distance: 5 }, 100);
-            $('.like i').addClass('liked');
+            if(!$('.dislike i').hasClass('disliked')) {
+              $('.like i').toggleClass('liked');
+            }
             $('.dislike i').removeClass('disliked');
           } else if(json.status == "own") {
             $('.likes').effect("shake", { times:3, distance: 2 }, 50);
@@ -48,7 +50,9 @@ orrmaps.ui = function() {
           $('.likes span').html(json.count);
           if(json.status == "success") {
             $('.dislike').effect("bounce", { direction: "down", times:1, distance: 5 }, 100);
-            $('.dislike i').addClass('disliked');
+            if(!$('.like i').hasClass('liked')) {
+              $('.dislike i').toggleClass('disliked');
+            }
             $('.like i').removeClass('liked');
           } else if(json.status == "own") {
             $('.likes').effect("shake", { times:3, distance: 2 }, 50);
