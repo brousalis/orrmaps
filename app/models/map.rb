@@ -13,8 +13,16 @@ class Map < ActiveRecord::Base
     $redis.hget("map_likes", self.id) || 0
   end
 
-  def already_likes?(user)
+  def has_voted?(user)
     $redis.hexists(self.redis_key(:user), user.id)
+  end
+
+  def already_likes?(user)
+    $redis.hget(self.redis_key(:user), user.id) == "1" ? true : false
+  end
+
+  def already_dislikes?(user)
+    $redis.hget(self.redis_key(:user), user.id) == "-1" ? true : false
   end
 
   def like(user)
