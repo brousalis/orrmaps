@@ -26,14 +26,16 @@ class Map < ActiveRecord::Base
   end
 
   def like(user)
-    $redis.multi do
-      $redis.hincrby("map_likes", self.id, 1)
-      $redis.hset(self.redis_key(:user), user.id, 1)
+    unless already_likes?(user)
+      $redis.multi do
+        $redis.hincrby("map_likes", self.id, 1)
+        $redis.hset(self.redis_key(:user), user.id, 1)
+      end
     end
   end
 
   def unlike(user)
-    if score = $redis.hget(redis_key(:user), user.id)
+    if score = $redis.hget(self.redis_key(:user), user.id)
       $redis.hincrby("map_likes", self.id, -1) if score == '1'
       $redis.hincrby("map_likes", self.id, 1) if score == '-1'
       $redis.hdel(self.redis_key(:user), user.id)
@@ -41,9 +43,11 @@ class Map < ActiveRecord::Base
   end
 
   def dislike(user)
-    $redis.multi do
-      $redis.hincrby("map_likes", self.id, -1) 
-      $redis.hset(self.redis_key(:user), user.id, -1)
+    unless already_dislikes?(user)
+      $redis.multi do
+        $redis.hincrby("map_likes", self.id, -1) 
+        $redis.hset(self.redis_key(:user), user.id, -1)
+      end
     end
   end
 
