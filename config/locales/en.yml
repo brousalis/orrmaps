@@ -1,5 +1,44 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  navigation: # primary navigation bar
+    your_map: "Your map"
+    server_map: "Server map"
+    delete_account: "Delete account"
+    sign_out: "Sign out"
+
+  secondary: # secondary navigation bar
+    map: "map"
+    likes: "likes"
+    ago: "ago"
+    signed_in_html: "Points from the maps with the most likes will be more visible. View the %{href}"
+    map_list: "map list"
+    create_html: "%{href} to create your own map."
+    sign_in: "Sign in"
+    faq_html: "Read the %{href} if you have any questions"
+    faq: "FAQ"
+
+  sign_in: # sign in modal
+    header: "Sign in or register"
+    blurb_html: "By registering you can maintain your own map daily, share your map with others, rate other maps, and more. The site is in beta, %{href} if you find any issues."
+    email_me: "email me"
+    username: "username"
+    password: "password"
+
+  servers: # server pick modal
+    header: "Set your home server"
+    us: "United States"
+    eu: "Europe"
+    fr: "France"
+    ge: "Germany"
+    sp: "Spain"
+
+  rated: # map list
+    header: "Map list for %{server}"
+    table:
+      name: "Name"
+      points: "Points"
+      likes: "Likes"
+      updated_at: "Updated at"
+
+  faq:
+    donate: "Donate"
+    header: "Help and Quesitons"

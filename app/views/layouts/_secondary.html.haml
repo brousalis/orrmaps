@@ -4,7 +4,7 @@
       - if map
         .brand.logo{:href => "#"}
           %i.icon.icon-white.icon-user
-          #{map.user.name}'s map
+          #{map.user.name}'s #{t("secondary.map")}
         .likes
           %a.like{:href => "#", :title => "#{map.id}"}
             %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user && map.already_likes?(current_user))}
@@ -14,7 +14,7 @@
           likes 
         .date{:href => "#"}
           %i.icon.icon-white.icon-calendar
-          #{time_ago_in_words(map.updated_at).sub("minute", "min").sub("less than a minute", "< 1 min").sub("about","")} ago
+          #{time_ago(map.updated_at)} #{t("secondary.ago")}
         .date{:href => "#"}
           %i.icon.icon-white.icon-home
           = map.server.name 
@@ -27,14 +27,10 @@
           = server.name  
         .pull-right.faq
           - if current_user
-            Points from the maps with the most likes will be more visible. View the 
-            %a.top_rated{:href => "#rated", :"data-toggle" => "modal"} map list
+            = t("secondary.signed_in_html", :href => link_to(t("secondary.map_list"), "#rated", {:class => "top_rated", :"data-toggle" => "modal"}))
           - else
-            %a.sign_in{:href => "#sign_in", :"data-toggle" => "modal"} Sign in
-            to create your own map.
-            Read the 
-            %a{:href => "#faq", "data-toggle" => "tab"} FAQ
-            if you have any questions
+            = t("secondary.create_html", :href => link_to(t("secondary.sign_in"), "#sign_in", {:class => "sign_in", :"data-toggle" => "modal"}))
+            = t("secondary.faq_html", :href => link_to(t("secondary.faq"), "#faq", {:"data-toggle" => "modal"}))
       .pull-right.toolshed
         %ul.tools
           %li

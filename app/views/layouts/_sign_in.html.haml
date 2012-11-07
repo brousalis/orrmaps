@@ -1,19 +1,17 @@
 #sign_in.modal.fade.hide{:role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3 Sign in or register
+    %h3= t("sign_in.header")
   .modal-body
     %p 
-      By registering you can maintain your own map daily, share your map with others, rate other maps, and more. The site is in beta,
-      %a{:href => "mailto:orrmaps@gmail.com"} e-mail me
-      if you find any issues.
+      = t("sign_in.blurb_html", :href => link_to(t("sign_in.email_me"), "mailto:orrmaps@gmail.com"))
     = form_for(User.new, :remote => true) do |f|
       .errors.alert.alert-error
         %i.icon.icon-exclamation-sign
         .error
       %div
-        = f.text_field :name, :placeholder => "username", :class => "username"
+        = f.text_field :name, :placeholder => t("sign_in.username"), :class => "username"
       %div
-        = f.password_field :password, :placeholder => "password", :class => "password"
+        = f.password_field :password, :placeholder => t("sign_in.password"), :class => "password"
       %div
-        = f.submit "Sign in or register", :class => "btn btn-primary btn-large"
+        = f.submit t("sign_in.header"), :class => "btn btn-primary btn-large"
