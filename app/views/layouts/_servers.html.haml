@@ -1,35 +1,35 @@
 #servers.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"data-dismiss" => "modal", :type => "button"} ×
-    %h3 Set your home server
+    %h3= t("servers.header")
   .modal-body
     .servers
       %ul.nav-header.us
-        United States
+        = t("servers.us")
         - @servers["us"].each do |server|
           %li
             %a{:href => "#", :title => "#{server}"}= server
     .servers
       %ul.nav-header 
-        Europe
+        = t("servers.eu")
         - @servers["eu"].each do |server|
           %li
             %a{:href => "#", :title => "#{server}"}= server
     .servers
       %ul.nav-header 
-        France
+        = t("servers.fr")
         - @servers["fr"].each do |server|
           %li
             %a{:href => "#", :title => "#{server}"}= server
     .servers
       %ul.nav-header 
-        Germany
+        = t("servers.ge")
         - @servers["ge"].each do |server|
           %li
             %a{:href => "#", :title => "#{server}"}= server
     .servers
       %ul.nav-header 
-        Spain
+        = t("servers.sp")
         - @servers["mx"].each do |server|
           %li
             %a{:href => "#", :title => "#{server}"}= server

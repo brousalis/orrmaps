@@ -1,14 +1,13 @@
 #rated.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"data-dismiss" => "modal", :type => "button"} ×
-    %h3 Map list for #{@server.name}
+    %h3= t("rated.header", :server => @server.name)
   .modal-body
     %table.table
       %thead
         %tr
-          %th Name
-          %th Points
-          %th Likes
-          %th Updated at
-          %th Updated at
-
+          %th= t("rated.table.name")
+          %th= t("rated.table.points")
+          %th= t("rated.table.likes")
+          %th= t("rated.table.updated_at")
+          %th= t("rated.table.updated_at")

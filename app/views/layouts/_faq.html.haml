@@ -6,16 +6,16 @@
       %li.active
         %a{"data-toggle" => "tab", :href => "#faqs"} 
           %i.icon-white.icon-question-sign
-          FAQ
+          = t("secondary.faq")
       %li
         %a{"data-toggle" => "tab", :href => "#donate"} 
           %i.icon-white.icon-heart
-          Donate
+          = t("faq.donate")
   .modal-body
     .tabbable
       .tab-content
         #faqs.tab-pane.active
-          .header Help and Questions
+          .header= t("faq.header")
           %ul#questions
             %li.open
               %a.question{:href => "#"} What's this site for?
