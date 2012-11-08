@@ -43,8 +43,6 @@ orrmaps.map = function() {
 
   var update_marker = function(marker) {
     marker_id = get_marker_id(marker.getPosition());
-    console.log('current ' + current_marker_id)
-    console.log('new' + marker_id)
     $.ajax({ url: '/points',
              type: 'PUT',
              data: {
@@ -249,7 +247,6 @@ orrmaps.map = function() {
         clearTimeout(timeout);
         $(box).find('.status').fadeIn();
         timeout = setTimeout(function () {
-          console.log(current_marker_id)
           $.ajax({ 
             url: '/notes',
             type: 'PUT',
