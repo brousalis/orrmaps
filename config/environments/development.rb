@@ -53,5 +53,4 @@ Orrore::Application.configure do
   config.assets.debug = true
 end
 
-$redis = Redis.new(:host => "localhost", :port => "6379")
-
+#ENV["REDISTOGO_URL"] = 'localhost:6789'
