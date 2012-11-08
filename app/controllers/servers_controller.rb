@@ -24,7 +24,8 @@ class ServersController < ApplicationController
   end
 
   def rated
-    @server = find_server(params[:server] || session[:server])
+    server = params[:server] == "" ? session[:server] : params[:server]
+    @server = find_server(server || "Jade Quarry")
 
     sorted = users_on_server(@server).collect do |user|
       [
@@ -55,7 +56,7 @@ private
   def valid_server?
     @servers = servers
     name = params[:name].titleize.sub("Of", "of")
-    render "404", :layout => false unless Server.find_by_name(name)
+    render "404", :layout => "error" unless Server.find_by_name(name)
   end
 
 end

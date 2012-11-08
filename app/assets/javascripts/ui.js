@@ -124,20 +124,13 @@ orrmaps.ui = function() {
 }();
 
 orrmaps.alert = function() {
-  var init = function(message) {
-    $('#footer .msg').html(message);
-    $('#footer').fadeIn();
-
-    $('#footer .close').live('click', function() {
-      $('#footer').fadeOut();
-    });
-
-    setTimeout(function() {
-      $('#footer').fadeOut();
-    }, 5000);
+  var init = function(message, time) {
+    $.jGrowl(message, { life: time });  
+    $.jGrowl.defaults.closerTemplate = '';
   };
 
   return {
     init: init
   };
 }();
+  

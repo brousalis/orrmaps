@@ -1,6 +1,8 @@
 class MapsController < ApplicationController
   respond_to :json
 
+  before_filter :valid_map?, :only => :show
+
   def index
     if current_user
       map = current_user.map
@@ -33,7 +35,6 @@ class MapsController < ApplicationController
 
     if current_user.try(:map) != map
       map.dislike(current_user)
-
       render :json => { "status" => "success", "count" => map.likes }
     else
       render :json => { "status" => "own" }
@@ -50,4 +51,11 @@ class MapsController < ApplicationController
       render :json => { "status" => "own" }
     end
   end
+
+private
+
+  def valid_map?
+    @server = find_server(session[:server] || "Jade Quarry")
+    render "404", :layout => "error" unless Map.find_by_id(params[:id])
+  end 
 end

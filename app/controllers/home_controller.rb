@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+
   def index
     session[:server] = "Jade Quarry" if !session[:server]
     @server = find_server(session[:server] || "Jade Quarry")
@@ -17,6 +18,7 @@ class HomeController < ApplicationController
       redirect_to "/server/#{underscore(session[:server])}"
       @map = Map.new
     end
+    session[:alert] = "seen"
   end
 
 end
