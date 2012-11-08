@@ -25,6 +25,7 @@ en:
 
   servers: # server pick modal
     header: "Set your home server"
+    invalid_header: "Server not found, choose below"
     us: "United States"
     eu: "Europe"
     fr: "France"
