@@ -6,7 +6,7 @@ orrmaps.index = function() {
       orrmaps.map.set_map_id(data.map_id)
       orrmaps.map.toolshed();
 
-      points = $.parseJSON(data.points);
+      points = data.points
       if (points != null) {
         for (var i=0; i < points.length; i++) {
           orrmaps.map.add_draggable_marker(points[i]); 
