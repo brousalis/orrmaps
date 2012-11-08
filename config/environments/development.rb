@@ -53,4 +53,4 @@ Orrore::Application.configure do
   config.assets.debug = true
 end
 
-#ENV["REDISTOGO_URL"] = 'localhost:6789'
+ENV["REDISTOGO_URL"] = 'localhost:6379'

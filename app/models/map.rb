@@ -10,7 +10,7 @@ class Map < ActiveRecord::Base
   end
 
   def likes
-    $redis.get(likes_count_key) || 0
+    $redis.zscore(likes_count_key, self.id).to_i || 0
   end
 
   def has_voted?(user)
@@ -30,7 +30,7 @@ class Map < ActiveRecord::Base
       unlike(user)
     else
       $redis.multi do
-        $redis.incr(likes_count_key)
+        $redis.zincrby(likes_count_key, 1, self.id)
         $redis.hset(redis_key, user.id, 1)
       end
     end
@@ -38,7 +38,7 @@ class Map < ActiveRecord::Base
 
   def unlike(user)
     if score = $redis.hget(redis_key, user.id)
-      $redis.incrby(likes_count_key, score.to_i * -1)
+      $redis.zincrby(likes_count_key, score.to_i * -1, self.id)
       $redis.hdel(redis_key, user.id)
     end
   end
@@ -48,7 +48,7 @@ class Map < ActiveRecord::Base
       unlike(user)
     else
       $redis.multi do
-        $redis.decr(likes_count_key)
+        $redis.zincrby(likes_count_key, -1, self.id)
         $redis.hset(redis_key, user.id, -1)
       end
     end
@@ -59,6 +59,6 @@ class Map < ActiveRecord::Base
   end
 
   def likes_count_key
-    "map:#{self.id}:likes"
+    "map:#{self.server.id}:likes"
   end
 end

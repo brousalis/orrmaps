@@ -29,8 +29,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end 
 
-group :test, :development do
+group :test do
   gem 'pry'
   gem 'database_cleaner'
   gem 'fakeredis', :require => "fakeredis/rspec"
+  gem 'sqlite3'
 end
