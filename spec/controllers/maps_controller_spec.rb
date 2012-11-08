@@ -22,4 +22,33 @@ describe MapsController do
       json['points'].first['marker_id'].should == '70,70'
     end
   end
+
+  describe 'dislike' do
+    it 'decrements the maps like count' do
+      user  = User.create!(:name => 'foo',  :password => 'foo')
+      user2 = User.create!(:name => 'foo2', :password => 'foo')
+      map   = Map.create!(:user => user)
+      @controller.stub(:current_user => user2)
+
+      post 'dislike', :map_id => map.id
+
+      json = JSON.parse(response.body)
+      json['status'].should == 'success'
+      json['count'].should  == '-1'
+    end
+
+    it 'removes the users previous dislike if one is already there' do
+      user  = User.create!(:name => 'foo',  :password => 'foo')
+      user2 = User.create!(:name => 'foo2', :password => 'foo')
+      map   = Map.create!(:user => user)
+      @controller.stub(:current_user => user2)
+
+      post 'dislike', :map_id => map.id
+      post 'dislike', :map_id => map.id
+
+      json = JSON.parse(response.body)
+      json['status'].should == 'success'
+      json['count'].should  == '0'
+    end
+  end
 end

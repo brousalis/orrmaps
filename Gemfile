@@ -31,4 +31,5 @@ gem 'redis'
 group :test, :development do
   gem 'pry'
   gem 'database_cleaner'
+  gem 'fakeredis', :require => "fakeredis/rspec"
 end

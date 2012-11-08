@@ -53,6 +53,8 @@ GEM
     excon (0.16.7)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    fakeredis (0.4.1)
+      redis (~> 3.0.0)
     figgy (0.9.1)
       json
     gmaps4rails (1.5.5)
@@ -189,6 +191,7 @@ DEPENDENCIES
   dalli
   database_cleaner
   email_spec (>= 1.2.1)
+  fakeredis
   figgy
   gmaps4rails
   haml (>= 3.1.7)

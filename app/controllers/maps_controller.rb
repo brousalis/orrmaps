@@ -40,7 +40,7 @@ class MapsController < ApplicationController
       end
     else
       render :json => { "status" => "own" }
-    end 
+    end
   end
 
   def like
@@ -57,6 +57,4 @@ class MapsController < ApplicationController
       render :json => { "status" => "own" }
     end
   end
- 
-
 end
