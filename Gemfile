@@ -29,6 +29,6 @@ gem 'heroku'
 gem 'redis'
 
 group :test, :development do
-  gem 'sqlite3'
   gem 'pry'
+  gem 'database_cleaner'
 end

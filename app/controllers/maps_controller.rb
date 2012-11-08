@@ -5,8 +5,7 @@ class MapsController < ApplicationController
     if current_user
       map = current_user.map
       points = Point.includes(:note).where(:map_id => map.id)
-      data = points.collect { |point| point.to_hash }.to_json
-      render :json => {:map_id => map.id, :points => data}
+      render :json => { :map_id => map.id, :points => points.map(&:to_hash) }
     end
     render :json => {:points => []} if !current_user
   end
