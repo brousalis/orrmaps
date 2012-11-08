@@ -1,6 +1,8 @@
 class ServersController < ApplicationController
   respond_to :json
 
+  before_filter :valid_server?, :only => :show
+
   def create
     @server = find_server(params[:server])
     session[:server] = @server.name
@@ -47,4 +49,13 @@ class ServersController < ApplicationController
     end
     render :json => data
   end
+
+private
+
+  def valid_server?
+    @servers = servers
+    name = params[:name].titleize.sub("Of", "of")
+    render "404", :layout => false unless Server.find_by_name(name)
+  end
+
 end

@@ -11,6 +11,10 @@ body {
   height: 100%;
   background: #222;
   overflow: hidden;
+
+  &.invalid {
+    #servers .close { display: none; }
+  }
 }
 
 a:hover { text-decoration: none; }
