@@ -1,10 +1,6 @@
 source 'https://rubygems.org'
+
 gem 'rails', '3.2.8'
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-end
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem "pg", ">= 0.14.1"
@@ -22,11 +18,16 @@ gem "thin"
 gem "bcrypt-ruby"
 gem 'newrelic_rpm'
 gem 'dalli'
-gem 'figgy'
 gem 'taps'
 gem 'metamagic'
 gem 'heroku'
 gem 'redis'
+
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+end 
 
 group :test, :development do
   gem 'pry'

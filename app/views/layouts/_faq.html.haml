@@ -1,6 +1,6 @@
 #faq.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   .modal-header
-    %h1 Orrmaps
+    %h1 Orr maps
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %ul.nav.nav-tabs
       %li.active
@@ -18,43 +18,22 @@
           .header= t("faq.header")
           %ul#questions
             %li.open
-              %a.question{:href => "#"} What's this site for?
-              .answer 
-                When you hit 80 in Guild Wars 2, most of the exotic end game gear, weapons, and legendaries require 
-                %a{:href => "http://wiki.guildwars2.com/wiki/Orichalcum_Ore"} Orichalcum ore
-                and
-                %a{:href => "http://wiki.guildwars2.com/wiki/Ancient_Wood"} Ancient wood
-                These materials can be gathered in the Machlor's Leap, Cursed Shore, and Frostgorge Sound. The locations of these materials change every week and are different by server. This site keeps track of the locations by server, and resets each week.
+              %a.question{:href => "#"}= t("faq.questions.what")
+              .answer= t("faq.questions.what_answer_html", :ore => link_to("Orichalcum ore", "http://wiki.guildwars2.com/wiki/Orichalcum_Ore"), :wood => link_to("Ancient wood", "http://wiki.guildwars2.com/wiki/Ancient_Wood"))
             %li
-              %a.question{:href => "#"} How do I make my own map?
-              .answer Just sign in! If you are not registered, it will automatically make an account for you with a new map. Once you log in, you'll see an empty map where you can add markers to it by selecting a marker from the toolbox at the top right and clicking on the map.
+              %a.question{:href => "#"}= t("faq.questions.how")
+              .answer= t("faq.questions.how_answer")
             %li
-              %a.question{:href => "#"} How does the Server map work?
-              .answer 
-                Each map on a server keeps track of
-                %strong likes.
-                The points on the maps with the most likes will be more visible than the other maps on the server map. To like a map, visit it's individual page and click on the thumbs up icon.
+              %a.question{:href => "#"}= t("faq.questions.server_map")
+              .answer= t("faq.questions.server_map_answer_html")
             %li
-              %a.question{:href => "#"} Who made this?
-              .answer 
-                My name is 
-                %a{:href => "http://twitter.com/brousalis"} Pete
-                , or 
-                %strong brous.
-                I'm a software developer from Chicago. You can find my personal website
-                %a{:href=>"http://www.brousalis.com"} here
-                I play on Blackgate as Brous and Rewket. 
-                %a{:href => "http://twitter.com/davidpick"} David Pick 
-                helped clean up the mess I started here. If you're interested in the code of the website, or want to work on a project together, or for just about anything, feel free to send me an 
-                %a{:href=>"mailto:brousapg@gmail.com"} email
+              %a.question{:href => "#"}= t("faq.questions.who")
+              .answer= t("faq.questions.who_answer_html", :pete => link_to("Pete", "http://twitter.com/brousalis"), :website => link_to("here", "http://www.brousalis.com"), :pick => link_to("David Pick", "http://twitter.com/davidpick"), :email => link_to("email", "mailto:brousapg@gmail.com"))
         #donate.tab-pane
           .wrap
-            %h1 Donate to a good cause
-            %p 
-              The site has grown large enough that more hardware was needed to support the amount of users. It now costs $35 a month, and I don't mind paying it. However, in order to keep my consultant 
-              %strong Jack Daniels 
-              on call at all times - I could use some help. If you can't donate, help share the word about the website and we'll call it even. If you donate, you gain the ability to like your own map, among other things.
-            %p{:style => "padding:0px 15px;"} Thanks for using the site,
+            %h1= t("donate.header")
+            %p= t("donate.body_html")
+            %p{:style => "padding:0px 15px;"}= t("donate.thanks")
             %p{:style => "padding:0px 15px;"}  
               %strong brous
             %p
@@ -66,7 +45,7 @@
 
   .modal-footer
     .meter
-      .cost Monthly cost
+      .cost= t("donate.monthly_cost")
       .progress
         %span $35
         .bar{:style => "width:35%"}
@@ -76,4 +55,4 @@
           %i.icon.icon-white.icon-heart
     %a.email{:href => "mailto:orrmaps@gmail.com"}
       %i.icon-white.icon-envelope 
-      email
+      = t("sign_in.email_me")
