@@ -26,7 +26,9 @@ class Map < ActiveRecord::Base
   end
 
   def like(user)
-    unless already_likes?(user)
+    if already_likes?(user)
+      unlike(user)
+    else
       $redis.multi do
         $redis.incr(likes_count_key)
         $redis.hset(redis_key, user.id, 1)
@@ -42,7 +44,9 @@ class Map < ActiveRecord::Base
   end
 
   def dislike(user)
-    unless already_dislikes?(user)
+    if already_dislikes?(user)
+      unlike(user)
+    else
       $redis.multi do
         $redis.decr(likes_count_key)
         $redis.hset(redis_key, user.id, -1)
