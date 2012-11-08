@@ -10,48 +10,51 @@ class Map < ActiveRecord::Base
   end
 
   def likes
-    $redis.hget("map_likes", self.id) || 0
+    $redis.get(likes_count_key) || 0
   end
 
   def has_voted?(user)
-    $redis.hexists(self.redis_key(:user), user.id)
+    $redis.hexists(redis_key, user.id)
   end
 
   def already_likes?(user)
-    $redis.hget(self.redis_key(:user), user.id) == "1" ? true : false
+    $redis.hget(redis_key, user.id) == "1"
   end
 
   def already_dislikes?(user)
-    $redis.hget(self.redis_key(:user), user.id) == "-1" ? true : false
+    $redis.hget(redis_key, user.id) == "-1"
   end
 
   def like(user)
     unless already_likes?(user)
       $redis.multi do
-        $redis.hincrby("map_likes", self.id, 1)
-        $redis.hset(self.redis_key(:user), user.id, 1)
+        $redis.incr(likes_count_key)
+        $redis.hset(redis_key, user.id, 1)
       end
     end
   end
 
   def unlike(user)
-    if score = $redis.hget(self.redis_key(:user), user.id)
-      $redis.hincrby("map_likes", self.id, -1) if score == '1'
-      $redis.hincrby("map_likes", self.id, 1) if score == '-1'
-      $redis.hdel(self.redis_key(:user), user.id)
+    if score = $redis.hget(redis_key, user.id)
+      $redis.incrby(likes_count_key, score.to_i * -1)
+      $redis.hdel(redis_key, user.id)
     end
   end
 
   def dislike(user)
     unless already_dislikes?(user)
       $redis.multi do
-        $redis.hincrby("map_likes", self.id, -1) 
-        $redis.hset(self.redis_key(:user), user.id, -1)
+        $redis.decr(likes_count_key)
+        $redis.hset(redis_key, user.id, -1)
       end
     end
   end
 
-  def redis_key(str)
-    "map:#{self.id}:#{str}"
+  def redis_key
+    "map:#{self.id}:users"
+  end
+
+  def likes_count_key
+    "map:#{self.id}:likes"
   end
 end
