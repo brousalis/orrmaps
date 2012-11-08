@@ -11,7 +11,7 @@
           %a.dislike{:href => "#", :title => "#{map.id}"}
             %i.icon.icon-white.icon-thumbs-down{:class => ("disliked" if current_user && map.already_dislikes?(current_user))} 
           %span= likes_for_map(map)
-          likes 
+          = t("secondary.likes")
         .date{:href => "#"}
           %i.icon.icon-white.icon-calendar
           #{time_ago(map.updated_at)} #{t("secondary.ago")}
