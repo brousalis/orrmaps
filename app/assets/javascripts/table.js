@@ -156,6 +156,9 @@ $(document).ready(function() {
     "bInfo": false,
     "bAutoWidth": false,
     "sAjaxSource": "/rated",
+    "fnServerParams": function ( aoData ) {
+      aoData.push({ name: "server", value: $('.server').text() });
+    },
     "aoColumns": [
             { "asSorting": [ "desc", "asc" ] },
             { "asSorting": [ "desc", "asc" ] },

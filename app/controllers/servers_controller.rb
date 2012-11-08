@@ -22,7 +22,7 @@ class ServersController < ApplicationController
   end
 
   def rated
-    @server = find_server(session[:server] || "Jade Quarry")
+    @server = find_server(params[:server] || session[:server])
 
     sorted = users_on_server(@server).collect do |user|
       [
@@ -40,7 +40,9 @@ class ServersController < ApplicationController
     name = params[:name].titleize.sub("Of", "of")
     server = find_server(name)
 
-    data = server.maps.includes(:points).sort_by { |m| likes_for_map(m) || 0 }.reverse.collect do |map|
+    data = server.maps.includes(:points).sort_by { 
+      |m| likes_for_map(m).to_i || 0 
+    }.reverse.collect do |map|
       {:likes => likes_for_map(map) || 0, :points => map.points.flatten.to_json}
     end
     render :json => data
