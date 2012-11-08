@@ -9,11 +9,7 @@ class PointsController < ApplicationController
                          :marker_id => params[:marker_id],
                          :icon => params[:icon])
       @point.map = @map
-      if @map.find_points_by(:ore).count < 15 &&
-         @map.find_points_by(:wood).count < 15 &&
-         @map.find_points_by(:omnom).count < 15 &&
-         @map.find_points_by(:mithril).count < 15 &&
-         @point.save
+      if @point.save
         respond_with @point
       else
         render :json => { "status" => "failure" }
