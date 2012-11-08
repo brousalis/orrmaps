@@ -51,4 +51,33 @@ describe MapsController do
       json['count'].should  == '0'
     end
   end
+
+  describe 'like' do
+    it 'increments the maps like count' do
+      user  = User.create!(:name => 'foo',  :password => 'foo')
+      user2 = User.create!(:name => 'foo2', :password => 'foo')
+      map   = Map.create!(:user => user)
+      @controller.stub(:current_user => user2)
+
+      post 'like', :map_id => map.id
+
+      json = JSON.parse(response.body)
+      json['status'].should == 'success'
+      json['count'].should  == '1'
+    end
+
+    it 'removes the users previous like if one is already there' do
+      user  = User.create!(:name => 'foo',  :password => 'foo')
+      user2 = User.create!(:name => 'foo2', :password => 'foo')
+      map   = Map.create!(:user => user)
+      @controller.stub(:current_user => user2)
+
+      post 'like', :map_id => map.id
+      post 'like', :map_id => map.id
+
+      json = JSON.parse(response.body)
+      json['status'].should == 'success'
+      json['count'].should  == '0'
+    end
+  end
 end
