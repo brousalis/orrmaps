@@ -14,10 +14,19 @@ body {
 
   &.invalid {
     #rated .close, #servers .close { display: none; }
+    .back { display: inline-block; }
   }
 }
 
 a:hover { text-decoration: none; }
+.back { 
+  float: right;
+  display: none;
+  margin-right: 5px;
+  margin-top: 5px;
+  i { @include opacity(0.2); }
+}
+
 
 #map {
   position: fixed !important;
