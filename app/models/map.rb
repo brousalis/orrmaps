@@ -26,7 +26,7 @@ class Map < ActiveRecord::Base
   end
 
   def like(user)
-    if already_likes?(user)
+    if has_voted?(user)
       unlike(user)
     else
       $redis.multi do
@@ -44,7 +44,7 @@ class Map < ActiveRecord::Base
   end
 
   def dislike(user)
-    if already_dislikes?(user)
+    if has_voted?(user)
       unlike(user)
     else
       $redis.multi do
