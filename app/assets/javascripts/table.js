@@ -156,6 +156,7 @@ $(document).ready(function() {
     "bInfo": false,
     "bAutoWidth": false,
     "sAjaxSource": "/rated",
+    "bRetrieve": true,
     "fnServerParams": function ( aoData ) {
       aoData.push({ name: "server", value: $('.server').text() });
     },

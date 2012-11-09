@@ -33,7 +33,7 @@ class MapsController < ApplicationController
   def dislike
     map = Map.find_by_id(params[:map_id])
 
-    if current_user.try(:map) != map
+    if current_user && current_user.try(:map) != map
       map.dislike(current_user)
       render :json => { "status" => "success", "count" => map.likes }
     else
@@ -44,7 +44,7 @@ class MapsController < ApplicationController
   def like
     map = Map.find_by_id(params[:map_id])
 
-    if current_user.try(:map) != map
+    if current_user && current_user.try(:map) != map
       map.like(current_user)
       render :json => { "status" => "success", "count" => map.likes }
     else
