@@ -22,8 +22,8 @@ module ApplicationHelper
   end
 
   def likes_for_map(map)
-    @map_cache ||= map.server.likes
-    @map_cache[map.id] || 0
+    @map_cache ||= Hash[map.server.likes]
+    @map_cache[map.id.to_s].to_i || 0
   end
 
   def users_on_server(server)
