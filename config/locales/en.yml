@@ -45,13 +45,13 @@ en:
     header: "Help and Quesitons"
     questions:
       what: "What's this site for?"
-      what_answer_html: "When you hit 80 in Guild Wars 2, most of the exotic end game gear, weapons, and legendaries require {{ore}} and {{wood}}. These materials can be gathered in the Machlor's Leap, Cursed Shore, and Frostgorge Sound. The locations of these materials change every week and are different by server. This site keeps track of the locations by server, and resets each week."
+      what_answer_html: "When you hit 80 in Guild Wars 2, most of the exotic end game gear, weapons, and legendaries require %{ore} and %{wood}. These materials can be gathered in the Machlor's Leap, Cursed Shore, and Frostgorge Sound. The locations of these materials change every week and are different by server. This site keeps track of the locations by server, and resets each week."
       how: "How do I make my own map?"
       how_answer: "Just sign in! If you are not registered, it will automatically make an account for you with a new map. Once you log in, you'll see an empty map where you can add markers to it by selecting a marker from the toolbox at the top right and clicking on the map."
       server_map: "How does the Server map work?"
       server_map_answer_html: "Each map on a server keeps track of <strong>likes</strong>. The points on the maps with the most likes will be more visible than the other maps on the server map. To like a map, visit it's individual page and click on the thumbs up icon. You can also dislike a map if think it is inaccurate."
       who: "Who made this?"
-      who_answer_html: "My name is {{pete}}. I'm a software developer from Chicago. You can find my personal website {{website}}. I play on Blackgate as Brous and Rewket. {{pick}} helped clean up the mess I started. If you're interested in the code for the website, want to work on a project together, or for just about anything, feel free to send me an {{email}}"
+      who_answer_html: "My name is %{pete}. I'm a software developer from Chicago. You can find my personal website %{website}. I play on Blackgate as Brous and Rewket. %{pick} helped clean up the mess I started. If you're interested in the code for the website, want to work on a project together, or for just about anything, feel free to send me an %{email}"
 
   donate: # donate tab
     header: "Donate to a good cause"
