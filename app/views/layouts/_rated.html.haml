@@ -1,6 +1,10 @@
 #rated.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
   .modal-header
     %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    .back
+      %a{:href => "/"} 
+        %i.icon.icon-white.icon-arrow-left
+        Back
     %h3= t("rated.header", :server => @server.name)
   .modal-body
     %table.table
