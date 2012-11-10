@@ -9,11 +9,14 @@ orrmaps.server = function() {
         orrmaps.map.set_map_id(data.map_id)
 
         if (data != null) {
-          for (var i=0; i < data.length; i++) {
-            if(data[i].points != []) {
-              points = data[i].points
+          maps = data.data
+          total_like_count = data.total_like_count
+
+          for (var i=0; i < maps.length; i++) {
+            if(maps[i].points != []) {
+              points = maps[i].points
               for (var j=0; j < points.length; j++) {
-                orrmaps.map.add_server_marker(points[j], data[i].likes); 
+                orrmaps.map.add_server_marker(points[j], maps[i].likes, total_like_count);
               }
             }
           }
