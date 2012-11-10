@@ -10,8 +10,8 @@ orrmaps.server = function() {
 
         if (data != null) {
           for (var i=0; i < data.length; i++) {
-            if(data[i].points != "[]") {
-              points = $.parseJSON(data[i].points);
+            if(data[i].points != []) {
+              points = data[i].points
               for (var j=0; j < points.length; j++) {
                 orrmaps.map.add_server_marker(points[j], data[i].likes); 
               }

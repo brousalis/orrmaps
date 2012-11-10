@@ -16,6 +16,15 @@ class Point < ActiveRecord::Base
     m.save
   end
 
+  def to_json
+    {
+      :latitude => self.latitude,
+      :longitude => self.longitude,
+      :marker_id => self.marker_id,
+      :icon => self.icon
+    }
+  end
+
   def to_hash
     hash = {
       :latitude => self.latitude,

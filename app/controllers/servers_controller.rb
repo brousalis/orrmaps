@@ -43,11 +43,12 @@ class ServersController < ApplicationController
     name = params[:name].titleize.sub("Of", "of")
     server = find_server(name)
 
-    data = server.maps.includes(:points).sort_by {
-      |m| likes_for_map(m).to_i || 0
-    }.reverse.collect do |map|
-      {:likes => likes_for_map(map) || 0, :points => map.points.flatten.to_json}
+    data = server.maps.includes(:points).sort do |a, b|
+      (likes_for_map(b).to_i || 0) <=> (likes_for_map(a).to_i || 0)
+    end.collect do |map|
+      {:likes => likes_for_map(map) || 0, :points => map.points.map(&:to_json)}
     end
+
     render :json => data
   end
 

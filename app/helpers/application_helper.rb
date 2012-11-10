@@ -28,7 +28,7 @@ module ApplicationHelper
 
   def users_on_server(server)
     Rails.cache.fetch("servers/#{server.id}/maps", :expires_in => 5.minutes) do
-      User.joins(:map => [:points]).where(:server_id => server.id).uniq
+      User.includes(:map).joins(:map => [:points]).where(:server_id => server.id).uniq
     end
   end
 
