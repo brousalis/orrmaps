@@ -8,7 +8,7 @@ class Server < ActiveRecord::Base
   end
 
   def likes_count
-    $redis.zcount(likes_count_key, '-inf', '+inf')
+    likes.inject(0) { |sum, num| sum += num.last.to_i }
   end
 
   def likes_count_key
