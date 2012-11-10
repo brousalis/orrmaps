@@ -36,7 +36,7 @@ class PointsController < ApplicationController
     @point = Point.find_by_marker_id(params[:marker_id])
     if @point && @point.note && @point.note.update_attributes(:content => params[:content])
       render :json => { "status" => "success" }
-    elsif !@point.try(:note)
+    elsif @point && !@point.try(:note)
       @note = Note.create(:point => @point, :content => params[:content])
       @point.update_attributes(:note => @note)
       render :json => { "status" => "success" }
