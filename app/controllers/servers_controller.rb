@@ -46,7 +46,7 @@ class ServersController < ApplicationController
     maps = Map.includes(:points).find_all_by_id(map_ids)
 
     data = maps.collect do |map|
-      {:likes => likes_for_map(map) || 0, :points => map.points.map(&:to_json)}
+      {:likes => likes_for_map(map) || 0, :points => map.points.map(&:to_hash)}
     end
 
     render :json => { :data => data, :total_like_count => server.likes_count}
