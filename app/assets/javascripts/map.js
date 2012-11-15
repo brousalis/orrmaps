@@ -4,15 +4,13 @@ orrmaps.map = function() {
   var icon_type = "ore";
   var prev_id, counter = "0"; // my god. what have I done.
 
-  var icon = function(img, like_count, total_like_count) {
+  var icon = function(img, opacity) {
     var icon = "";
     var type = img.replace("/assets/tiles/","").replace(".png", "")
-    percentage = (like_count / total_like_count) * 100;
 
-    console.log(percentage);
-    if(percentage < 20) icon = "";
-    else if(percentage < 50) icon = "20";
-    else if(percentage < 70) icon = "40";
+    if(opacity == 20) icon = "20";
+    else if(opacity == 40) icon = "40";
+
     return "/assets/tiles/" + type + icon + ".png";
   };
 
@@ -57,7 +55,7 @@ orrmaps.map = function() {
     current_marker_id = marker_id
   };
 
-  var add_server_marker = function(data, likes, total_likes) {
+  var add_server_marker = function(data, opacity) {
     point = new google.maps.LatLng(data.latitude, data.longitude)
     marker_id = get_marker_id(point);
 
@@ -66,7 +64,7 @@ orrmaps.map = function() {
     // muahahahaha
     if(data.map_id != prev_id) counter++;
     prev_id = data.map_id;
-    image = icon(data.icon, likes, total_likes)
+    image = icon(data.icon, opacity)
 
     var marker = new google.maps.Marker({
       position: point,

@@ -10,13 +10,12 @@ orrmaps.server = function() {
 
         if (data != null) {
           maps = data.data
-          total_like_count = data.total_like_count
 
           for (var i=0; i < maps.length; i++) {
             if(maps[i].points != []) {
               points = maps[i].points
               for (var j=0; j < points.length; j++) {
-                orrmaps.map.add_server_marker(points[j], maps[i].likes, total_like_count);
+                orrmaps.map.add_server_marker(points[j], maps[i].opacity);
               }
             }
           }

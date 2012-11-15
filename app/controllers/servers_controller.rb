@@ -42,17 +42,31 @@ class ServersController < ApplicationController
   def points
     name = params[:name].titleize.sub("Of", "of")
     server = find_server(name)
-    map_ids = server.likes.map(&:first)
-    maps = Map.includes(:points).find_all_by_id(map_ids)
+    maps = server.maps.includes(:points)
+    top_map    = server.top_map
+    second_map = server.second_top_map
 
     data = maps.collect do |map|
-      {:likes => likes_for_map(map) || 0, :points => map.points.map(&:to_hash)}
+      {
+        :opacity => opacity(map.id, top_map, second_map),
+        :points  => map.points.map(&:to_hash)
+      }
     end
 
-    render :json => { :data => data, :total_like_count => server.likes_count}
+    render :json => { :data => data }
   end
 
 private
+
+  def opacity(map_id, top_map_id, second_map_id)
+    if map_id == top_map_id
+      100
+    elsif map_id == second_map_id
+      40
+    else
+      20
+    end
+  end
 
   def valid_server?
     @servers = servers
