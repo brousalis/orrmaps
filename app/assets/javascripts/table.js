@@ -168,6 +168,7 @@ $(document).ready(function() {
             { "iDataSort": 3, "asSorting": [ "desc", "asc" ] }
     ],
     "oLanguage": {
+      "sEmptyTable": "There are no maps with any points!",
       "sLengthMenu": "_MENU_ records per page",
       "oPaginate": {
       "sPrevious": "" ,
