@@ -106,7 +106,6 @@ orrmaps.map = function() {
   };
 
   var place_marker = function(location) {
-    console.log(location);
     marker_id = get_marker_id(location);
     icon = "/assets/tiles/" + icon_type + ".png"
     $.ajax({

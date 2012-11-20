@@ -59,7 +59,6 @@ class ServersController < ApplicationController
 private
 
   def opacity(map_id, top_map_id, second_map_id)
-    puts "#{map_id} #{top_map_id} #{second_map_id}"
     if map_id == top_map_id
       100
     elsif map_id == second_map_id
