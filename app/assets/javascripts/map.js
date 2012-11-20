@@ -177,9 +177,9 @@ orrmaps.map = function() {
         //if (normalizedCoord && (normalizedCoord.x < Math.pow(2, zoom)) && (normalizedCoord.x > -1) && (normalizedCoord.y < Math.pow(2, zoom)) && (normalizedCoord.y > -1)) {
         //  return "/assets/tiles/" + zoom + '_' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
         if (normalizedCoord) {
-          return "/assets/tiles/" + (zoom-MIN_ZOOM) + '_' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
+          return "/assets/map/" + (zoom-MIN_ZOOM) + '_' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
         } else {
-          return "/assets/tiles/_empty.jpg";
+          return "/assets/map/_empty.jpg";
         }
       },
       tileSize: new google.maps.Size(256, 256),
