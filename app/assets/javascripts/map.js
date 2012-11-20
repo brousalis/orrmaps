@@ -1,17 +1,12 @@
 orrmaps.map = function() {
-  var map, map_id, marks = [], markers = [];
+  var map, map_id, markers = [];
   var current_marker, current_marker_id, current_info_box;
   var icon_type = "ore";
-  var prev_id, counter = "0"; // my god. what have I done.
 
   var icon = function(img, opacity) {
-    var icon = "";
     var type = img.replace("/assets/tiles/","").replace(".png", "")
-
-    if(opacity == 20) icon = "20";
-    else if(opacity == 40) icon = "40";
-
-    return "/assets/tiles/" + type + icon + ".png";
+    if (opacity == 100) opacity = "";
+    return "/assets/tiles/" + type + opacity + ".png";
   };
 
   var toolshed = function() {
@@ -61,24 +56,15 @@ orrmaps.map = function() {
 
     if(data.icon == "/assets/tiles/note.png") return false;
 
-    // muahahahaha
-    if(data.map_id != prev_id) counter++;
-    prev_id = data.map_id;
-    image = icon(data.icon, opacity)
-
     var marker = new google.maps.Marker({
       position: point,
       animation: google.maps.Animation.DROP,
       map: map,
-      icon: image,
+      icon: icon(data.icon, opacity),
       id: 'marker_' + marker_id
     });
-    markers[marker_id] = marker;
-    if(counter <= 2) marks.push(marker);
-  };
 
-  var cluster_markers = function() {
-    var mc = new MarkerClusterer(map, marks);
+    markers[marker_id] = marker;
   };
 
   var add_marker = function(data) {
@@ -120,6 +106,7 @@ orrmaps.map = function() {
   };
 
   var place_marker = function(location) {
+    console.log(location);
     marker_id = get_marker_id(location);
     icon = "/assets/tiles/" + icon_type + ".png"
     $.ajax({
@@ -157,47 +144,69 @@ orrmaps.map = function() {
     });
   };
 
-  var init = function() {
 
+  var MIN_ZOOM = 10, MAX_ZOOM = 14;
+
+  var normalize = function(coord, zoom) {
+    var totalTiles = 1 << (zoom - MIN_ZOOM),
+        y = coord.y,
+        x = coord.x;
+    var originx = 1 << (zoom-1),
+        originy = 1 << (zoom-1);
+        
+    if(y < originx || y >= originx + totalTiles ||
+        x < originx || x >= originx + totalTiles){
+        return null;
+    }
+        
+    x -= originx;
+    y -= originy;
+      
+    return { x:x, y:y };
+  };
+
+  var init = function() {
     var map_options = {
-      zoom: 4,
-      center: new google.maps.LatLng(46.558860303117164, 10.37109375),
+      zoom: MAX_ZOOM - 1,
+      center: new google.maps.LatLng(-0.15432339128604552, 0.174407958984375),
       disableDefaultUI: true,
     }
 
     var customMapType = new google.maps.ImageMapType({
       getTileUrl: function(coord, zoom) {
-        if(coord && (coord.x < Math.pow(2, zoom)) && (coord.x > -1) && (coord.y < Math.pow(2, zoom)) && (coord.y > -1)) {
-          var tile = "" + zoom + '_' + coord.x + '_' + coord.y + '.jpg';
-          return "/assets/tiles/"+ tile;
+        var normalizedCoord = normalize(coord, zoom);
+        //if (normalizedCoord && (normalizedCoord.x < Math.pow(2, zoom)) && (normalizedCoord.x > -1) && (normalizedCoord.y < Math.pow(2, zoom)) && (normalizedCoord.y > -1)) {
+        //  return "/assets/tiles/" + zoom + '_' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
+        if (normalizedCoord) {
+          return "/assets/tiles/" + (zoom-MIN_ZOOM) + '_' + normalizedCoord.x + '_' + normalizedCoord.y + '.jpg';
         } else {
           return "/assets/tiles/_empty.jpg";
         }
       },
       tileSize: new google.maps.Size(256, 256),
-      maxZoom: 4,
-      minZoom: 2
+      maxZoom: MAX_ZOOM,
+      minZoom: 11
     });
 
     map = new google.maps.Map(document.getElementById('map'), map_options);
     map.mapTypes.set('custom', customMapType);
+    map.overlayMapTypes.insertAt(0, customMapType); 
     map.setMapTypeId('custom');
 
-    var allowedBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(-78.98992503056701,-83.369140625),
-      new google.maps.LatLng(86.89074547194515, 137.060546875));
+   var allowedBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-0.3483846177618207, 0.0000858306884765625),
+      new google.maps.LatLng(-0.005064010613521995, 0.35302162170410156));
 
     var lastValidCenter = map.getCenter();
 
     google.maps.event.addListener(map, 'center_changed', function() {
-        if (allowedBounds.contains(map.getCenter())) {
-            lastValidCenter = map.getCenter();
-            return; 
-        }
+      if (allowedBounds.contains(map.getCenter())) {
+          lastValidCenter = map.getCenter();
+          return; 
+      }
 
-        map.panTo(lastValidCenter);
+      map.panTo(lastValidCenter);
     });
-    
   };
 
   var set_map_id = function(id) {
@@ -359,7 +368,6 @@ orrmaps.map = function() {
     remove_current_marker: remove_current_marker,
     place_marker: place_marker,
     get_marker_id: get_marker_id,
-    cluster_markers: cluster_markers,
     click_handler: click_handler,
     set_map_id: set_map_id,
     toolshed: toolshed,

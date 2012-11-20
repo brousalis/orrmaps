@@ -43,7 +43,7 @@ class ServersController < ApplicationController
     name = params[:name].titleize.sub("Of", "of")
     server = find_server(name)
     maps = server.maps.includes(:points)
-    top_map    = server.top_map
+    top_map = server.top_map
     second_map = server.second_top_map
 
     data = maps.collect do |map|
@@ -59,6 +59,7 @@ class ServersController < ApplicationController
 private
 
   def opacity(map_id, top_map_id, second_map_id)
+    puts "#{map_id} #{top_map_id} #{second_map_id}"
     if map_id == top_map_id
       100
     elsif map_id == second_map_id

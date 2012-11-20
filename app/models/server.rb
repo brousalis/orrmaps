@@ -12,15 +12,15 @@ class Server < ActiveRecord::Base
   end
 
   def top_map
-    $redis.zrange(likes_count_key, -1, -1)
+    $redis.zrange(likes_count_key, -1, -1).first.to_i
   end
 
   def second_top_map
-    $redis.zrange(likes_count_key, -2, -2)
+    $redis.zrange(likes_count_key, -2, -2).first.to_i
   end
 
   def rest_of_maps
-    $redis.zrange(likes_count_key, 0, -3)
+    $redis.zrange(likes_count_key, 0, -3).map(&:to_i)
   end
 
   def likes_count_key
