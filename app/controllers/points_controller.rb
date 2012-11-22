@@ -36,7 +36,7 @@ class PointsController < ApplicationController
       render :json => { "status" => "success" }
     elsif @point && !@point.try(:note)
       @note = Note.create(:point => @point, :content => params[:content])
-      @point.update_attributes(:note => @note)
+      @point.update_attributes(:note_id => @note_id)
       render :json => { "status" => "success" }
     else
       render :json => { "status" => "failure" }

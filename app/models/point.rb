@@ -23,7 +23,7 @@ class Point < ActiveRecord::Base
       :marker_id => self.marker_id,
       :icon => self.icon
     }
-    hash[:note] = self.note.content if self.note
+    hash[:note] = self.note.content if self.note_id
     hash
   end
 end
