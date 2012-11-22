@@ -1,5 +1,5 @@
 class Point < ActiveRecord::Base
-  attr_accessible :latitude, :longitude, :marker_id, :map, :icon, :note
+  attr_accessible :latitude, :longitude, :marker_id, :map, :icon, :note, :note_id
 
   acts_as_gmappable :lat => 'latitude', 
                     :lng => 'longitude',
