@@ -6,7 +6,8 @@
 @import "tables";
 
 * { border: none; @include box-sizing(border-box); outline: none !important; }
-a:hover { text-decoration: none; }
+a, a:visited { color: #f90; }
+a:hover { color: #d58000; text-decoration: none; }
 
 body {
   font-family: "proxima-nova", Helvetica;
@@ -463,6 +464,7 @@ body {
       padding: 0 8px;
       border: 1px solid #222;
       background: #000;
+      color: #f90;
       @include background-clip(padding-box);
     }
     .pagination a:hover, .pagination .active a, .pagination .active span { background: #111; }
