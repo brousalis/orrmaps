@@ -1,0 +1,56 @@
+#map {
+  position: fixed !important;
+  height: 100%;
+  width: 100%;
+}
+
+.info {
+  @include border-radius(4px);
+  background: rgba(0,0,0,0.7);
+  border-radius: 4px;
+  margin-top: 8px;
+  padding: 5px;
+  width: 53px;
+  a {
+    margin-left: 5px;
+    @include opacity(0.7);
+    i { @include opacity(0.5); }
+    &:hover { @include opacity(1); }
+    &.report, &.report:hover { cursor: default; @include opacity(0.3); }
+  }
+}
+.infoBox img { margin: 2px -6px !important; }
+
+.popover.right .arrow { border-right-color: rgba(0,0,0,0.6); top: 30px !important; }
+.popover { border: 2px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.7) !important; }
+.popover-content { padding: 5px 10px !important; }
+.popover .close { text-shadow: none; color: #fff; }
+.popover .delete, .popover .status {
+  margin-right: -1px;
+  opacity: 0.2;
+  float: right;
+  &:hover { opacity: 0.4 }
+}
+.popover .status {
+  position: absolute;
+  bottom: 2px;
+  right: 11px;
+  display: none;
+}
+textarea.note {
+  overflow: hidden;
+  padding: 0;
+  font-family: "proxima-nova";
+  resize: none !important;
+  border: none;
+  margin: 0;
+  margin-bottom: 8px;
+  height: 60px;
+  float: left;
+  @include box-shadow(none);
+  background: transparent;
+  width: 93%;
+  color: #ddd;
+}
+textarea[disabled] { cursor: default !important; }
+ 

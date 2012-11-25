@@ -1,0 +1,182 @@
+#faq {
+  width: 700px;
+  background: rgba(0,0,0,0.4);
+  .modal-header {
+    padding: 0;
+    h1 {
+      position: absolute;
+      top: 5px;
+      padding: 0;
+      font-size: 22px;
+      text-transform: uppercase;
+      left: 15px;
+      line-height: normal;
+      text-shadow: 0px 2px 0px #000;
+    }
+  }
+  .nav-tabs {
+    border: none;
+    margin: 10px 0px 0px 0px;
+    &>li { float: right; margin-right: 10px; }
+    &> .active > a, &> .active > a:hover {
+      background: #000;
+      color: #fff;
+      border-color:#222;
+      border-bottom-color: transparent;
+      i { opacity: 0.8; margin-right: 2px }
+    }
+    &> li > a {
+      color: #666;
+      background: #000;
+      border-color: #111;
+      border-bottom-color: #222;
+      i { opacity: 0.1; margin-right: 2px }
+      &:hover {
+        i { opacity: 0.5; margin-right: 2px }
+        background: #000;
+        color: #aaa;
+      }
+    }
+  }
+  .modal-body {
+    background: #000;
+    border-bottom: 1px solid #444;
+    padding: 10px 0px 0 0;
+    .header { 
+      padding-left: 13px;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #111;
+      padding-top: 10px;
+      i { 
+        opacity: 0.2;
+        margin-top: 3px;
+        margin-right: 1px;
+      }
+    }
+    #donate {
+      background: image-url('donate.jpg') no-repeat;
+      overflow: hidden;
+      height: 370px;
+      @include box-shadow(inset 0px 1px 20px #000);
+      p { margin: 0; padding: 15px; }
+      .wrap { 
+        float: left;
+        width: 370px;
+        margin-left: 15px;
+        h1 {
+          text-transform: uppercase;
+          text-shadow: 0px 2px 0px #000;
+          font-size: 25px;
+          padding: 15px 15px 0 15px;
+          margin: 5px 0px;
+          color: #fff;
+        }
+        p { 
+          padding: 15px;
+          color: white;
+          text-shadow: 0px 2px 0px black;
+          padding-top: 5px;
+        }
+        form { margin-left: 15px; }
+      }
+    }
+    #questions {
+      margin: 0;
+      padding: 0;
+      li {
+        list-style: none;
+        border-bottom: 1px solid #111;
+        &:last-child { border-bottom: none; }
+        a.question {
+          padding: 10px 15px;
+          padding-left: 33px;
+          background: image-url('closed.png') no-repeat 15px;
+          opacity: 0.6;
+          color: #fff;
+          font-weight: bold;
+          display: block;
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+        .answer {
+          display: none;
+          color: rgba(255,255,255,0.4);
+          padding: 10px 33px;
+          a.wiki { background: #000; border: 1px solid #222; font-weight: bold; padding: 1px 5px; @include border-radius(4px); color: rgba(255,255,255,0.8)}
+          a.wiki:hover { color: #fff; }
+          a { color: #fff; }
+        }
+        &.open {
+          background: #080808;
+          a.question {
+            opacity: 1;
+            color: #fff;
+            padding-bottom: 0px;
+            background: image-url('open.png') no-repeat 15px 16px;
+          }
+          .answer { 
+            display: block;
+          }
+        }
+      }
+    }
+
+  } 
+  .modal-footer { 
+    background: #191919;
+    border-top: #333;
+    @include box-shadow(inset 0px 0px 6px #111);
+    padding: 8px 15px;
+
+    .meter { color: #666; text-shadow: 0px 1px 0px #000; float: left; width: 300px; } 
+    .cost { float: left; margin-right: 10px; }
+    .heart { float: left; margin-left: 10px; }
+    .heart i { background: image-url('heart.png') no-repeat; width: 16px; }
+    a.email {
+      color: #fff;
+      font-weight: bold;
+      opacity: 0.8;
+      i { background: image-url('email.png') no-repeat; width: 16px; height: 16px; margin-right: 2px; }
+      &:hover { opacity: 1 }
+      &:active { top: 1px; position: relative; }
+    }
+    .progress {
+      float: left;
+      width: 175px;
+      margin-bottom: 0;
+      border: 1px solid #111;
+      background-color: #313131;
+      background-image: -webkit-linear-gradient(#323232, #2E2E2E 50%, #323232);
+      background-image: -moz-linear-gradient(#323232, #2E2E2E 50%, #323232);
+      background-image: -o-linear-gradient(#323232, #2E2E2E 50%, #323232);
+      @include box-shadow(inset 0 4px 8px #222);
+      span {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 13px;
+        text-shadow: 0px 1px 0px black;
+        margin-right: 8px;
+        line-height: normal;
+        font-weight: bold;
+      }
+      .bar {
+        background-color: #5387BA;
+        border-right: 1px solid #282828;
+        -webkit-box-shadow: inset 0 0 1px #ddd;
+        -moz-box-shadow: inset 0 0 1px #ddd;
+        -o-box-shadow: inset 0 0 1px #ddd;
+        box-shadow: inset 0 0 1px #ddd;
+        background-image: -webkit-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87);
+        background-image: -moz-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87);
+        background-image: -o-linear-gradient(#66A3E2, #5387BA 50%, #4B79AF 51%, #385D87);
+        span { float: left; margin-left: 8px; margin-top: 2px; }
+      }
+    }
+
+  }
+  .close { margin-right: 15px; opacity: 0.7; text-shadow: none }
+}
+ 

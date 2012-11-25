@@ -1,7 +1,7 @@
-%div.navbar.navbar-fixed-top
+%div.navbar.primary.navbar-fixed-top
   %nav.navbar-inner
     .container
-      %a.brand.logo{:href => "/"} Orr maps
+      %a.brand.logo{:href => "/"} Orrmaps
       %ul.nav
         %li.your
           %a{:href => "/"}= t("navigation.your_map")
@@ -12,27 +12,33 @@
             %a{:href => "/server/jade_quarry"}= t("navigation.server_map")
         %li.rated
           %a.top_rated{:href => "#rated", :"data-toggle" => "modal"}= t("secondary.map_list").humanize
-      %ul.nav.pull-right
-        %li
-          %a.faq{:href => "#faq", :"data-toggle" => "modal"}
-            %i.icon.icon-question-sign
-            = t("secondary.faq")
+      %ul.nav.pull-right.user
         - unless current_user
           %li
             %a.sign_in{:href => "#sign_in", :"data-toggle" => "modal"}
-              %i.icon.icon-user
+              %i.icon.icon-white.icon-user
               = t("secondary.sign_in")
         - else
           %li
-            %a.delete{:href => "/user/delete"}
-              %i.icon.icon-remove
-              = t("navigation.delete_account")
-          %li
-            %a.sign_in{:href => "/logout"}
-              %i.icon.icon-off
-              = t("navigation.sign_out")
+            %a.sign_in.dropdown-toggle{:href => "#", :"data-toggle" => "dropdown"}
+              %i.icon.icon-white.icon-user
               %strong= current_user.name
+              %b.caret
+            %ul.dropdown-menu{:role => "menu", :"aria-labelledby" => "dLabel"}
+              %li 
+                %a{:href => "#faq", :"data-toggle" => "modal"}
+                  %i.icon.icon-white.icon-question-sign
+                  = t("secondary.faq") 
+              %li
+                %a{:href => "/user/delete"}
+                  %i.icon.icon-white.icon-remove
+                  = t("navigation.delete_account") 
+              %li
+                %a{:href => "/logout"}
+                  %i.icon.icon-white.icon-off
+                  = t("navigation.sign_out")  
         %li
           %a{:href => "#servers", :"data-toggle" => "modal"}
-            %i.icon.icon-home
+            %i.icon.icon-white.icon-home
             %span.server= @server.name
+            %b.caret

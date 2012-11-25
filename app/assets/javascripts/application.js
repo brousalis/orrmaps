@@ -3,6 +3,7 @@
 //= require jquery.effects.shake
 //= require jquery.effects.slide
 //= require bootstrap-modal
+//= require bootstrap-dropdown
 //= require bootstrap-transition
 //= require bootstrap-tab
 //= require_self

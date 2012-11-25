@@ -12,10 +12,10 @@
             %i.icon.icon-white.icon-thumbs-down{:class => ("disliked" if current_user && map.already_dislikes?(current_user))} 
           %span= likes_for_map(map)
           = t("secondary.likes")
-        .date{:href => "#"}
+        .date
           %i.icon.icon-white.icon-calendar
           #{time_ago(map.updated_at)} #{t("secondary.ago")}
-        .date{:href => "#"}
+        .date
           %i.icon.icon-white.icon-home
           = map.server.name 
         %a.date{:href => map_path(map)}
@@ -25,23 +25,41 @@
         .brand.logo{:href => "#", :style => "font-weight:bold;"}
           %i.icon.icon-white.icon-home
           = server.name  
-        .pull-right.faq
+        .faq.pull-right
           - if current_user
             = t("secondary.signed_in_html", :href => link_to(t("secondary.map_list"), "#rated", {:class => "top_rated", :"data-toggle" => "modal"}))
           - else
             = t("secondary.create_html", :href => link_to(t("secondary.sign_in"), "#sign_in", {:class => "sign_in", :"data-toggle" => "modal"}))
             = t("secondary.faq_html", :href => link_to(t("secondary.faq"), "#faq", {:"data-toggle" => "modal"}))
-      .pull-right.toolshed
-        %ul.tools
+      .toolshed
+        %ul.tools.pull-right
           %li
-            %a.note{:href => "#"}
-          %li
-            %a.raspberry{:href => "#"}
-          %li
-            %a.mithril{:href => "#"}
-          %li
-            %a.omnom{:href => "#"}
-          %li
-            %a.wood{:href => "#"}
-          %li
-            %a.ore.active{:href => "#"}
+            %a.node{:href => "#", :"data-toggle" => "dropdown"} 
+              %b.caret
+            %ul.dropdown-menu{:role => "menu", :"aria-labelledby" => "dLabel"}
+              %li.desc
+                %span orichalcum ore
+              %li
+                %h1
+                  Ore & wood
+                %div
+                  %a.ore.active{:href => "#", :rel => "orichalcum ore"}     
+                  %a.wood{:href => "#", :rel => "ancient wood"}     
+                  %a.mithril{:href => "#", :rel => "rich mithril"}
+              %li
+                %h1
+                  Cooking
+                %div 
+                  %a.omnom{:href => "#", :rel => "omnomnom berry"}
+                  %a.raspberry{:href => "#", :rel => "raspberry"}
+                  %a.oritruffle{:href => "#", :rel => "orrian truffle"}
+                  %a.snowtruffle{:href => "#", :rel => "snow truffle"}
+                  %a.passiflora{:href => "#", :rel => "passiflora"}
+                  %a.ghostpepper{:href => "#", :rel => "ghost pepper"}
+              %li
+                %h1
+                  Misc
+                %div
+                  %a.note{:href => "#", :rel => "note"}
+                  %a.chest{:href => "#", :rel => "chest"}
+

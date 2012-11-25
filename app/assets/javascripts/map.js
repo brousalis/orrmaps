@@ -14,6 +14,13 @@ orrmaps.map = function() {
       $('.tools a').removeClass('active');
       icon_type = $(this).attr('class');
       $(this).addClass('active');
+      $('.node').css('background', $(this).css('background'));
+      $('.desc span').html($(this).attr('rel'));
+    });
+    $('.dropdown-menu div a').hover(function() {
+      $('.desc span').html($(this).attr('rel'));
+    }, function() {
+      $('.desc span').html($('.dropdown-menu div').find('.active').attr('rel'));
     });
     $('.toolshed').fadeIn();
   };
