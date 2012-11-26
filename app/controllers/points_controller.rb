@@ -43,6 +43,11 @@ class PointsController < ApplicationController
     end
   end
 
+  def destroy_all
+    @points =  Point.find_all_by_map_id(params[:map_id])
+    @points.each {|p| p.destroy}
+  end
+
   def destroy
     @point = Point.find_by_marker_id(params[:marker_id])
     @point.destroy if @point

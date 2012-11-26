@@ -36,6 +36,10 @@ module ApplicationHelper
     time_ago_in_words(updated).sub("minute", "min").sub("less than a min", "< 1 min").sub("about", "")
   end
 
+  def last_reset
+    Time.parse($redis.get("last_reset"))
+  end
+
   private
 
   def cache_counts(rel)

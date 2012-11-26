@@ -28,13 +28,7 @@ class ServersController < ApplicationController
     @server = find_server(server || "Jade Quarry")
 
     sorted = users_on_server(@server).collect do |user|
-      [
-        "<a href='/maps/#{user.map.id}'>#{user.name}</a>",
-        points_for_map(user.map),
-        likes_for_map(user.map),
-        (Time.now-user.map.updated_at).to_i,
-        time_ago(user.map.updated_at)
-      ]
+      hide_outdated(user)
     end
     render :json => { "aaData" => sorted }
   end
@@ -57,6 +51,21 @@ class ServersController < ApplicationController
   end
 
 private
+
+  def hide_outdated(user)
+    data = [
+      "<a href='/maps/#{user.map.id}'>#{user.name}</a>",
+      points_for_map(user.map),
+      likes_for_map(user.map),
+      time_ago(user.map.updated_at)
+    ]
+
+    if user.map.updated_at < last_reset 
+      data = data.map {|d| "<span>#{d}</span>"}
+    end
+
+    data << (Time.now-user.map.updated_at).to_i
+  end
 
   def opacity(map_id, top_map_id, second_map_id)
     if map_id == top_map_id

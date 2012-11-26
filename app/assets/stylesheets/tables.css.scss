@@ -186,6 +186,7 @@ div.DTFC_LeftFootWrapper table {
   vertical-align: top;
   border-top: 1px solid #303030;
   &:nth-child(even) { background-color: rgba(40,40,40,.3);}
+  span { @include opacity(0.2); }
   i { @include opacity(0.2); }
   color: #fff;
 }

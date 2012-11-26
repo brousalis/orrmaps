@@ -164,9 +164,10 @@ $(document).ready(function() {
             { "asSorting": [ "desc", "asc" ] },
             { "asSorting": [ "desc", "asc" ] },
             { "asSorting": [ "desc", "asc" ] },
-            { "bVisible": false, "asSorting": [ "desc", "asc" ] }, 
-            { "iDataSort": 3, "asSorting": [ "desc", "asc" ] }
+            { "iDataSort": 4, "asSorting": [ "desc", "asc" ] },
+            { "bVisible": false, "asSorting": [ "desc", "asc" ] }
     ],
+    "aaSorting": [[3,'asc']],
     "oLanguage": {
       "sEmptyTable": "There are no maps with any points!",
       "sLengthMenu": "_MENU_ records per page",

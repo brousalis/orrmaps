@@ -13,6 +13,7 @@ Orrore::Application.routes.draw do
   post "server_maps" => "servers#points", :as => "servers"
   put "points" => "points#update", :as => "points"
   delete "points" => "points#destroy", :as => "points"
+  delete "points_all" => "points#destroy_all", :as => "points_all"
   put "notes" => "points#notes", :as => "notes"
 
   match "/map/:id" => "maps#map"

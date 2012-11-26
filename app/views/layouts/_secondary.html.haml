@@ -1,6 +1,6 @@
 %div.navbar.navbar-inverse.navbar-fixed-top
   %nav.navbar-inner
-    .container 
+    .container
       - if map
         .brand.logo{:href => "#"}
           %i.icon.icon-white.icon-user
@@ -9,7 +9,7 @@
           %a.like{:href => "#", :title => "#{map.id}"}
             %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user && map.already_likes?(current_user))}
           %a.dislike{:href => "#", :title => "#{map.id}"}
-            %i.icon.icon-white.icon-thumbs-down{:class => ("disliked" if current_user && map.already_dislikes?(current_user))} 
+            %i.icon.icon-white.icon-thumbs-down{:class => ("disliked" if current_user && map.already_dislikes?(current_user))}
           %span= likes_for_map(map)
           = t("secondary.likes")
         .date
@@ -17,14 +17,22 @@
           #{time_ago(map.updated_at)} #{t("secondary.ago")}
         .date
           %i.icon.icon-white.icon-home
-          = map.server.name 
+          = map.server.name
         %a.date{:href => map_path(map)}
           %i.icon.icon-white.icon-share
-          = "/maps/#{map.id}"  
+          = "/maps/#{map.id}"
+        - if map.updated_at < last_reset
+          .date
+            %i.icon.icon-white.icon-exclamation-sign
+            out of date
       - else
         .brand.logo{:href => "#", :style => "font-weight:bold;"}
           %i.icon.icon-white.icon-home
-          = server.name  
+          = server.name
+        .date
+          %i.icon.icon-white.icon-time
+          last reset 
+          = last_reset.strftime("%m/%d")
         .faq.pull-right
           - if current_user
             = t("secondary.signed_in_html", :href => link_to(t("secondary.map_list"), "#rated", {:class => "top_rated", :"data-toggle" => "modal"}))
@@ -34,22 +42,20 @@
       .toolshed
         %ul.tools.pull-right
           %li
-            %a.node{:href => "#", :"data-toggle" => "dropdown"} 
+            %a.node{:href => "#", :"data-toggle" => "dropdown"}
               %b.caret
             %ul.dropdown-menu{:role => "menu", :"aria-labelledby" => "dLabel"}
               %li.desc
                 %span orichalcum ore
               %li
-                %h1
-                  Ore & wood
+                %h1 Ore & wood
                 %div
-                  %a.ore.active{:href => "#", :rel => "orichalcum ore"}     
-                  %a.wood{:href => "#", :rel => "ancient wood"}     
+                  %a.ore.active{:href => "#", :rel => "orichalcum ore"}
+                  %a.wood{:href => "#", :rel => "ancient wood"}
                   %a.mithril{:href => "#", :rel => "rich mithril"}
               %li
-                %h1
-                  Cooking
-                %div 
+                %h1 Cooking
+                %div
                   %a.omnom{:href => "#", :rel => "omnomnom berry"}
                   %a.raspberry{:href => "#", :rel => "raspberry"}
                   %a.oritruffle{:href => "#", :rel => "orrian truffle"}
@@ -57,9 +63,10 @@
                   %a.passiflora{:href => "#", :rel => "passiflora"}
                   %a.ghostpepper{:href => "#", :rel => "ghost pepper"}
               %li
-                %h1
-                  Misc
-                %div
+                %h1 Misc
+                %div.last
                   %a.note{:href => "#", :rel => "note"}
                   %a.chest{:href => "#", :rel => "chest"}
-
+        %a.delete_all{:href => "#"} 
+          %i.icon.icon-white.icon-remove
+          Delete all  

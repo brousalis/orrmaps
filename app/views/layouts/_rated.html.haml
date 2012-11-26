@@ -5,7 +5,9 @@
       %a{:href => "/"} 
         %i.icon.icon-white.icon-arrow-left
         Back
-    %h3= t("rated.header", :server => @server.name)
+    %h3
+      = t("rated.header", :server => @server.name)
+      %span last reset #{last_reset.strftime("%m/%d")}
   .modal-body
     %table.table
       %thead
@@ -15,3 +17,4 @@
           %th= t("rated.table.likes")
           %th= t("rated.table.updated_at")
           %th= t("rated.table.updated_at")
+

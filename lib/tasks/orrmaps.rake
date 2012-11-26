@@ -1,10 +1,30 @@
-namespace :orrmaps do
-  task :reset_maps do
-    Point.where(:icon => '/assets/tiles/ore.png')
-    Point.where(:icon => '/assets/tiles/wood.png')
+namespace :o do
+  task :reset, [:date] => :environment do |t, args|
+    args.with_defaults(:date => Time.now)
+
+    previous = $redis.get("last_reset")
+
+    $redis.set("prev_reset", previous)
+    $redis.set("last_reset", args.date)
+
+    puts "Previous reset: #{previous}"
+    puts "New reset: #{args.date}"
+
+    Like.destroy_all
+    puts "Likes destroyed"
   end
 
-  task :reset_likes do
+  task :see_resets => :environment do
+    puts "Previous reset: #{previous}"
+    puts "New reset: #{args.date}"
+  end
+
+  task :clear_reset => :environment do
+    $redis.del("prev_reset")
+    $redis.del("last_reset")
+  end
+
+  task :reset_likes => :environment do
     Like.destroy_all
   end
 end
