@@ -4,14 +4,14 @@ namespace :o do
 
     previous = $redis.get("last_reset")
 
+    puts "Likes destroyed"
+    $redis.flushdb
+
     $redis.set("prev_reset", previous)
     $redis.set("last_reset", args.date)
 
     puts "Previous reset: #{previous}"
     puts "New reset: #{args.date}"
-
-    Like.destroy_all
-    puts "Likes destroyed"
   end
 
   task :see_resets => :environment do

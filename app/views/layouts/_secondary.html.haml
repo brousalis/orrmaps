@@ -5,6 +5,10 @@
         .brand.logo{:href => "#"}
           %i.icon.icon-white.icon-user
           #{map.user.name}'s #{t("secondary.map")}
+        - if map.updated_at < last_reset
+          .date
+            %i.icon.icon-white.icon-exclamation-sign
+            out of date 
         .likes
           %a.like{:href => "#", :title => "#{map.id}"}
             %i.icon.icon-white.icon-thumbs-up{:class => ("liked" if current_user && map.already_likes?(current_user))}
@@ -21,10 +25,6 @@
         %a.date{:href => map_path(map)}
           %i.icon.icon-white.icon-share
           = "/maps/#{map.id}"
-        - if map.updated_at < last_reset
-          .date
-            %i.icon.icon-white.icon-exclamation-sign
-            out of date
       - else
         .brand.logo{:href => "#", :style => "font-weight:bold;"}
           %i.icon.icon-white.icon-home
@@ -62,6 +62,8 @@
                   %a.snowtruffle{:href => "#", :rel => "snow truffle"}
                   %a.passiflora{:href => "#", :rel => "passiflora"}
                   %a.ghostpepper{:href => "#", :rel => "ghost pepper"}
+                  %a.coral{:href => "#", :rel => "coral"}
+                  %a.lotus{:href => "#", :rel => "lotus"}
               %li
                 %h1 Misc
                 %div.last

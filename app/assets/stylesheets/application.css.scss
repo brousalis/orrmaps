@@ -392,7 +392,7 @@ body {
   .tools {
     margin: 0;
     .dropdown-menu {
-      min-width: 170px;
+      min-width: 159px;
       @include box-shadow(#{0 1px rgba(255, 255, 255, .3) inset, .2em .2em .6em black});
       border: 1px solid rgba(0, 0, 0, 0.6);
       background-color: rgba(0, 0, 0, 0.1);
@@ -453,6 +453,8 @@ body {
             &.ore { background: image-url('tiles/ore.png') no-repeat}
             &.omnom { background: image-url('tiles/omnom.png') no-repeat}
             &.wood { background: image-url('tiles/wood.png') no-repeat}
+            &.coral { background: image-url('tiles/coral.png') no-repeat}
+            &.lotus { background: image-url('tiles/lotus.png') no-repeat}
             &.oritruffle { background: image-url('tiles/oritruffle.png') no-repeat}
             &.ghostpepper { background: image-url('tiles/ghostpepper.png') no-repeat}
             &.passiflora{ background: image-url('tiles/passiflora.png') no-repeat}
