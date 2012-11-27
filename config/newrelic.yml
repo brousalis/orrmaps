@@ -3,9 +3,9 @@
 # Ruby, Java, .NET, PHP, and Python applications with deep visibility and low overhead.
 # For more information, visit www.newrelic.com.
 #
-# Generated October 28, 2012
+# Generated November 27, 2012
 #
-# This configuration file is custom generated for orrmaps
+# This configuration file is custom generated for David - kronykcles@gmail.com
 
 # Here are the settings that are common to all environments:
 common: &default_settings
@@ -14,7 +14,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  license_key: '8c25c93ab74ef4ebc82449fd66cf2d3e4695891e'
+  license_key: '3c72232c5194ae6e130f96b6144ef754e35a8dcd'
   
   # Agent Enabled (Ruby/Rails Only)
   # Use this setting to force the agent to run or not run.
