@@ -50,7 +50,7 @@ class ServersController < ApplicationController
     data = maps.collect do |map|
       {
         :opacity => opacity(map.id, top_map, second_map),
-        :points  => map.points.where("updated_at > '#{last_reset.to_s(:db)}'").map(&:to_hash)
+        :points  => map.points.select{|p| p.updated_at > last_reset}.map(&:to_hash)
       }
     end
 
