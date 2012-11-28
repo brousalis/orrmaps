@@ -3,3 +3,7 @@
   #map
 :javascript
   orrmaps.index.init();
+- if !session[:alert4]
+  :javascript
+    orrmaps.alert.init("Server nodes reset on <strong>11/28</strong>", 8000);
+    orrmaps.alert.init("Better map list, shows outdated maps grayed out. Server maps don't include points from outdated maps. Added more markers.", 8000);
