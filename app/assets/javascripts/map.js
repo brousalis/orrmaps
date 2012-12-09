@@ -4,7 +4,7 @@ orrmaps.map = function() {
   var icon_type = "ore";
 
   var icon = function(img, opacity) {
-    var type = img.replace("/assets/tiles/","").replace(".png", "")
+    var type = img.replace("/assets/tiles/","").replace(".png", "");
     if (opacity == 100) opacity = "";
     return "/assets/tiles/" + type + opacity + ".png";
   };

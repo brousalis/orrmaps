@@ -17,8 +17,8 @@ class HomeController < ApplicationController
       session[:server] = current_user.server.name
 
       # god save my soul
-      session[:count3] = 0 unless session[:count3].to_i > 0
-      session[:count3] = session[:count3].to_i + 1 unless session[:count3] > 1
+      session[:count4] = 0 unless session[:count4].to_i > 0
+      session[:count4] = session[:count4].to_i + 1 unless session[:count4] > 1
     else
       redirect_to "/server/#{underscore(session[:server])}"
       @map = Map.new
@@ -29,7 +29,7 @@ class HomeController < ApplicationController
 private
 
   def set_alert
-    session[:alert3] = true if session[:count3].to_i == 1
+    session[:alert4] = true if session[:count4].to_i == 1
   end
 
 end

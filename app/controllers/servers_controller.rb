@@ -35,7 +35,7 @@ class ServersController < ApplicationController
         time_ago(user.map.updated_at),
         (Time.now-user.map.updated_at).to_i,
         (user.map.updated_at < last_reset)
-      ] 
+      ]
     end
     render :json => { "aaData" => sorted }
   end

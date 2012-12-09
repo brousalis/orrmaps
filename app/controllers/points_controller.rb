@@ -46,6 +46,7 @@ class PointsController < ApplicationController
   def destroy_all
     @points = Point.find_all_by_map_id(params[:map_id])
     @points.each {|p| p.destroy}
+    render :json => { "status" => "success" }
   end
 
   def destroy
