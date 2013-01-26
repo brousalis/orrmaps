@@ -4,9 +4,6 @@ namespace :o do
 
     previous = $redis.get("last_reset")
 
-    puts "Likes destroyed"
-    $redis.flushdb
-
     $redis.set("prev_reset", previous)
     $redis.set("last_reset", args.date)
 
@@ -25,6 +22,7 @@ namespace :o do
   end
 
   task :reset_likes => :environment do
-    Like.destroy_all
+    puts "Likes destroyed"
+    $redis.flushdb
   end
 end
