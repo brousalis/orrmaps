@@ -23,7 +23,8 @@ orrmaps.map = function() {
       $('.desc span').html($('.dropdown-menu div').find('.active').attr('rel'));
     });
     $('.delete_all').live('click', function() {
-      clear_markers();
+      if(confirm("This will delete all markers on your map. Are you sure?"))
+        clear_markers();
     });
     $('.toolshed').fadeIn();
   };

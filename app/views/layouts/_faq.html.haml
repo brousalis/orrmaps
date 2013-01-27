@@ -44,15 +44,6 @@
                       %img{:alt => "", :border => "0", :height => "1", :src => "https://www.paypalobjects.com/en_US/i/scr/pixel.gif", :width => "1"}
 
   .modal-footer
-    .meter
-      .cost= t("donate.monthly_cost")
-      .progress
-        %span $35
-        .bar{:style => "width:48%"}
-          %span $17
-      .heart
-        %a{:href => "#donate", "data-toggle" => "tab"}
-          %i.icon.icon-white.icon-heart
     %a.email{:href => "mailto:orrmaps@gmail.com"}
       %i.icon-white.icon-envelope 
       = t("sign_in.email_me")
