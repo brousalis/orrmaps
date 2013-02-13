@@ -22,6 +22,7 @@ gem 'taps'
 gem 'metamagic'
 gem 'heroku'
 gem 'redis'
+gem 'nokogiri'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
