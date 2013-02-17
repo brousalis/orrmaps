@@ -1,50 +1,68 @@
-%div.navbar.primary.navbar-fixed-top
-  %nav.navbar-inner
-    .container
-      %a.brand.logo{:href => "/"} Orrmaps
-      %ul.nav
-        %li.your
-          %a{:href => "/"}= t("navigation.your_map")
-        %li.serv
-          - if session[:server]
-            %a{:href => "/server/#{underscore(session[:server])}"}= t("navigation.server_map")
-          - else
-            %a{:href => "/server/jade_quarry"}= t("navigation.server_map")
-        %li.rated
-          %a.top_rated{:href => "#rated", :"data-toggle" => "modal"}= t("secondary.map_list").humanize
-      %ul.nav.pull-right.user
-        %li
-          %form{:action => "https://www.paypal.com/cgi-bin/webscr", :method => "post"}
-            %input{:name => "cmd", :type => "hidden", :value => "_s-xclick"}
-              %input{:name => "encrypted", :type => "hidden", :value => "-----BEGIN PKCS7-----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-----END PKCS7-----\r\n"}
-                %input{:alt => "PayPal - The safer, easier way to pay online!", :border => "0", :name => "submit", :src => "/assets/donate.png", :type => "image"}
-                  %img{:alt => "", :border => "0", :height => "1", :src => "https://www.paypalobjects.com/en_US/i/scr/pixel.gif", :width => "1"} 
-        - unless current_user
-          %li
-            %a.sign_in{:href => "#sign_in", :"data-toggle" => "modal"}
-              %i.icon.icon-white.icon-user
-              = t("secondary.sign_in")
-        - else
-          %li
-            %a.sign_in.dropdown-toggle{:href => "#", :"data-toggle" => "dropdown"}
-              %i.icon.icon-white.icon-user
-              %strong= current_user.name
-              %b.caret
-            %ul.dropdown-menu{:role => "menu", :"aria-labelledby" => "dLabel"}
-              %li 
-                %a{:href => "#faq", :"data-toggle" => "modal"}
-                  %i.icon.icon-white.icon-question-sign
-                  = t("secondary.faq") 
-              %li
-                %a{:href => "/user/delete"}
-                  %i.icon.icon-white.icon-remove
-                  = t("navigation.delete_account") 
-              %li
-                %a{:href => "/logout"}
-                  %i.icon.icon-white.icon-off
-                  = t("navigation.sign_out")  
-        %li
-          %a{:href => "#servers", :"data-toggle" => "modal"}
-            %i.icon.icon-white.icon-home
-            %span.server= @server.name
-            %b.caret
+#sidebar
+  %ul
+    %li.logo
+      %a.logo{:href => "/"} orrmaps
+      %a.reset{:href => "#", :rel => "tooltip", :title => "Last location reset", :"data-placement" => "right"}
+        %i.icon-clock
+        = last_reset.strftime("%m/%d")
+    %li.user
+      - if current_user
+        %a.user{:href => "#"}
+          %i.icon-user
+          = current_user.name
+          %span.wrench
+            %i.icon-wrench
+        .user-menu
+          %ul
+            %li
+              %a{:href => "/user/delete"}
+                %i.icon-cancel
+                Delete account
+            %li
+              %a{:target => "_blank", :href => "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Q8FJSMSQHRMDA&lc=US&item_name=orrmaps&item_number=42&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"}
+                %i.icon-heart
+                Donate
+            %li
+              %a{:href => "/logout"}
+                %i.icon-off
+                Logout
+      - else
+        %a.user{:href => "#sign_in", :"data-toggle" => "modal"}
+          %i.icon-exclamation
+          Login or Register
+    %li.server
+      %select.chzn-select{:"data-placeholder" => @server.name}
+        %option{:value=>""}
+        - @servers.each do |server|
+          %option{:value => server}= server
+      %span.icon
+        %i.closed.icon-pencil
+
+    %li.selected
+      %a.your_map{:href => "#"}
+        %i.icon-home
+        Your map
+    %li
+      %a.server_map{:href => "#"}
+        %i.icon-globe
+        Server map
+    %li
+      %a.map_list{:href => "#rated", :"data-toggle" => "modal"}
+        %i.icon-air
+        Map list
+    %li
+      %a.filter{:href => "#"}
+        %i.icon-location
+        Filter icons
+        %span
+          %i.icon-right-dir
+    %li
+      %a.temple{:href => "#"}
+        %i.icon-lock
+        Temple status
+        %span
+          %i.icon-right-dir
+  .ads
+    %a{:target => "_blank", :href => "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Q8FJSMSQHRMDA&lc=US&item_name=orrmaps&item_number=42&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"}
+      %i.icon-heart
+      Donate

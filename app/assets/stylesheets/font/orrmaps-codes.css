@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+
+.icon-home:before { content: '\2302'; } /* '⌂' */
+.icon-up-dir:before { content: '\25b4'; } /* '▴' */
+.icon-right-dir:before { content: '\25b8'; } /* '▸' */
+.icon-down-dir:before { content: '\25be'; } /* '▾' */
+.icon-left-dir:before { content: '\25c2'; } /* '◂' */
+.icon-check:before { content: '\2611'; } /* '☑' */
+.icon-heart-empty:before { content: '\e801'; } /* '' */
+.icon-heart:before { content: '\e800'; } /* '' */
+.icon-cog:before { content: '\2699'; } /* '⚙' */
+.icon-attention:before { content: '\26a0'; } /* '⚠' */
+.icon-cog-alt:before { content: '\26ef'; } /* '⛯' */
+.icon-pencil:before { content: '\270e'; } /* '✎' */
+.icon-cancel:before { content: '\2715'; } /* '✕' */
+.icon-asterisk:before { content: '\2731'; } /* '✱' */
+.icon-exclamation:before { content: '\2757'; } /* '❗' */
+.icon-help:before { content: '\e704'; } /* '' */
+.icon-comment:before { content: '\e718'; } /* '' */
+.icon-chat:before { content: '\e803'; } /* '' */
+.icon-location:before { content: '\e724'; } /* '' */
+.icon-air:before { content: '\e753'; } /* '' */
+.icon-off:before { content: '\e78e'; } /* '' */
+.icon-spin:before { content: '\e830'; } /* '' */
+.icon-check-empty:before { content: '\f096'; } /* '' */
+.icon-filter:before { content: '\f0b0'; } /* '' */
+.icon-angle-left:before { content: '\f104'; } /* '' */
+.icon-angle-right:before { content: '\f105'; } /* '' */
+.icon-angle-up:before { content: '\f106'; } /* '' */
+.icon-angle-down:before { content: '\f107'; } /* '' */
+.icon-circle-empty:before { content: '\f10c'; } /* '' */
+.icon-circle:before { content: '\f111'; } /* '' */
+.icon-globe:before { content: '\f30e'; } /* '' */
+.icon-gift:before { content: '\f381'; } /* '' */
+.icon-thumbs-up:before { content: '\f44d'; } /* '' */
+.icon-thumbs-down:before { content: '\f44e'; } /* '' */
+.icon-user:before { content: '\f464'; } /* '' */
+.icon-search:before { content: '\e802'; } /* '' */
+.icon-lock:before { content: '\f512'; } /* '' */
+.icon-lock-open:before { content: '\f513'; } /* '' */
+.icon-wrench-1:before { content: '🔧'; } /* '\1f527' */
+.icon-wrench:before { content: '\e805'; } /* '' */
+.icon-clock:before { content: '\f554'; } /* '' */

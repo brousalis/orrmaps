@@ -1,6 +1,4 @@
 class HomeController < ApplicationController
-  after_filter :set_alert, :only => :index
-
   def index
     session[:server] = "Jade Quarry" if !session[:server]
     @server = find_server(session[:server] || "Jade Quarry")
@@ -15,21 +13,10 @@ class HomeController < ApplicationController
       end
 
       session[:server] = current_user.server.name
-
-      # god save my soul
-      session[:count4] = 0 unless session[:count4].to_i > 0
-      session[:count4] = session[:count4].to_i + 1 unless session[:count4] > 1
     else
       redirect_to "/server/#{underscore(session[:server])}"
       @map = Map.new
     end
 
   end
-
-private
-
-  def set_alert
-    session[:alert4] = true if session[:count4].to_i == 1
-  end
-
 end

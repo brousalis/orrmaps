@@ -12,11 +12,11 @@
     = yield(:head)
   %body
     = render :partial => 'layouts/navigation'
+
     = yield
+
     = render :partial => 'layouts/sign_in' unless current_user
-    = render :partial => 'layouts/servers', :locals => { :header => t("servers.header") }
     = render :partial => 'layouts/rated'
-    = render :partial => 'layouts/faq'
 
     :javascript
       var _gaq = _gaq || [];

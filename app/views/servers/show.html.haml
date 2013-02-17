@@ -1,5 +1,5 @@
-= render :partial => 'layouts/secondary', :locals => {:server => @server, :map => nil}
 #main{:role => "main"}
   #map
-  :javascript
-    orrmaps.server.init("#{underscore(@server.name)}");
+
+:javascript
+  orrmaps.server.init("#{underscore(@server.name)}");

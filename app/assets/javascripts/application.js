@@ -6,6 +6,7 @@
 //= require bootstrap-dropdown
 //= require bootstrap-transition
 //= require bootstrap-tab
+//= require bootstrap-tooltip
 //= require_self
 //= require_tree .
 
