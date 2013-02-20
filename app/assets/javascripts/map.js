@@ -37,6 +37,27 @@ orrmaps.map = function() {
     $('.toolshed').show();
   };
 
+  var filters = function() {
+    $('.filters a').live('click', function() {
+      var rel = $(this).attr('rel');
+      var on = $(this).hasClass('active');
+      if(on)
+        $(this).removeClass('active');
+      else
+        $(this).addClass('active');
+      for (var i = 0, marker; marker = dmarkers[++i]; ) {
+        var type = marker.icon.replace("/assets/tiles/","").replace(".png", "");
+        if(type == rel) {
+          if(on)
+            marker.setVisible(true);
+          else
+            marker.setVisible(false);
+        }
+      }
+      return false;
+    });
+  };
+
   var get_marker_id = function(latlng) {
     return latlng.toUrlValue();
   };
@@ -240,6 +261,8 @@ orrmaps.map = function() {
 
       map.panTo(lastValidCenter);
     });
+
+    filters();
   };
 
   var set_map_id = function(id) {

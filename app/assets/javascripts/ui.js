@@ -155,10 +155,15 @@ orrmaps.ui = function() {
     $('a[rel=tooltip]').tooltip();
     $('#sign_in').modal({keyboard: false, show: false});
     $('input').attr('autocomplete', 'off');
-    $('.node_toggle').live('click', function() {
-      $('.nodes').toggle();
+    $('.toggle').live('click', function() {
+      $(this).next('div').toggle();
       $(this).toggleClass('open');
     }); 
+    $('.filter_toggle').live('click', function() {
+      $('.filters').toggle();
+      $(this).toggleClass('open');
+    });  
+    $('li.last_reset').tooltip({placement: "bottom", title: "Last updated on", trigger: 'hover'});
     if(window.location.pathname == '/') $('.your_map').addClass('selected');
     if(window.location.pathname.indexOf('server') > -1) $('.server_map').addClass('selected');
 

@@ -31,7 +31,6 @@ class ServersController < ApplicationController
       [
         "<a href='/maps/#{user.map.id}'>#{user.name}</a>",
         points_for_map(user.map),
-        likes_for_map(user.map),
         time_ago(user.map.updated_at),
         (Time.now-user.map.updated_at).to_i,
         (user.map.updated_at < last_reset)
@@ -43,12 +42,11 @@ class ServersController < ApplicationController
   def points
     name = params[:name].titleize.sub("Of", "of")
     server = find_server(name)
+    opacitys = [100,70,40,40,20]
     maps = server.maps.where("updated_at > ?", last_reset.to_s(:db)).includes(:points).limit(5)
-    top_map = server.top_map
-    second_map = server.second_top_map
-    data = maps.collect do |map|
+    data = maps.zip(opacitys).collect do |map, opacity|
       {
-        :opacity => opacity(map.id, top_map, second_map),
+        :opacity => 100,
         :points  => map.points.map(&:to_hash)
       }
     end

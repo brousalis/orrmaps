@@ -9,7 +9,7 @@
           %li
             %i.icon-exclamation
             out of date 
-        %li
+        %li.last_reset
           %i.icon-clock
           #{time_ago(map.updated_at)} #{t("secondary.ago")}
         %li
@@ -19,46 +19,52 @@
           %a{:href => map_path(map)}
             %i.icon-pencil
             = "/maps/#{map.id}"
-      - if current_user
         %li
-          %a.delete_all{:href => "#"} 
-            %i.icon-cancel 
-        %li.toolshed
-          %ul.tools
-            %li
-              %a.node{:href => "#", :"data-toggle" => "dropdown"}
-                %b.caret
-              %ul.dropdown-menu{:role => "menu", :"aria-labelledby" => "dLabel"}
-                %li.desc
-                  %span orichalcum ore
-                %li
-                  %h1 Ore & wood
-                  %div
-                    %a.ore.active{:href => "#", :rel => "orichalcum ore"}
-                    %a.wood{:href => "#", :rel => "ancient wood"}
-                    %a.mithril{:href => "#", :rel => "rich mithril"}
-                %li
-                  %h1 Cooking
-                  %div
-                    %a.omnom{:href => "#", :rel => "omnomnom berry"}
-                    %a.raspberry{:href => "#", :rel => "raspberry"}
-                    %a.oritruffle{:href => "#", :rel => "orrian truffle"}
-                    %a.snowtruffle{:href => "#", :rel => "snow truffle"}
-                    %a.passiflora{:href => "#", :rel => "passiflora"}
-                    %a.ghostpepper{:href => "#", :rel => "ghost pepper"}
-                    %a.coral{:href => "#", :rel => "coral"}
-                    %a.lotus{:href => "#", :rel => "lotus"}
-                %li
-                  %h1 Misc
-                  %div
-                    %a.note{:href => "#", :rel => "note"}
-                    %a.chest{:href => "#", :rel => "chest"}
+          %a.map_list{:href => "#rated", :"data-toggle" => "modal"}
+            %i.icon-air{:style => "display:block;"}
+        - if current_user
+          %li
+            %a.delete_all{:href => "#"} 
+              %i.icon-cancel 
+          %li.toolshed
+            %ul.tools
+              %li
+                %a.node{:href => "#", :"data-toggle" => "dropdown"}
+                  %b.caret
+                %ul.dropdown-menu{:role => "menu", :"aria-labelledby" => "dLabel"}
+                  %li.desc
+                    %span orichalcum ore
+                  %li
+                    %h1 Ore & wood
+                    %div
+                      %a.ore.active{:href => "#", :rel => "orichalcum ore"}
+                      %a.wood{:href => "#", :rel => "ancient wood"}
+                      %a.mithril{:href => "#", :rel => "rich mithril"}
+                  %li
+                    %h1 Cooking
+                    %div
+                      %a.omnom{:href => "#", :rel => "omnomnom berry"}
+                      %a.raspberry{:href => "#", :rel => "raspberry"}
+                      %a.oritruffle{:href => "#", :rel => "orrian truffle"}
+                      %a.snowtruffle{:href => "#", :rel => "snow truffle"}
+                      %a.passiflora{:href => "#", :rel => "passiflora"}
+                      %a.ghostpepper{:href => "#", :rel => "ghost pepper"}
+                      %a.coral{:href => "#", :rel => "coral"}
+                      %a.lotus{:href => "#", :rel => "lotus"}
+                  %li
+                    %h1 Misc
+                    %div
+                      %a.note{:href => "#", :rel => "note"}
+                      %a.chest{:href => "#", :rel => "chest"}
       - else
         %li
           %i.icon-home
           = @server.name
         %li
           %i.icon-clock
-          last reset 
+          Last reset 
           = last_reset.strftime("%m/%d")
-
+        %li
+          %a.map_list{:href => "#rated", :"data-toggle" => "modal"}
+            %i.icon-air
+            Map list 

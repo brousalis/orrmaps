@@ -163,13 +163,12 @@ $(document).ready(function() {
     "aoColumns": [
             { "asSorting": [ "desc", "asc" ] },
             { "asSorting": [ "desc", "asc" ] },
-            { "asSorting": [ "desc", "asc" ] },
-            { "iDataSort": 4, "asSorting": [ "desc", "asc" ] },
+            { "iDataSort": 3, "asSorting": [ "desc", "asc" ] },
             { "bVisible": false, "asSorting": [ "desc", "asc" ] }, 
     ],
     "aaSorting": [[3, 'asc']],
     "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-      if(aData[5] == true)
+      if(aData[4] == true)
         $(nRow).css('opacity', '0.2');
     },
     "oLanguage": {

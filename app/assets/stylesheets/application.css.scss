@@ -71,6 +71,7 @@ body {
   padding: 0;
   z-index: 0;
   position: relative;
+  @include transition(margin-left 0.2s linear);
 }
 
 #tab {
@@ -79,6 +80,7 @@ body {
   z-index: 100;
   background: rgba(0,0,0,0.9);
   top: 50%;
+  @include transition(left 0.1s linear);
   &:hover {
     left: 211px;
   }
@@ -205,14 +207,7 @@ body {
         &:hover {
           background-color: #191919;
         }
-        &.selected {
-          background: #151515;
-          color: #fff;
-          &:hover {
-            background: #151515;
-          }
-          i { color: #f9f9f9; }
-        }
+        
         &.login, &.user {
           color: #fff;
           text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
@@ -469,18 +464,12 @@ body {
 .delete_all i { color: #fff; display: block; }
 
 .toolshed { display: none; padding: 0px !important; }
-.toolshed a { background-color: #151515; }
-.toolshed a:hover { background-color: #151515 !important; }
-.node_toggle {
-  background-size: 20px !important; 
-  background-position: 9px 9px !important;
-  a:hover { background-color: transparent; }
-}
-.node_toggle.open span i:before { content: '\25be' }
-.node_toggle.open { background-color: #151515; color: #fff !important; }
-.node_toggle.open i { color: #fff !important }
-.nodes {
+.toggle.open span i:before { content: '\25be' }
+.toggle.open { background-color: #151515; color: #fff !important; }
+.toggle.open i { color: #fff !important }
+.filters, .nodes {
   margin-top: 4px;
+  display: none;
   margin-top: 0 !important;
   background-color: #151515;
   a { 
@@ -498,6 +487,16 @@ body {
   }
 } 
  
+.filters {
+  a {
+    @include opacity(1); 
+    position: relative;
+    i { position: absolute; right: 10px; }
+    &.active {
+      i:before { content: '\f111' }
+    }
+  }
+}
 
 #rated {
   padding: 0;
@@ -539,12 +538,13 @@ body {
     margin-left: auto;
     margin-right: auto;
     ul {
+      @include border-radius(0px 0px 6px 6px);
       background: rgba(0,0,0,0.7);
       margin: 0;
       padding: 0;
       li {
         display: inline-block;
-        padding: 7px 8px;
+        padding: 7px 12px;
         color: #fff;
         list-style: none;
         border-right: 1px solid rgba(255,255,255,0.1);
@@ -556,3 +556,4 @@ body {
     }
   }
 }
+

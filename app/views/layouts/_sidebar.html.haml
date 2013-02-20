@@ -75,8 +75,55 @@
         %a.your_map{:href => "/"}
           %i.icon-home
           Your map
+    - if params[:controller] == 'servers' || params[:controller] == 'maps' || params[:controller] == 'home'
+      %li
+        %a.toggle{:href => "#"}
+          %i.icon-filter
+          Filter icons
+          %span
+            %i.icon-right-dir 
+        .filters
+          %a.ore{:href => "#", :rel => "ore"} 
+            %i.icon-circle-empty
+            Orichalcum Ore
+          %a.wood{:href => "#", :rel => "wood"}
+            %i.icon-circle-empty
+            Ancient Wood
+          %a.mithril{:href => "#", :rel => "mithril"}
+            %i.icon-circle-empty
+            Rich Mithril
+          %a.omnom{:href => "#", :rel => "omnom"} 
+            %i.icon-circle-empty
+            Omnomberry
+          %a.raspberry{:href => "#", :rel => "raspberry"} 
+            %i.icon-circle-empty
+            Raspberry
+          %a.oritruffle{:href => "#", :rel => "oritruffle"}
+            %i.icon-circle-empty
+            Orrian Truffle
+          %a.snowtruffle{:href => "#", :rel => "snowtruffle"}
+            %i.icon-circle-empty
+            Snow Truffle
+          %a.passiflora{:href => "#", :rel => "passiflora"}
+            %i.icon-circle-empty
+            Passiflora
+          %a.ghostpepper{:href => "#", :rel => "ghostpepper"}
+            %i.icon-circle-empty
+            Ghost Pepper
+          %a.coral{:href => "#", :rel => "coral"}
+            %i.icon-circle-empty
+            Coral
+          %a.lotus{:href => "#", :rel => "lotus"}
+            %i.icon-circle-empty
+            Lotus
+          %a.note{:href => "#", :rel => "note"}
+            %i.icon-circle-empty
+            Note 
+          %a.chest{:href => "#", :rel => "chest"}
+            %i.icon-circle-empty
+            Chest 
     %li.toolshed
-      %a.node_toggle.open{:href => "#"}
+      %a.toggle{:href => "#"}
         %i.icon-location
         Place a marker
         %span
@@ -98,13 +145,15 @@
       %a.delete_all{:href => "#"}
         %i.icon-cancel{:style => "display: inline-block"}
         Delete all
+
   .ads
-    :javascript
-      google_ad_client = "ca-pub-8553243631007251";
-      google_ad_slot = "7313123645";
-      google_ad_width = 336;
-      google_ad_height = 280;
-    %script{:src => "http://pagead2.googlesyndication.com/pagead/show_ads.js", :type => "text/javascript"}
+    .ads-wrapper{:style => "margin-left: 10px;"}
+      :javascript
+        google_ad_client = "ca-pub-8553243631007251";
+        google_ad_slot = "9361606444";
+        google_ad_width = 200;
+        google_ad_height = 200; 
+      %script{:src => "http://pagead2.googlesyndication.com/pagead/show_ads.js", :type => "text/javascript"}
     %a{:target => "_blank", :href => "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Q8FJSMSQHRMDA&lc=US&item_name=orrmaps&item_number=42&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"}
       %i.icon-heart
-      Donate
+      Any donation hides ad
