@@ -1,0 +1,110 @@
+#tab
+  %a{:href => "#"}
+    %i.icon-left-dir
+#sidebar
+  %ul
+    %li.logo
+      %a.logo{:href => "/"} orrmaps
+      %a.reset{:href => "#", :rel => "tooltip", :title => "Last reset date", :"data-placement" => "right"}
+        %i.icon-clock
+        = last_reset.strftime("%m/%d")
+    %li.user
+      - if current_user
+        %a#toggle_user.user{:href => "#"}
+          = current_user.name
+          %span.wrench
+            %i.icon-wrench
+        .user-menu
+          %ul
+            %li
+              %a.delete_user{:href => "/user/delete"}
+                %i.icon-cancel
+                Delete account
+            %li
+              %a#toggle_navbar{:href => "#"}
+                %i.icon-circle-empty
+                Toggle navbar
+            %li
+              %a{:target => "_blank", :href => "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Q8FJSMSQHRMDA&lc=US&item_name=orrmaps&item_number=42&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"}
+                %i.icon-heart
+                Donate
+            %li
+              %a{:href => "/logout"}
+                %i.icon-off
+                Logout
+      - else
+        %a.login{:href => "#sign_in", :"data-toggle" => "modal"}
+          Login or Register
+          %span
+            %i.icon-user
+    %li.server
+      %select.chzn-select{:"data-placeholder" => @server.name}
+        %option{:value=>""}
+        - @servers.each do |server|
+          %option{:value => server}= server
+      %span.icon
+        %i.closed.icon-pencil
+    %li
+      - if session[:server]
+        %a.server_map{:href => "/server/#{underscore(session[:server])}"}
+          %i.icon-globe
+          = t("navigation.server_map")
+      - else
+        %a.server_map{:href => "/server/jade_quarry"}
+          %i.icon-globe
+          = t("navigation.server_map")
+    %li
+      %a.map_list{:href => "#rated", :"data-toggle" => "modal"}
+        %i.icon-air
+        Map list
+    - if false
+      %li
+        %a.filter{:href => "#"}
+          %i.icon-location
+          Filter icons
+          %span
+            %i.icon-right-dir
+      %li
+        %a.temple{:href => "#"}
+          %i.icon-lock
+          Temple status
+          %span
+            %i.icon-right-dir
+    - if current_user
+      %li
+        %a.your_map{:href => "/"}
+          %i.icon-home
+          Your map
+    %li.toolshed
+      %a.node_toggle.open{:href => "#"}
+        %i.icon-location
+        Place a marker
+        %span
+          %i.icon-right-dir
+      .nodes
+        %a.ore.active{:href => "#", :rel => "orichalcum ore"} Orichalcum Ore
+        %a.wood{:href => "#", :rel => "ancient wood"} Ancient Wood
+        %a.mithril{:href => "#", :rel => "rich mithril"} Rich Mithril
+        %a.omnom{:href => "#", :rel => "omnomnom berry"} Omnomberry
+        %a.raspberry{:href => "#", :rel => "raspberry"} Raspberry
+        %a.oritruffle{:href => "#", :rel => "orrian truffle"} Orrian Truffle
+        %a.snowtruffle{:href => "#", :rel => "snow truffle"} Snow Truffle
+        %a.passiflora{:href => "#", :rel => "passiflora"} Passiflora
+        %a.ghostpepper{:href => "#", :rel => "ghost pepper"} Ghost Pepper
+        %a.coral{:href => "#", :rel => "coral"} Coral
+        %a.lotus{:href => "#", :rel => "lotus"} Lotus
+        %a.note{:href => "#", :rel => "note"} Note
+        %a.chest{:href => "#", :rel => "chest"} Chest
+      %a.delete_all{:href => "#"}
+        %i.icon-cancel{:style => "display: inline-block"}
+        Delete all
+  .ads
+    :javascript
+      google_ad_client = "ca-pub-8553243631007251";
+      google_ad_slot = "7313123645";
+      google_ad_width = 336;
+      google_ad_height = 280;
+    %script{:src => "http://pagead2.googlesyndication.com/pagead/show_ads.js", :type => "text/javascript"}
+    %a{:target => "_blank", :href => "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Q8FJSMSQHRMDA&lc=US&item_name=orrmaps&item_number=42&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"}
+      %i.icon-heart
+      Donate

@@ -9,7 +9,7 @@ namespace :orrmaps do
     end
 
     client = res[0]
-    patch = res[1]      
+    patch = res[1]
 
     reset_maps(client)
   end
@@ -47,6 +47,6 @@ end
 
 def print_resets
   puts "Previous reset: #{$redis.get("prev_reset")}"
-  puts "Latest reset: #{$redis.get("latest_reset")}" 
+  puts "Latest reset: #{$redis.get("last_reset")}" 
 end
  

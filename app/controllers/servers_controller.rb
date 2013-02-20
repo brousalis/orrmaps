@@ -43,17 +43,15 @@ class ServersController < ApplicationController
   def points
     name = params[:name].titleize.sub("Of", "of")
     server = find_server(name)
-    maps = server.maps.where("updated_at > ?", last_reset.to_s(:db)).includes(:points)
+    maps = server.maps.where("updated_at > ?", last_reset.to_s(:db)).includes(:points).limit(5)
     top_map = server.top_map
     second_map = server.second_top_map
-
     data = maps.collect do |map|
       {
         :opacity => opacity(map.id, top_map, second_map),
         :points  => map.points.map(&:to_hash)
       }
     end
-
     render :json => { :data => data }
   end
 

@@ -17,8 +17,8 @@ en:
     faq: "FAQ"
 
   sign_in: # sign in modal
-    header: "Sign in or register"
-    blurb_html: "By registering you can maintain your own map daily, share your map with others, rate other maps, and more. The site is in beta, %{href} if you find any issues."
+    header: "Login or register"
+    blurb_html: "By registering you can maintain your own map, share your map with others, rate other maps, and more. The site is in beta, %{href} if you find any issues."
     email_me: "email me"
     username: "username"
     password: "password"

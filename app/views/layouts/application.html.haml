@@ -11,7 +11,8 @@
     = stylesheet_link_tag "application", :media => "all"
     = yield(:head)
   %body
-    = render :partial => 'layouts/navigation'
+    = render :partial => 'layouts/secondary', :locals => {map: @map }
+    = render :partial => 'layouts/sidebar'
 
     = yield
 
@@ -29,4 +30,4 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
 
-    
+

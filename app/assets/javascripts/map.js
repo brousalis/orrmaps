@@ -1,3 +1,4 @@
+//FIXME: if you're reading this, i'm so sorry
 orrmaps.map = function() {
   var map, map_id, markers = [], dmarkers = [];
   var current_marker, current_marker_id, current_info_box;
@@ -10,8 +11,15 @@ orrmaps.map = function() {
   };
 
   var toolshed = function() {
-    $('.tools a').live('click', function() {
-      $('.tools a').removeClass('active');
+    $('.nodes a').live('click', function() {
+      $('.nodes a').removeClass('active');
+      icon_type = $(this).attr('class');
+      //$('.node_toggle em').html($(this).text());
+      //$('.node_toggle').css('background', $(this).css('background'));
+      $(this).addClass('active');
+    });
+    $('.dropdown-menu a').live('click', function() {
+      $('.dropdown-menu a').removeClass('active');
       icon_type = $(this).attr('class');
       $(this).addClass('active');
       $('.node').css('background', $(this).css('background'));
@@ -26,7 +34,7 @@ orrmaps.map = function() {
       if(confirm("This will delete all markers on your map. Are you sure?"))
         clear_markers();
     });
-    $('.toolshed').fadeIn();
+    $('.toolshed').show();
   };
 
   var get_marker_id = function(latlng) {
@@ -77,7 +85,7 @@ orrmaps.map = function() {
 
     var marker = new google.maps.Marker({
       position: point,
-      animation: google.maps.Animation.DROP,
+      //animation: google.maps.Animation.DROP,
       map: map,
       icon: icon(data.icon, opacity),
       id: 'marker_' + marker_id
@@ -93,7 +101,7 @@ orrmaps.map = function() {
 
     var marker = new google.maps.Marker({
       position: point,
-      animation: google.maps.Animation.DROP,
+      //animation: google.maps.Animation.DROP,
       map: map,
       icon: data.icon,
       note: data.note,
@@ -113,7 +121,7 @@ orrmaps.map = function() {
 
     var marker = new google.maps.Marker({
       position: point,
-      animation: google.maps.Animation.DROP,
+      //animation: google.maps.Animation.DROP,
       map: map,
       icon: data.icon,
       draggable: true,
@@ -142,7 +150,7 @@ orrmaps.map = function() {
         } else {
           var marker = new google.maps.Marker({
             position: location,
-            animation: google.maps.Animation.DROP,
+            //animation: google.maps.Animation.DROP,
             map: map,
             icon: icon,
             draggable: true,
@@ -252,11 +260,11 @@ orrmaps.map = function() {
     if(enabled == false)
       disabled = "disabled=disabled"
     else
-      del = '<a class="delete" href="#"><i class="icon icon-white icon-trash"></i></a>';
+      del = '<a class="delete" href="#"><i class="icon-trash"></i></a>';
 
     var box = document.createElement("div");
     box.className = "note_box";
-    box.innerHTML = '<div class="popover fade right in" style="top: -48px; left: 60px; display: block; "><div class="arrow"></div><div class="popover-inner"><div class="popover-content"><textarea ' + disabled + ' name="note" class="note" /></textarea><a class="close" href="#">&times;</a>' + del + '<a class="status" href="#"><i class="icon icon-white icon-ok"></i></a></div></div>';
+    box.innerHTML = '<div class="popover fade right in" style="top: -48px; left: 60px; display: block; "><div class="arrow"></div><div class="popover-inner"><div class="popover-content"><textarea ' + disabled + ' name="note" class="note" /></textarea><a class="close" href="#">&times;</a>' + del + '<a class="status" href="#"><i class="icon-check"></i></a></div></div>';
 
     $(box).find('.note').val(marker.note);
 
@@ -346,7 +354,7 @@ orrmaps.map = function() {
   var add_delete_box = function(marker) {
     var box = document.createElement("div");
     box.className = "info";
-    box.innerHTML = "<a class='delete' href='#'><i class='icon icon-white icon-trash'></i></a><a class='report' href='#'><i class='icon icon-white icon-flag'></i></a>";
+    box.innerHTML = "<a class='delete' href='#'><i class='icon-cancel'></i></a><a class='report' href='#'><i class='icon-exclamation'></i></a>";
 
     $(box).find('.delete').click(function() {
       remove_current_marker();

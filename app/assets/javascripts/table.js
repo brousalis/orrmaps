@@ -158,7 +158,7 @@ $(document).ready(function() {
     "sAjaxSource": "/rated",
     "bRetrieve": true,
     "fnServerParams": function ( aoData ) {
-      aoData.push({ name: "server", value: $('.server').text() });
+      aoData.push({ name: "server", value: $('.chzn-default span').text() });
     },
     "aoColumns": [
             { "asSorting": [ "desc", "asc" ] },
@@ -169,7 +169,6 @@ $(document).ready(function() {
     ],
     "aaSorting": [[3, 'asc']],
     "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-      console.log(aData);
       if(aData[5] == true)
         $(nRow).css('opacity', '0.2');
     },
@@ -183,4 +182,4 @@ $(document).ready(function() {
       "sSearch": "" 
     }
   } );
-} );
+});
