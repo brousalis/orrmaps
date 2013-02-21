@@ -18,6 +18,8 @@
 @import "tables";
 @import "map";
 
+$color: #000;
+
 @mixin nodes() {
   &.note{ background: image-url('tiles/note.png') no-repeat}
   &.mithril { background: image-url('tiles/mithril.png') no-repeat}
@@ -41,8 +43,8 @@
   @include box-sizing(border-box);
 }
 
-a, a:visited { color:  #3a5482; text-decoration: none; }
-a:hover { color: darken(#3a5482,10%); text-decoration: none; }
+a, a:visited { color:  $color; text-decoration: none; }
+a:hover { color: darken($color,10%); text-decoration: none; }
 
 body {
   font-family: "proxima-nova", Helvetica;
@@ -130,11 +132,11 @@ body {
       position: relative;
       &.logo { border: none; }
       &.server {
-        border-top: 1px solid #344b74;
+        border-top: 1px solid #222;
         position: relative;
-        background: #3a5482;
+        background: $color;
         .chzn-container a {
-          padding: 10px;
+          padding: 10px 15px;
           color: #fff;
           &:hover {
             background: rgba(0,0,0,0.1);
@@ -159,13 +161,14 @@ body {
       }
       &.login, &.user {
         border-top: 1px solid #111;
-        background: #3a5482;
+        background: $color;
         .user-menu { display: none; }
         &.open {
           .user { background: rgba(0,0,0,0.1); border-bottom: none; }
           i { color: #fff; }
           .wrench .icon-wrench:before { content: '\2715' }
           .user-menu {
+            background-color: #151515;
             display: block;
             padding: 0;
             ul {
@@ -174,7 +177,7 @@ body {
                 border-top: none;
                 padding: 0px ;
                 a {
-                  padding: 5px 4px;
+                  padding: 5px 10px;
                   font-size: 14px;
                   color: #fff;
                   i { color: rgba(255,255,255,0.4); }
@@ -204,6 +207,7 @@ body {
           float: right;
         }
         &#toggle_navbar.open i:before { content: '\f111' }
+        &.selected { color: #fff; i { color: #fff; } }
         &:hover {
           background-color: #191919;
         }
@@ -211,6 +215,7 @@ body {
         &.login, &.user {
           color: #fff;
           text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
+          padding: 10px 10px 10px 15px;
           i { color: rgba(255,255,255,0.7); }
           span i { color: rgba(255,255,255,0.7); }
           &:hover { background: rgba(0,0,0,0.1); }
@@ -230,6 +235,8 @@ body {
         }
 
         &.logo {
+          text-indent: -9999px;
+          background: image-url('logo.png') no-repeat 5px;
           text-transform: uppercase;
           padding: 8px 15px;
           color: #fff;
@@ -318,7 +325,7 @@ body {
         font-family: "proxima-nova";
         width: 100%;
         background-image: none;
-        @include gradient-vertical(#4d6895, #3a5482);
+        @include gradient-vertical(#4d6895, $color);
         padding: 8px 0px;
         border: none;
         color: #fff;
@@ -452,8 +459,8 @@ body {
       width: 57px;
       padding: 8px; 
       display: block;
-      background-position: 8px 3px !important;
-      background-size: 22px;
+      background-position: 10px 5px !important;
+      background-size: 24px !important;
       background: image-url('tiles/ore.png') no-repeat;
       margin-right: 5px;
       .caret { vertical-align: middle; margin-left: 35px; border-top-color: #fff; }
@@ -477,11 +484,11 @@ body {
     display: inline-block;
     padding: 5px 37px !important;
     @include opacity(0.5);
+    font-size: 14px !important;
     @include nodes();
     margin: 0;
     background-size: 20px !important; 
-    background-position: 9px 5px !important;
-    border-top: 1px solid #282828;
+    background-position: 9px 3px !important;
     &:hover { background-color: #000 !important; }
     &.active { background-color: #000; color: #fff !important; @include opacity(1);  }
     &.active:hover { background-color: #000 !important; color: #fff !important; @include opacity(1);  }
@@ -519,7 +526,7 @@ body {
       padding: 0 8px;
       border: 1px solid #222;
       background: #000;
-      color:  #3a5482;
+      color:  $color;
       @include background-clip(padding-box);
     }
     .pagination a:hover, .pagination .active a, .pagination .active span { background: #111; }

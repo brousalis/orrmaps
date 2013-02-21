@@ -169,6 +169,11 @@ orrmaps.ui = function() {
 
     $('a[rel=tooltip]').tooltip();
     $('li.last_reset').tooltip({placement: "bottom", title: "Last updated on", trigger: 'hover'});
+    $('li.dall').tooltip({placement: "bottom", title: "Delete all markers", trigger: 'hover'});
+    $('li.mlist').tooltip({placement: "bottom", title: "Map list", trigger: 'hover'});
+
+    if(window.location.pathname == '/') $('.your_map').addClass('selected');
+    if(window.location.pathname.indexOf('server') > -1) $('.server_map').addClass('selected');
 
     sidebar();
     handle_submit();
