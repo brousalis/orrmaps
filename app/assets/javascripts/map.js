@@ -34,7 +34,8 @@ orrmaps.map = function() {
       if(confirm("This will delete all markers on your map. Are you sure?"))
         clear_markers();
     });
-    $('.toolshed').show();
+    $('li.dall, li.toolshed').css('display','inline-block');
+    $('#sidebar li.toolshed').css('display','block');
   };
 
   var filters = function() {

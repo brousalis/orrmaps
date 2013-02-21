@@ -68,7 +68,7 @@ orrmaps.ui = function() {
 
   var load_settings = function() {
     if(localStorage['toggle_user'] == 'true') {
-      $('li.user').addClass('open');
+     $('li.user').addClass('open');
     } 
     if(localStorage['toggle_navbar'] == 'true') {
       $('#toggle_navbar').addClass('open')
@@ -77,7 +77,10 @@ orrmaps.ui = function() {
     if(localStorage['tab'] == 'false') {
       $('body').addClass('collapsed');
       $('.navbar').show();
-    } 
+    } else {
+      $('body').removeClass('collapsed');
+      $('.navbar').hide();
+    }
   };
 
   var storage_events = function() {

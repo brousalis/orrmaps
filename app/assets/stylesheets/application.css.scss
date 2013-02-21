@@ -59,8 +59,8 @@ body {
   }
 
   &.collapsed {
-    #tab { left: -3px; }
-    #tab:hover { left: -2px }
+    #tab { left: -1px; }
+    #tab:hover { left: 0px }
     #tab a i:before { content: '\25b8' }
     #main { margin-left: 0px; }
   }
@@ -78,18 +78,20 @@ body {
 
 #tab {
   position: absolute;
-  left: 212px;
+  left: 225px;
   z-index: 100;
   background: rgba(0,0,0,0.9);
+  @include border-radius(0px 6px 6px 0px);
   top: 50%;
   @include transition(left 0.1s linear);
   &:hover {
-    left: 211px;
+    left: 224px;
   }
   a {
     display: block;
     height: 49px;
     padding-top: 15px;
+    i:before { margin-left: 0; }
     i { color: rgba(255,255,255,0.6); }
   }
 }
@@ -160,12 +162,10 @@ body {
         }
       }
       &.login, &.user {
-        border-top: 1px solid #111;
         background: $color;
         .user-menu { display: none; }
         &.open {
           .user { background: rgba(0,0,0,0.1); border-bottom: none; }
-          i { color: #fff; }
           .wrench .icon-wrench:before { content: '\2715' }
           .user-menu {
             background-color: #151515;
@@ -208,18 +208,13 @@ body {
         }
         &#toggle_navbar.open i:before { content: '\f111' }
         &.selected { color: #fff; i { color: #fff; } }
-        &:hover {
-          background-color: #191919;
-        }
-        
+        &:hover { color: #fff }
         &.login, &.user {
           color: #fff;
           text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
           padding: 10px 10px 10px 15px;
           i { color: rgba(255,255,255,0.7); }
           span i { color: rgba(255,255,255,0.7); }
-          &:hover { background: rgba(0,0,0,0.1); }
-          &:hover span i { color: #fff; }
         }
         &.reset {
           top: 0;
@@ -236,7 +231,7 @@ body {
 
         &.logo {
           text-indent: -9999px;
-          background: image-url('logo.png') no-repeat 5px;
+          background: image-url('logo.png') no-repeat 10px 10px;
           text-transform: uppercase;
           padding: 8px 15px;
           color: #fff;
@@ -325,7 +320,7 @@ body {
         font-family: "proxima-nova";
         width: 100%;
         background-image: none;
-        @include gradient-vertical(#4d6895, $color);
+        background: #f25e06;
         padding: 8px 0px;
         border: none;
         color: #fff;
@@ -471,10 +466,7 @@ body {
 .delete_all { border-top: 1px solid #282828; }
 .delete_all i { color: #fff; display: block; }
 
-.toolshed { display: none; padding: 0px !important; }
 .toggle.open span i:before { content: '\25be' }
-.toggle.open { background-color: #151515; color: #fff !important; }
-.toggle.open i { color: #fff !important }
 .filters, .nodes {
   margin-top: 4px;
   display: none;
@@ -501,7 +493,7 @@ body {
     position: relative;
     i { position: absolute; right: 10px; }
     &.active {
-      i:before { content: '\f111' }
+      i:before { content: '\f10c' }
     }
   }
 }
@@ -509,12 +501,11 @@ body {
 #rated {
   padding: 0;
   width:650px !important;
-  a { font-weight: bold; }
+  a { font-weight: bold; color: #f90 !important }
   h3 span { color: #444; float: right; margin-right: 20px; font-size: 20px; }
   .modal-body {
     max-height: 480px;
     padding: 0;
-
     .row { margin: 15px 0 10px; padding: 0px 15px }
     .page { float:right; width:auto; }
     .search { float:left; }
@@ -526,7 +517,6 @@ body {
       padding: 0 8px;
       border: 1px solid #222;
       background: #000;
-      color:  $color;
       @include background-clip(padding-box);
     }
     .pagination a:hover, .pagination .active a, .pagination .active span { background: #111; }
@@ -565,4 +555,5 @@ body {
     }
   }
 }
-
+.navbar .container ul li.dall { display: none; }
+#sidebar ul li.toolshed, .navbar .container ul li.toolshed { display: none; padding: 0px !important; }

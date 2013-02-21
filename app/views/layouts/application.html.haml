@@ -10,7 +10,7 @@
     = csrf_meta_tag
     = stylesheet_link_tag "application", :media => "all"
     = yield(:head)
-  %body
+  %body.collapsed
     = render :partial => 'layouts/secondary', :locals => {map: @map }
     = render :partial => 'layouts/sidebar'
 

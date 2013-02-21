@@ -281,7 +281,7 @@ div.DTFC_LeftFootWrapper table {
   z-index: 1010;
 }
 .chzn-container-single .chzn-search input {
-  background: rgba(0,0,0,1) image-url('search.png') no-repeat 15px 10px;
+  background: #151515 image-url('search.png') no-repeat 15px 10px;
   width: 225px !important;
   padding: 8px 15px 8px 35px !important;
   outline: 0;
@@ -293,7 +293,7 @@ div.DTFC_LeftFootWrapper table {
   -moz-background-clip   : padding;
   -webkit-background-clip: padding-box;
   background-clip        : padding-box;
-  background: #1f1f1f;
+  background: #151515;
 }
 /* @end */
 
@@ -324,7 +324,7 @@ div.DTFC_LeftFootWrapper table {
   display: list-item;
 }
 .chzn-container .chzn-results .highlighted {
-  background-color: #252525;
+  background-color: #000;
   color: #fff;
 }
 .chzn-container .chzn-results li em {
