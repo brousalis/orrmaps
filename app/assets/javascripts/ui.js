@@ -134,6 +134,18 @@ orrmaps.ui = function() {
       $('.icon').toggleClass('open');
       $('.chzn-drop').toggleClass('open');
     });
+
+    $('.toggle').live('click', function() {
+      if($(this).hasClass('open')) {
+        $(this).removeClass('open');
+        $(this).next('div').toggle();
+        return false;
+      }
+      $(this).next('div').toggle();
+      $(this).toggleClass('open');
+      return false;
+    }); 
+ 
   };
 
   var servers = function() {
@@ -152,22 +164,12 @@ orrmaps.ui = function() {
   };
 
   var init = function() {
-    $('a[rel=tooltip]').tooltip();
     $('#sign_in').modal({keyboard: false, show: false});
     $('input').attr('autocomplete', 'off');
-    $('.toggle').live('click', function() {
-      $(this).next('div').toggle();
-      $(this).toggleClass('open');
-    }); 
-    $('.filter_toggle').live('click', function() {
-      $('.filters').toggle();
-      $(this).toggleClass('open');
-    });  
-    $('li.last_reset').tooltip({placement: "bottom", title: "Last updated on", trigger: 'hover'});
-    if(window.location.pathname == '/') $('.your_map').addClass('selected');
-    if(window.location.pathname.indexOf('server') > -1) $('.server_map').addClass('selected');
 
-    faqs();
+    $('a[rel=tooltip]').tooltip();
+    $('li.last_reset').tooltip({placement: "bottom", title: "Last updated on", trigger: 'hover'});
+
     sidebar();
     handle_submit();
     servers();

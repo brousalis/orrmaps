@@ -453,6 +453,7 @@ body {
       padding: 8px; 
       display: block;
       background-position: 8px 3px !important;
+      background-size: 22px;
       background: image-url('tiles/ore.png') no-repeat;
       margin-right: 5px;
       .caret { vertical-align: middle; margin-left: 35px; border-top-color: #fff; }
@@ -548,6 +549,7 @@ body {
         color: #fff;
         list-style: none;
         border-right: 1px solid rgba(255,255,255,0.1);
+        &.thin { padding: 7px 5px; }
         &:last-child { border-right: none; }
         i { color: rgba(255,255,255,0.4); }
         i:before { margin: 0; margin-right: 3px; }

@@ -19,11 +19,11 @@
           %a{:href => map_path(map)}
             %i.icon-pencil
             = "/maps/#{map.id}"
-        %li
+        %li.thin
           %a.map_list{:href => "#rated", :"data-toggle" => "modal"}
             %i.icon-air{:style => "display:block;"}
         - if current_user
-          %li
+          %li.thin
             %a.delete_all{:href => "#"} 
               %i.icon-cancel 
           %li.toolshed
