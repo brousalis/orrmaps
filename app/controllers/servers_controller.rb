@@ -43,11 +43,12 @@ class ServersController < ApplicationController
     name = params[:name].titleize.sub("Of", "of")
     server = find_server(name)
     opacitys = [100,70,40,40,20]
-    maps = server.maps.where("updated_at > ?", last_reset.to_s(:db)).includes(:points).limit(5)
-    data = maps.zip(opacitys).collect do |map, opacity|
+    maps = Point.connection.select_rows("SELECT COUNT(*) AS count_all, map_id AS map_id FROM \"points\" GROUP BY map_id ORDER BY 1 DESC LIMIT 5").map(&:last)
+    points = Map.find_all_by_id(maps).sort_by(:updated_at)
+    data = points.zip(opacitys).collect do |map, opacity|
       {
-        :opacity => 100,
-        :points  => map.points.map(&:to_hash)
+        :opacity => opacity,
+        :points  => Map.find(map[1]).points.map(&:to_hash)
       }
     end
     render :json => { :data => data }

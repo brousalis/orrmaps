@@ -206,7 +206,7 @@ body {
           margin-top: 1px;
           float: right;
         }
-        &#toggle_navbar.open i:before { content: '\f111' }
+        &#toggle_navbar.open i:before { content: '\f10c' }
         &.selected { color: #fff; i { color: #fff; } }
         &:hover { color: #fff }
         &.login, &.user {
@@ -464,7 +464,7 @@ body {
   }
 }
 .delete_all { border-top: 1px solid #282828; }
-.delete_all i { color: #fff; display: block; }
+.delete_all i { color: #fff; }
 
 .toggle.open span i:before { content: '\25be' }
 .filters, .nodes {
@@ -530,7 +530,6 @@ body {
   top: 0px;
   left: 0px;
   right: 0px;
-  display: none;
   .container {
     display: inline-block;
     margin-left: auto;
@@ -540,17 +539,44 @@ body {
       background: rgba(0,0,0,0.7);
       margin: 0;
       padding: 0;
+      .tools { @include border-radius(0 0 6px 0px); }
       li {
         display: inline-block;
         padding: 7px 12px;
         color: #fff;
         list-style: none;
         border-right: 1px solid rgba(255,255,255,0.1);
-        &.thin { padding: 7px 5px; }
+        position: relative;
+        &.thin { padding: 7px 0px; }
+        &.thin a { padding: 7px 8px; }
         &:last-child { border-right: none; }
         i { color: rgba(255,255,255,0.4); }
         i:before { margin: 0; margin-right: 3px; }
         a { color: #fff; }
+        &.filter.open #filter i { color: #fff; }
+        #filters {
+          li {
+            background: rgba(0,0,0,0.1);
+            padding: 5px 0px;
+            text-align: left;
+            a {
+              padding: 5px 37px !important;
+              font-size: 14px !important;
+              margin: 0;
+              background-size: 20px !important; 
+              background-position: 9px 3px !important;
+              &:hover { background-color: #000 !important; }
+              display: block;
+              @include opacity(1); 
+              position: relative;
+              i { position: absolute; right: 10px; }
+              @include nodes();
+              &.active {
+                i:before { content: '\f10c' }
+              } 
+            }
+          }
+        }
       }
     }
   }

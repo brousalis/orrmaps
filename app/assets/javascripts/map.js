@@ -18,17 +18,17 @@ orrmaps.map = function() {
       //$('.node_toggle').css('background', $(this).css('background'));
       $(this).addClass('active');
     });
-    $('.dropdown-menu a').live('click', function() {
-      $('.dropdown-menu a').removeClass('active');
+    $('#nodes a').live('click', function() {
+      $('#nodes aa').removeClass('active');
       icon_type = $(this).attr('class');
       $(this).addClass('active');
       $('.node').css('background', $(this).css('background'));
       $('.desc span').html($(this).attr('rel'));
     });
-    $('.dropdown-menu div a').hover(function() {
+    $('#nodes div a').hover(function() {
       $('.desc span').html($(this).attr('rel'));
     }, function() {
-      $('.desc span').html($('.dropdown-menu div').find('.active').attr('rel'));
+      $('.desc span').html($('#nodes div').find('.active').attr('rel'));
     });
     $('.delete_all').live('click', function() {
       if(confirm("This will delete all markers on your map. Are you sure?"))
@@ -39,15 +39,18 @@ orrmaps.map = function() {
   };
 
   var filters = function() {
-    $('.filters a').live('click', function() {
+    $('#sidebar .filters a').live('click', function(e) {
       var rel = $(this).attr('rel');
       var on = $(this).hasClass('active');
-      if(on)
+      if(on){
         $(this).removeClass('active');
-      else
+        $('#filters li').find('a[rel="'+rel+'"]').removeClass('active');
+      } else{
         $(this).addClass('active');
+        $('#filters li').find('a[rel="'+rel+'"]').addClass('active');
+      }
       for (var i = 0, marker; marker = dmarkers[++i]; ) {
-        var type = marker.icon.replace("/assets/tiles/","").replace(".png", "");
+        var type = marker.icon.replace("/assets/tiles/","").replace(".png", "").replace(/[0-9]/g, '');;
         if(type == rel) {
           if(on)
             marker.setVisible(true);
@@ -55,7 +58,28 @@ orrmaps.map = function() {
             marker.setVisible(false);
         }
       }
-      return false;
+    });
+    $('#filter').live('click', function() { $(this).toggleClass('active'); });
+    $('#filters li a').on('click', function(e) { 
+      e.stopPropagation(); 
+      var rel = $(this).attr('rel');
+      var on = $(this).hasClass('active');
+      if(on) {
+        $(this).removeClass('active');
+        $('#sidebar .filters').find('a[rel="'+rel+'"]').removeClass('active');
+      } else {
+        $(this).addClass('active');
+        $('#sidebar .filters').find('a[rel="'+rel+'"]').addClass('active');
+      }
+      for (var i = 0, marker; marker = dmarkers[++i]; ) {
+        var type = marker.icon.replace("/assets/tiles/","").replace(".png", "").replace(/[0-9]/g, '');;
+        if(type == rel) {
+          if(on)
+            marker.setVisible(true);
+          else
+            marker.setVisible(false);
+        }
+      } 
     });
   };
 
@@ -378,7 +402,8 @@ orrmaps.map = function() {
   var add_delete_box = function(marker) {
     var box = document.createElement("div");
     box.className = "info";
-    box.innerHTML = "<a class='delete' href='#'><i class='icon-cancel'></i></a><a class='report' href='#'><i class='icon-exclamation'></i></a>";
+    box.innerHTML = "<a class='delete' href='#'><i class='icon-cancel'></i></a>" +
+                    "<a class='report' href='#'><i class='icon-exclamation'></i></a>";
 
     $(box).find('.delete').click(function() {
       remove_current_marker();

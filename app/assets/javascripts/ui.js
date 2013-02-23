@@ -71,15 +71,11 @@ orrmaps.ui = function() {
      $('li.user').addClass('open');
     } 
     if(localStorage['toggle_navbar'] == 'true') {
-      $('#toggle_navbar').addClass('open')
-      $('.navbar').show();
-    }
-    if(localStorage['tab'] == 'false') {
-      $('body').addClass('collapsed');
-      $('.navbar').show();
-    } else {
-      $('body').removeClass('collapsed');
+      $('#toggle_navbar').removeClass('open')
       $('.navbar').hide();
+    }
+    if(localStorage['tab'] == 'true') {
+      $('body').removeClass('collapsed');
     }
   };
 
@@ -102,13 +98,9 @@ orrmaps.ui = function() {
         $('body').addClass('collapsed');
         $('.icon').removeClass('open');
         $('.chzn-drop').removeClass('open');
-        $('.navbar').show();
       } else {
         localStorage[this.id] = 'true';
         $('body').removeClass('collapsed');
-        if(localStorage['toggle_navbar'] == 'false') {
-          $('.navbar').hide();
-        }
       }
     }); 
     $('#toggle_navbar').live('click', function(e) {
@@ -116,11 +108,11 @@ orrmaps.ui = function() {
       if(open == 'true') {
         localStorage[this.id] = 'false'
         $(this).removeClass('open');
-        $('.navbar').hide();
+        $('.navbar').show();
       } else {
         localStorage[this.id] = 'true'
         $(this).addClass('open');
-        $('.navbar').show();
+        $('.navbar').hide();
       }
     }); 
   };
@@ -174,6 +166,7 @@ orrmaps.ui = function() {
     $('li.last_reset').tooltip({placement: "bottom", title: "Last updated on", trigger: 'hover'});
     $('li.dall').tooltip({placement: "bottom", title: "Delete all markers", trigger: 'hover'});
     $('li.mlist').tooltip({placement: "bottom", title: "Map list", trigger: 'hover'});
+   //$('li.filter').tooltip({placement: "bottom", title: "Filter icons", trigger: 'hover'});
 
     if(window.location.pathname == '/') $('.your_map').addClass('selected');
     if(window.location.pathname.indexOf('server') > -1) $('.server_map').addClass('selected');
