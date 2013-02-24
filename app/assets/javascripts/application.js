@@ -1,4 +1,3 @@
-//= require jquery
 //= require bootstrap-modal
 //= require bootstrap-dropdown
 //= require bootstrap-transition

@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem "pg", ">= 0.14.1"
 gem "haml", ">= 3.1.7"
 gem "haml-rails", ">= 0.3.5", :group => :development
