@@ -2,7 +2,9 @@ class HomeController < ApplicationController
   def index
     if !session[:server]
       session[:new] = true
-      session[:server] = "Jade Quarry" if !session[:server]
+      session[:server] = "Jade Quarry"
+    else 
+      session[:new] = false
     end
     @server = find_server(session[:server] || "Jade Quarry")
     @servers = servers
