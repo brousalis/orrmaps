@@ -57,19 +57,6 @@
       %a.map_list{:href => "#rated", :"data-toggle" => "modal"}
         %i.icon-air
         Map list
-    - if false
-      %li
-        %a.filter{:href => "#"}
-          %i.icon-location
-          Filter icons
-          %span
-            %i.icon-right-dir
-      %li
-        %a.temple{:href => "#"}
-          %i.icon-lock
-          Temple status
-          %span
-            %i.icon-right-dir
     - if current_user
       %li
         %a.your_map{:href => "/"}
@@ -83,6 +70,9 @@
           %span
             %i.icon-right-dir 
         .filters
+          %a.all{:href => "#", :rel => "all"} 
+            %i.icon-circle
+            Toggle All
           %a.ore{:href => "#", :rel => "ore"} 
             %i.icon-circle
             Orichalcum Ore

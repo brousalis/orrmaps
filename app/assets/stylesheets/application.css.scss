@@ -21,6 +21,7 @@
 $color: #000;
 
 @mixin nodes() {
+  &.all{ background: none no-repeat; padding-left: 10px !important; }
   &.note{ background: image-url('tiles/note.png') no-repeat}
   &.mithril { background: image-url('tiles/mithril.png') no-repeat}
   &.mith { background: image-url('tiles/mith.png') no-repeat}
@@ -135,6 +136,9 @@ body {
       border-top: 1px solid #282828;
       position: relative;
       &.logo { border: none; }
+      &.map_stats {
+
+      }
       &.server {
         border-top: 1px solid #222;
         position: relative;
@@ -494,7 +498,10 @@ body {
     @include opacity(1); 
     position: relative;
     i { position: absolute; right: 10px; }
+    &:hover { background-color: #151515 !important; }
     &.active {
+      background-color: #151515;
+      &:hover { background-color: #151515 !important; }
       i:before { content: '\f10c' }
     }
   }

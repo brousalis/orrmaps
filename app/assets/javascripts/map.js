@@ -1,4 +1,4 @@
-//FIXME: if you're reading this, i'm so sorry
+//FIXME: if you're reading this, i'm so sorry.
 orrmaps.map = function() {
   var map, map_id, markers = [], dmarkers = [];
   var current_marker, current_marker_id, current_info_box;
@@ -42,44 +42,74 @@ orrmaps.map = function() {
     $('#sidebar .filters a').live('click', function(e) {
       var rel = $(this).attr('rel');
       var on = $(this).hasClass('active');
-      if(on){
-        $(this).removeClass('active');
-        $('#filters li').find('a[rel="'+rel+'"]').removeClass('active');
-      } else{
-        $(this).addClass('active');
-        $('#filters li').find('a[rel="'+rel+'"]').addClass('active');
-      }
-      for (var i = 0, marker; marker = dmarkers[++i]; ) {
-        var type = marker.icon.replace("/assets/tiles/","").replace(".png", "").replace(/[0-9]/g, '');;
-        if(type == rel) {
-          if(on)
-            marker.setVisible(true);
-          else
-            marker.setVisible(false);
+      if(rel == "all") {
+        if(on) {
+          $(this).removeClass('active');
+          $('#filter').removeClass('active');
+          $('#filters li a').removeClass('active');
+          $('#sidebar .filters a').removeClass('active');
+          for (var i = 0, marker; marker = dmarkers[++i]; ) { marker.setVisible(true); }
+        } else{
+          $(this).addClass('active');
+          $('#filter').addClass('active');
+          $('#sidebar .filters a').addClass('active');
+          $('#filters li a').addClass('active');
+          for (var i = 0, marker; marker = dmarkers[++i]; ) { marker.setVisible(false); }
+        }
+      } else {
+        if(on){
+          $(this).removeClass('active');
+          $('#filters li').find('a[rel="'+rel+'"]').removeClass('active');
+        } else{
+          $(this).addClass('active');
+          $('#filters li').find('a[rel="'+rel+'"]').addClass('active');
+        }
+        for (var i = 0, marker; marker = dmarkers[++i]; ) {
+          var type = marker.icon.replace("/assets/tiles/","").replace(".png", "").replace(/[0-9]/g, '');;
+          if(type == rel) {
+            if(on)
+              marker.setVisible(true);
+            else
+              marker.setVisible(false);
+          }
         }
       }
     });
     $('#filter').live('click', function() { $(this).toggleClass('active'); });
-    $('#filters li a').on('click', function(e) { 
-      e.stopPropagation(); 
+    $('#filters li a').on('click', function(e) {
+      e.stopPropagation();
       var rel = $(this).attr('rel');
       var on = $(this).hasClass('active');
-      if(on) {
-        $(this).removeClass('active');
-        $('#sidebar .filters').find('a[rel="'+rel+'"]').removeClass('active');
+      if(rel == "all") {
+        if(on) {
+          $(this).removeClass('active');
+          $('#filter').removeClass('active');
+          $('#filters li a').removeClass('active');
+          $('#sidebar .filters a').removeClass('active');
+          for (var i = 0, marker; marker = dmarkers[++i]; ) { marker.setVisible(true); }
+        } else{
+          $(this).addClass('active');
+          $('#filter').addClass('active');
+          $('#sidebar .filters a').addClass('active');
+          $('#filters li a').addClass('active');
+          for (var i = 0, marker; marker = dmarkers[++i]; ) { marker.setVisible(false); }
+        } 
       } else {
-        $(this).addClass('active');
-        $('#sidebar .filters').find('a[rel="'+rel+'"]').addClass('active');
-      }
-      for (var i = 0, marker; marker = dmarkers[++i]; ) {
-        var type = marker.icon.replace("/assets/tiles/","").replace(".png", "").replace(/[0-9]/g, '');;
-        if(type == rel) {
-          if(on)
-            marker.setVisible(true);
-          else
-            marker.setVisible(false);
+        if(on) {
+          $(this).removeClass('active');
+          $('#sidebar .filters').find('a[rel="'+rel+'"]').removeClass('active');
+        } else {
+          $(this).addClass('active');
+          $('#sidebar .filters').find('a[rel="'+rel+'"]').addClass('active');
         }
-      } 
+        for (var i = 0, marker; marker = dmarkers[++i]; ) {
+          var type = marker.icon.replace("/assets/tiles/","").replace(".png", "").replace(/[0-9]/g, '');;
+          if(type == rel) {
+            if(on) marker.setVisible(true);
+            else; marker.setVisible(false);
+          }
+        }
+      }
     });
   };
 

@@ -23,7 +23,6 @@ gem 'metamagic'
 gem 'heroku'
 gem 'redis'
 gem 'nokogiri'
-gem 'font-awesome-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
