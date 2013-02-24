@@ -1,7 +1,4 @@
 //= require jquery
-//= require jquery.effects.bounce
-//= require jquery.effects.shake
-//= require jquery.effects.slide
 //= require bootstrap-modal
 //= require bootstrap-dropdown
 //= require bootstrap-transition
