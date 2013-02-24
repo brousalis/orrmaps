@@ -56,7 +56,7 @@ body {
   overflow: hidden;
   &.invalid {
     #rated .close, #servers .close { display: none; }
-    .back { display: inline-block; }
+    .back { display: inline-block !important; }
   }
 
   &.collapsed {

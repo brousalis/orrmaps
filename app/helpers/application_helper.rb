@@ -5,6 +5,10 @@ module ApplicationHelper
     @servers ||= YAML.load_file('config/servers.yml')
   end
 
+  def donors 
+    YAML.load_file('config/donors.yml')
+  end
+
   def maps_for_server(name)
     Rails.cache.fetch("servers/#{name}/map_ids", :expires_in => 5.minutes) do
       s = find_server(name)

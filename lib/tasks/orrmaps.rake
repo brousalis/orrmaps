@@ -1,19 +1,23 @@
 require 'nokogiri'
 require 'open-uri'
+require Rails.root + 'config/initializers/redis.rb'
 
 namespace :o do
   task :get_reset do 
-    doc = Nokogiri::HTML(open('http://gw2status.com/version_history'))
-    res = doc.css('.latest').collect do |row|
+    doc = Nokogiri::HTML(open("http://gw2status.com/version_history"))
+    res = doc.css(".latest").collect do |row|
       Time.parse(row.at("td[2]").text.gsub(/\(.*\)/, "").strip)
     end
 
+    last = $redis.get("last_reset")
     client = res[0]
     patch = res[1]
 
-    reset_maps(client)
-
-    print_resets
+    if client != last
+      reset_maps(client)
+    else
+      puts "Dates are the same"
+    end
   end
  
   task :reset, [:date] => :environment do |t, args|
