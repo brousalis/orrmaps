@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-namespace :orrmaps do
+namespace :o do
   task :get_reset do 
     doc = Nokogiri::HTML(open('http://gw2status.com/version_history'))
     res = doc.css('.latest').collect do |row|
@@ -12,6 +12,8 @@ namespace :orrmaps do
     patch = res[1]
 
     reset_maps(client)
+
+    print_resets
   end
  
   task :reset, [:date] => :environment do |t, args|
@@ -33,8 +35,6 @@ namespace :orrmaps do
     $redis.flushdb
   end
 end
-
-private 
 
 def reset_maps(time)
   previous = $redis.get("last_reset")

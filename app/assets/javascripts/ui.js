@@ -23,49 +23,6 @@ orrmaps.ui = function() {
     });
   };
 
-  var likes = function() {
-    $('.like').live('click', function() {
-      $.ajax({
-        type: "post",
-        url: "/like",
-        data: { map_id: $(this).attr("title") },
-        success: function(json) {
-          $('.likes span').html(json.count);
-          if(json.status == "success") {
-            //$('.like').effect("bounce", { times:1, distance: 5 }, 100);
-            if(!$('.dislike i').hasClass('disliked')) {
-              $('.like i').toggleClass('liked');
-            }
-            $('.dislike i').removeClass('disliked');
-          } else if(json.status == "own") {
-            $('.likes').effect("shake", { times:3, distance: 2 }, 50);
-          }
-        },
-        dataType: "json"
-      });
-    });
-    $('.dislike').live('click', function() {
-      $.ajax({
-        type: "post",
-        url: "/dislike",
-        data: { map_id: $(this).attr("title") },
-        success: function(json) {
-          $('.likes span').html(json.count);
-          if(json.status == "success") {
-            //$('.dislike').effect("bounce", { direction: "down", times:1, distance: 5 }, 100);
-            if(!$('.like i').hasClass('liked')) {
-              $('.dislike i').toggleClass('disliked');
-            }
-            $('.like i').removeClass('liked');
-          } else if(json.status == "own") {
-            $('.likes').effect("shake", { times:3, distance: 2 }, 50);
-          }
-        },
-        dataType: "json"
-      });
-    }); 
-  };
-
   var load_settings = function() {
     if(localStorage['toggle_user'] == 'true') {
      $('li.user').addClass('open');
@@ -133,14 +90,19 @@ orrmaps.ui = function() {
     $('.toggle').live('click', function() {
       if($(this).hasClass('open')) {
         $(this).removeClass('open');
+        $(this).next('div').hide();
+      } else {
+        $('.toggle').removeClass('open');
+        $('.toggle').next('div').hide();
+        $(this).addClass('open');
         $(this).next('div').toggle();
-        return false;
       }
-      $(this).next('div').toggle();
-      $(this).toggleClass('open');
-      return false;
+      if($('.toggle').hasClass('open')) {
+        $('.ads').hide();
+      } else {
+        $('.ads').show();
+      }
     }); 
- 
   };
 
   var servers = function() {
@@ -149,7 +111,7 @@ orrmaps.ui = function() {
       $.ajax({
         type: "post",
         url: "/servers",
-        data: { server: $('.chzn-select').val()},
+        data: { server: $(this).val()},
         success: function(json) {
           if(json.location) window.location = json.location
         },
@@ -159,6 +121,8 @@ orrmaps.ui = function() {
   };
 
   var init = function() {
+    $('#pick').modal({keyboard: false});
+    $('.chzn-search input').focus();
     $('#sign_in').modal({keyboard: false, show: false});
     $('input').attr('autocomplete', 'off');
 
@@ -174,17 +138,7 @@ orrmaps.ui = function() {
     sidebar();
     handle_submit();
     servers();
-    likes();
   };
-
-  var faqs = function() {
-    $('#questions li a.question').live('click', function() {
-      $(this).parent().toggleClass('open');
-    });
-    $('.heart a').live('click', function() {
-      $("a[href='#donate']").tab('show')
-    });
-  }
 
   var serialize = function() {
     var values = {}

@@ -248,7 +248,7 @@ orrmaps.map = function() {
       disableDefaultUI: true,
       zoomControl: true,
       panControl: true,
-      scaleControl: true
+      scaleControl: false
     }
 
     var customMapType = new google.maps.ImageMapType({

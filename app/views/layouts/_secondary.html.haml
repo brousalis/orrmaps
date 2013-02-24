@@ -13,8 +13,9 @@
           %i.icon-clock
           #{time_ago(map.updated_at)} #{t("secondary.ago")}
         %li
-          %i.icon-home
-          = map.server.name
+          %a{:href => "/server/#{underscore(map.server.name)}"}
+            %i.icon-home
+            = map.server.name
         %li
           %a{:href => map_path(map)}
             %i.icon-pencil
@@ -25,7 +26,7 @@
         %li.filter.thin
           %a#filter{:href => "#", :"data-target" => "#", :"data-toggle" => "dropdown"}
             %i.icon-filter
-          %ul#filters.dropdown-menu{:role => "menu", :"aria-labelledby" => "filter", :style => "margin-left: -3px;"}
+          %ul#filters.dropdown-menu{:role => "menu", :"aria-labelledby" => "filter"}
             %li
               %a.ore{:href => "#", :rel => "ore"}
                 %i.icon-circle
@@ -33,6 +34,9 @@
               %a.wood{:href => "#", :rel => "wood"}
                 %i.icon-circle
                 Ancient Wood
+              %a.mith{:href => "#", :rel => "mith"}
+                %i.icon-circle
+                Mithril 
               %a.mithril{:href => "#", :rel => "mithril"}
                 %i.icon-circle
                 Rich Mithril
@@ -83,6 +87,7 @@
                     %div
                       %a.ore.active{:href => "#", :rel => "orichalcum ore"}
                       %a.wood{:href => "#", :rel => "ancient wood"}
+                      %a.mith{:href => "#", :rel => "mithril"}
                       %a.mithril{:href => "#", :rel => "rich mithril"}
                   %li
                     %h1 Cooking
@@ -103,6 +108,7 @@
       - else
         %li
           %i.icon-home
+          Map for
           = @server.name
         %li
           %i.icon-clock

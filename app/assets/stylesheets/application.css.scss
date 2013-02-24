@@ -23,6 +23,7 @@ $color: #000;
 @mixin nodes() {
   &.note{ background: image-url('tiles/note.png') no-repeat}
   &.mithril { background: image-url('tiles/mithril.png') no-repeat}
+  &.mith { background: image-url('tiles/mith.png') no-repeat}
   &.raspberry { background: image-url('tiles/raspberry.png') no-repeat}
   &.ore { background: image-url('tiles/ore.png') no-repeat}
   &.omnom { background: image-url('tiles/omnom.png') no-repeat}
@@ -86,6 +87,7 @@ body {
   @include transition(left 0.1s linear);
   &:hover {
     left: 224px;
+    i { color: #fff; }
   }
   a {
     display: block;
@@ -540,8 +542,10 @@ body {
       margin: 0;
       padding: 0;
       .tools { @include border-radius(0 0 6px 0px); }
+      .tools li { margin-left: 0px !important; }
       li {
         display: inline-block;
+        margin-left: -4px;
         padding: 7px 12px;
         color: #fff;
         list-style: none;
@@ -554,9 +558,11 @@ body {
         i:before { margin: 0; margin-right: 3px; }
         a { color: #fff; }
         &.filter.open #filter i { color: #fff; }
+        &.dall { display: none; }
         #filters {
           li {
             background: rgba(0,0,0,0.1);
+            margin: 0px !important;
             padding: 5px 0px;
             text-align: left;
             a {
@@ -581,5 +587,19 @@ body {
     }
   }
 }
-.navbar .container ul li.dall { display: none; }
+
+#pick {
+  background: rgba(0,0,0,0.8);
+  margin: -250px 0 0 -120px;
+  @include border-radius(4px);
+  width: 255px;
+  input { background-color: #000; }
+  h3 { font-weight: normal; }
+  .modal-header { padding: 10px;}
+  .modal-body { padding: 0; }
+  .chzn-default { display: none; }
+  .chzn-results li { border-top: 1px solid #252525 }
+  .chzn-search input, .chzn-drop { width: 255px !important; }
+}
+
 #sidebar ul li.toolshed, .navbar .container ul li.toolshed { display: none; padding: 0px !important; }

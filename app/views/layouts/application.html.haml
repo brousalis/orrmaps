@@ -16,7 +16,7 @@
 
     = yield
 
-    = render :partial => 'layouts/pick_server' unless session[:server]
+    = render :partial => 'layouts/pick_server' if session[:new] == true
     = render :partial => 'layouts/sign_in' unless current_user
     = render :partial => 'layouts/rated'
 

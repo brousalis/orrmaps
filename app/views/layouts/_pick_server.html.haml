@@ -1,0 +1,10 @@
+#pick.modal{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %h3 
+      %i.icon-globe
+      Select a server
+  .modal-body
+    %select.chzn-select{:"data-placeholder" => "Pick your server", :tabindex => "1"}
+      %option{:value=>""}
+      - @servers.each do |server|
+        %option{:value => server}= server 

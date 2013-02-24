@@ -6,6 +6,7 @@ class ServersController < ApplicationController
   def create
     @server = find_server(params[:server])
     session[:server] = @server.name
+    session[:new] = false
     if current_user
       @user = current_user
       @user.map.server = @server
@@ -14,7 +15,7 @@ class ServersController < ApplicationController
       @user.save
       current_user = @user
     end
-    render :json => { "location" => "/" }
+    render :json => { "location" => "/server/#{underscore(@server.name)}" }
   end
 
   def show
@@ -42,13 +43,12 @@ class ServersController < ApplicationController
   def points
     name = params[:name].titleize.sub("Of", "of")
     server = find_server(name)
-    opacitys = [100,70,40,40,20]
-    maps = Point.connection.select_rows("SELECT COUNT(*) AS count_all, map_id AS map_id FROM \"points\" GROUP BY map_id ORDER BY 1 DESC LIMIT 5").map(&:last)
-    points = Map.find_all_by_id(maps).sort_by(:updated_at)
-    data = points.zip(opacitys).collect do |map, opacity|
+    map_ids = maps_for_server(name)
+    maps = Map.find_all_by_id(map_ids).sort_by(&:updated_at)
+    data = maps.zip([100,40]).collect do |map, opacity|
       {
         :opacity => opacity,
-        :points  => Map.find(map[1]).points.map(&:to_hash)
+        :points  => map.points.map(&:to_hash)
       }
     end
     render :json => { :data => data }

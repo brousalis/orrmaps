@@ -5,6 +5,13 @@ module ApplicationHelper
     @servers ||= YAML.load_file('config/servers.yml')
   end
 
+  def maps_for_server(name)
+    Rails.cache.fetch("servers/#{name}/map_ids", :expires_in => 5.minutes) do
+      s = find_server(name)
+      Point.connection.select_rows("SELECT COUNT(*) AS count_all, map_id AS map_id FROM \"points\" JOIN maps on points.map_id = maps.id WHERE maps.server_id = #{s.id} GROUP BY map_id ORDER BY 1 DESC LIMIT 2").map(&:last)
+    end
+  end
+
   def find_server(name)
     Rails.cache.fetch("servers/#{name}", :expires_in => 5.minutes) do
       Server.find_by_name(name)

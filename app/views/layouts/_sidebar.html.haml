@@ -38,7 +38,7 @@
           %span
             %i.icon-user
     %li.server
-      %select.chzn-select{:"data-placeholder" => @server.name}
+      %select.chzn-select{:"data-placeholder" => @server.name, :tabindex => "2"}
         %option{:value=>""}
         - @servers.each do |server|
           %option{:value => server}= server
@@ -89,6 +89,9 @@
           %a.wood{:href => "#", :rel => "wood"}
             %i.icon-circle
             Ancient Wood
+          %a.mith{:href => "#", :rel => "mith"}
+            %i.icon-circle
+            Mithril 
           %a.mithril{:href => "#", :rel => "mithril"}
             %i.icon-circle
             Rich Mithril
@@ -131,6 +134,7 @@
       .nodes
         %a.ore.active{:href => "#", :rel => "orichalcum ore"} Orichalcum Ore
         %a.wood{:href => "#", :rel => "ancient wood"} Ancient Wood
+        %a.mith{:href => "#", :rel => "mithril"} Mithril
         %a.mithril{:href => "#", :rel => "rich mithril"} Rich Mithril
         %a.omnom{:href => "#", :rel => "omnomnom berry"} Omnomberry
         %a.raspberry{:href => "#", :rel => "raspberry"} Raspberry
