@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: 'orrmaps';
-  src: url("../font/orrmaps.eot?21910431");
-  src: url("../font/orrmaps.eot?21910431#iefix") format('embedded-opentype'), url("../font/orrmaps.woff?21910431") format('woff'), url("../font/orrmaps.ttf?21910431") format('truetype'), url("../font/orrmaps.svg?21910431#orrmaps") format('svg');
+  src: url("../font/orrmaps.eot?49158945");
+  src: url("../font/orrmaps.eot?49158945#iefix") format('embedded-opentype'), url("../font/orrmaps.woff?49158945") format('woff'), url("../font/orrmaps.ttf?49158945") format('truetype'), url("../font/orrmaps.svg?49158945#orrmaps") format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -13,7 +13,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'orrmaps';
-    src: url('../font/orrmaps.svg?21910431#orrmaps') format('svg');
+    src: url('../font/orrmaps.svg?49158945#orrmaps') format('svg');
   }
 }
 */
@@ -51,6 +51,8 @@
 .icon-cog:before { content: '\2699'; } /* '⚙' */
 .icon-attention:before { content: '\26a0'; } /* '⚠' */
 .icon-cog-alt:before { content: '\26ef'; } /* '⛯' */
+.icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-mail-1:before { content: '\e804'; } /* '' */
 .icon-pencil:before { content: '\270e'; } /* '✎' */
 .icon-cancel:before { content: '\2715'; } /* '✕' */
 .icon-asterisk:before { content: '\2731'; } /* '✱' */

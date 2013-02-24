@@ -110,10 +110,11 @@ body {
     bottom: 0;
     a {
       font-size: 16px;
-      padding: 10px;
+      padding: 8px 10px;
       display: block;
       color: #bbb;
       position: relative;
+      border-top: 1px solid #252525;
       i {
         color: #666;
         margin-right: 3px;

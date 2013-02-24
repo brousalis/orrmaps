@@ -12,6 +12,8 @@
 .icon-cog:before { content: '\2699'; } /* '⚙' */
 .icon-attention:before { content: '\26a0'; } /* '⚠' */
 .icon-cog-alt:before { content: '\26ef'; } /* '⛯' */
+.icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-mail-1:before { content: '\e804'; } /* '' */
 .icon-pencil:before { content: '\270e'; } /* '✎' */
 .icon-cancel:before { content: '\2715'; } /* '✕' */
 .icon-asterisk:before { content: '\2731'; } /* '✱' */
