@@ -1,0 +1,15 @@
+#reset.modal{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    %h3 
+      Delete all markers?
+  .modal-body
+    %p 
+      Guild Wars 2 updated on 
+      %strong #{last_reset.strftime("%A, %B %d")},
+      and your map is now out of date. You last updated on 
+      %strong #{@map.updated_at.strftime("%A, %B %d")}.
+      Do you want to delete all of your markers?
+  .actions
+    %a.del_all{:href => "#"} Yes
+    %a.cancel{:href => "#", "data-dismiss" => "modal"} No

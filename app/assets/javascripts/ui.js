@@ -122,6 +122,7 @@ orrmaps.ui = function() {
 
   var init = function() {
     $('#pick').modal({keyboard: false});
+    $('#reset').modal({backdrop: false, keyboard: false});
     $('.chzn-search input').focus();
     $('#sign_in').modal({keyboard: false, show: false});
     $('input').attr('autocomplete', 'off');

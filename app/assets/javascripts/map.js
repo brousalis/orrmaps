@@ -34,6 +34,10 @@ orrmaps.map = function() {
       if(confirm("This will delete all markers on your map. Are you sure?"))
         clear_markers();
     });
+    $('#reset .del_all').live('click', function() {
+      clear_markers();
+      $('#reset').modal('hide');
+    });
     $('li.dall, li.toolshed').css('display','inline-block');
     $('#sidebar li.toolshed').css('display','block');
   };
@@ -481,6 +485,7 @@ orrmaps.map = function() {
     place_marker: place_marker,
     get_marker_id: get_marker_id,
     click_handler: click_handler,
+    clear_markers: clear_markers,
     set_map_id: set_map_id,
     toolshed: toolshed,
     icon: icon,

@@ -1,5 +1,7 @@
 #main{:role => "main"}
   #map
 
+= render :partial => 'layouts/reset' if @map.updated_at < last_reset
+
 :javascript
   orrmaps.index.init();

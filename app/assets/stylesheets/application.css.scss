@@ -137,7 +137,7 @@ body {
       position: relative;
       &.logo { border: none; }
       &.map_stats {
-
+        background: #1f1f1f;
       }
       &.server {
         border-top: 1px solid #222;
@@ -259,7 +259,32 @@ body {
 
   .close { color: #fff; }
 
+  .actions {
+    position: relative;
+    width: 100%;
+    display: block;
+    a {
+      @include border-radius(4px);
+      font-family: "proxima-nova";
+      width: 46%;
+      background-image: none;
+      margin: 5px 15px;
+      background: #f25e06;
+      padding: 8px 0px;
+      float: left;
+      text-align: center;
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      &:first-child { margin-right: 6px; }
+      &:last-child { margin-left: 6px; }
+      &:active {
+        position: relative; top: 1px;
+      } 
+    } 
+  }
   .modal-header {
+    h3 { font-weight: normal; }
     color: #fff;
     border-color: #222;
 
@@ -481,14 +506,13 @@ body {
   a { 
     display: inline-block;
     padding: 5px 37px !important;
-    @include opacity(0.5);
     font-size: 14px !important;
     @include nodes();
     margin: 0;
     background-size: 20px !important; 
     background-position: 9px 3px !important;
     &:hover { background-color: #000 !important; }
-    &.active { background-color: #000; color: #fff !important; @include opacity(1);  }
+    &.active { background-color: #000; color: #fff; @include opacity(1);  }
     &.active:hover { background-color: #000 !important; color: #fff !important; @include opacity(1);  }
   }
 } 
@@ -500,6 +524,7 @@ body {
     i { position: absolute; right: 10px; }
     &:hover { background-color: #151515 !important; }
     &.active {
+      color: #bbb !important;
       background-color: #151515;
       &:hover { background-color: #151515 !important; }
       i:before { content: '\f10c' }
@@ -511,7 +536,7 @@ body {
   padding: 0;
   width:650px !important;
   a { font-weight: bold; color: #f90 !important }
-  h3 span { color: #444; float: right; margin-right: 20px; font-size: 20px; }
+  h3 span { font-weight: bold; color: #444; float: right; margin-right: 20px; font-size: 20px; }
   .modal-body {
     max-height: 480px;
     padding: 0;
@@ -595,13 +620,18 @@ body {
   }
 }
 
+#reset {
+  background: rgba(0,0,0,0.8);
+  p { margin-bottom: 0px; }
+  padding-bottom: 10px;
+}
+
 #pick {
   background: rgba(0,0,0,0.8);
   margin: -250px 0 0 -120px;
   @include border-radius(4px);
   width: 255px;
   input { background-color: #000; }
-  h3 { font-weight: normal; }
   .modal-header { padding: 10px;}
   .modal-body { padding: 0; }
   .chzn-default { display: none; }
