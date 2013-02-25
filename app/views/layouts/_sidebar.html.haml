@@ -141,7 +141,7 @@
         Delete all
 
     .ads
-      - unless current_user.donor?
+      - unless (current_user && current_user.donor?)
         .ads-wrapper{:style => "margin-left: 10px;"}
           :javascript
             google_ad_client = "ca-pub-8553243631007251";
