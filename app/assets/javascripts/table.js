@@ -158,7 +158,7 @@ $(document).ready(function() {
     "sAjaxSource": "/rated",
     "bRetrieve": true,
     "fnServerParams": function ( aoData ) {
-      aoData.push({ name: "server", value: $('.chzn-default span').text() });
+      aoData.push({ name: "server", value: $('#sidebar .chzn-default span').text() });
     },
     "aoColumns": [
             { "asSorting": [ "desc", "asc" ] },

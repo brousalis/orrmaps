@@ -147,6 +147,7 @@ orrmaps.ui = function() {
       values[this.name] = $(this).val();
     });
     values["server"] = $('.chzn-default span').text();
+
     return values;
   };
 
