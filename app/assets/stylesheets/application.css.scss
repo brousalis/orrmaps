@@ -152,7 +152,7 @@ body {
             i { color: #fff; }
           }
         }
-        .chzn-drop { display: none; }
+        .chzn-drop { overflow-x: hidden !important; display: none; }
         .chzn-drop.open { display: block; }
         .icon {
           top: 11px;
@@ -634,7 +634,7 @@ body {
   width: 255px;
   input { background-color: #000; }
   .modal-header { padding: 10px;}
-  .modal-body { padding: 0; }
+  .modal-body { overflow-x: hidden; padding: 0; }
   .chzn-default { display: none; }
   .chzn-results li { border-top: 1px solid #252525 }
   .chzn-search input, .chzn-drop { width: 255px !important; }
