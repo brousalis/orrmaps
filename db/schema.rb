@@ -11,16 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224235757) do
-
-  create_table "likes", :force => true do |t|
-    t.integer  "map_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "likes", ["map_id"], :name => "map_id_likes_ix"
+ActiveRecord::Schema.define(:version => 20130225005301) do
 
   create_table "maps", :force => true do |t|
     t.datetime "updated"
@@ -72,18 +63,5 @@ ActiveRecord::Schema.define(:version => 20130224235757) do
     t.string   "twitter"
     t.integer  "donor",         :default => 0
   end
-
-  create_table "votes", :force => true do |t|
-    t.integer  "votable_id"
-    t.string   "votable_type"
-    t.integer  "voter_id"
-    t.string   "voter_type"
-    t.boolean  "vote_flag"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "votes", ["votable_id", "votable_type"], :name => "index_votes_on_votable_id_and_votable_type"
-  add_index "votes", ["voter_id", "voter_type"], :name => "index_votes_on_voter_id_and_voter_type"
 
 end
