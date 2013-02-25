@@ -39,7 +39,7 @@ namespace :o do
     $redis.flushdb
   end
 
-  task :donor => environment do |t, args|
+  task :donor => :environment do |t, args|
     name = args[0]
     donation = args[1]
 
@@ -47,7 +47,9 @@ namespace :o do
     user.donor = donation
     user.save
 
-    puts "Added #{name} to the donors list, with $#{donation}"
+    user.reload
+
+    puts "Added #{user.name} to the donors list, with $#{user.donor} - quick check: #{user.donor?}"
   end
 end
 
