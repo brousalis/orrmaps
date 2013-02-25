@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031030800) do
+ActiveRecord::Schema.define(:version => 20130224235757) do
 
   create_table "likes", :force => true do |t|
     t.integer  "map_id"
@@ -40,13 +40,12 @@ ActiveRecord::Schema.define(:version => 20121031030800) do
   end
 
   create_table "points", :force => true do |t|
-    t.float    "latitude",                  :null => false
-    t.float    "longitude",                 :null => false
-    t.string   "marker_id",                 :null => false
+    t.float    "latitude",   :null => false
+    t.float    "longitude",  :null => false
+    t.string   "marker_id",  :null => false
     t.integer  "map_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "votes",      :default => 5, :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "icon"
     t.integer  "note_id"
   end
@@ -62,13 +61,16 @@ ActiveRecord::Schema.define(:version => 20121031030800) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name",          :null => false
-    t.string   "password_hash", :null => false
-    t.string   "password_salt", :null => false
+    t.string   "name",                         :null => false
+    t.string   "password_hash",                :null => false
+    t.string   "password_salt",                :null => false
     t.integer  "map_id"
     t.integer  "server_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "email"
+    t.string   "twitter"
+    t.integer  "donor",         :default => 0
   end
 
   create_table "votes", :force => true do |t|

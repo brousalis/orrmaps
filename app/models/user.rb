@@ -1,6 +1,6 @@
 require 'bcrypt'
 class User < ActiveRecord::Base
-  attr_accessible :name, :password, :server, :map
+  attr_accessible :name, :password, :server, :map, :donor, :email, :twitter
   attr_accessor :password
 
   belongs_to :server
@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
+
+  def donor?
+    return true if self.donor > 0
+    return false if self.donor == 0
+  end
 
   def authenticate(name, password)
     user = User.find_by_name(name)

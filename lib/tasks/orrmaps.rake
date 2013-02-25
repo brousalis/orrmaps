@@ -38,6 +38,17 @@ namespace :o do
     puts "Likes destroyed"
     $redis.flushdb
   end
+
+  task :donor => environment do |t, args|
+    name = args[0]
+    donation = args[1]
+
+    user = User.find_by_name(name)
+    user.donor = donation
+    user.save
+
+    puts "Added #{name} to the donors list, with $#{donation}"
+  end
 end
 
 def reset_maps(time)
