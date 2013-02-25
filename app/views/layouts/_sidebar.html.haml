@@ -143,7 +143,7 @@
     .ads
       - unless (current_user && current_user.donor?)
         .ads-wrapper{:style => "margin-left: 10px;"}
-          :javascript
+          %script{:type => "text/javascript"}
             google_ad_client = "ca-pub-8553243631007251";
             google_ad_slot = "5896449244";
             google_ad_width = 200;
