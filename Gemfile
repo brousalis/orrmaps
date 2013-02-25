@@ -18,7 +18,6 @@ gem 'newrelic_rpm'
 gem 'dalli'
 gem 'taps'
 gem 'metamagic'
-gem 'heroku'
 gem 'redis'
 gem 'nokogiri'
 
