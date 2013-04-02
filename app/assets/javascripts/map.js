@@ -19,7 +19,7 @@ orrmaps.map = function() {
       $(this).addClass('active');
     });
     $('#nodes a').live('click', function() {
-      $('#nodes aa').removeClass('active');
+      $('#nodes a').removeClass('active');
       icon_type = $(this).attr('class');
       $(this).addClass('active');
       $('.node').css('background', $(this).css('background'));
