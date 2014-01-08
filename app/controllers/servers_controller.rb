@@ -24,6 +24,12 @@ class ServersController < ApplicationController
     @servers = servers
   end
 
+  def all
+    name = params[:name].titleize.sub("Of", "of")
+    @server = find_server(name)
+    @servers = servers
+  end
+
   def rated
     server = params[:server] == "" ? session[:server] : params[:server]
     @server = find_server(server || "Jade Quarry")

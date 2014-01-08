@@ -21,7 +21,7 @@
             %i.icon-pencil
             = "/maps/#{map.id}"
         %li.mlist.thin
-          %a.map_list{:href => "#rated", :"data-toggle" => "modal"}
+          %a.map_list{:href => "/server/#{underscore(@server.name)}/all"}
             %i.icon-air
         %li.filter.thin
           %a#filter{:href => "#", :"data-target" => "#", :"data-toggle" => "dropdown"}
@@ -43,9 +43,6 @@
               %a.mithril{:href => "#", :rel => "mithril"}
                 %i.icon-circle
                 Rich Mithril
-              %a.omnom{:href => "#", :rel => "omnom"}
-                %i.icon-circle
-                Omnomberry
               %a.raspberry{:href => "#", :rel => "raspberry"}
                 %i.icon-circle
                 Raspberry
@@ -95,7 +92,6 @@
                   %li
                     %h1 Cooking
                     %div
-                      %a.omnom{:href => "#", :rel => "omnomnom berry"}
                       %a.raspberry{:href => "#", :rel => "raspberry"}
                       %a.oritruffle{:href => "#", :rel => "orrian truffle"}
                       %a.snowtruffle{:href => "#", :rel => "snow truffle"}
@@ -118,6 +114,6 @@
           Last reset
           = last_reset.strftime("%m/%d")
         %li
-          %a.map_list{:href => "#rated", :"data-toggle" => "modal"}
+          %a.map_list{:href => "/server/#{underscore(@server.name)}/all"}
             %i.icon-air
             Map list

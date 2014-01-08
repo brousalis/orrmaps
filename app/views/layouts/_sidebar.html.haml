@@ -54,7 +54,7 @@
           %i.icon-globe
           = t("navigation.server_map")
     %li
-      %a.map_list{:href => "#rated", :"data-toggle" => "modal"}
+      %a.map_list{:href => "/server/#{underscore(session[:server])}/all"}
         %i.icon-air
         Map list
     - if current_user
@@ -85,9 +85,6 @@
           %a.mithril{:href => "#", :rel => "mithril"}
             %i.icon-circle
             Rich Mithril
-          %a.omnom{:href => "#", :rel => "omnom"} 
-            %i.icon-circle
-            Omnomberry
           %a.raspberry{:href => "#", :rel => "raspberry"} 
             %i.icon-circle
             Raspberry
@@ -126,7 +123,6 @@
         %a.wood{:href => "#", :rel => "ancient wood"} Ancient Wood
         %a.mith{:href => "#", :rel => "mithril"} Mithril
         %a.mithril{:href => "#", :rel => "rich mithril"} Rich Mithril
-        %a.omnom{:href => "#", :rel => "omnomnom berry"} Omnomberry
         %a.raspberry{:href => "#", :rel => "raspberry"} Raspberry
         %a.oritruffle{:href => "#", :rel => "orrian truffle"} Orrian Truffle
         %a.snowtruffle{:href => "#", :rel => "snow truffle"} Snow Truffle

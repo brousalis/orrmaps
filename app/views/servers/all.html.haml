@@ -1,0 +1,15 @@
+#main.rated{:role => "main"}
+  #map
+    #rated
+      .modal-header
+        %h3
+          = t("rated.header", :server => @server.name)
+          %span last reset #{last_reset.strftime("%m/%d")}
+      .modal-body
+        %table.table
+          %thead
+            %tr
+              %th= t("rated.table.name")
+              %th= t("rated.table.points")
+              %th Last updated 
+              %th= t("rated.table.updated_at")

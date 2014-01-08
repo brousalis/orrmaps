@@ -148,8 +148,8 @@ if ( $.fn.DataTable.TableTools ) {
 /* Table initialisation */
 $(document).ready(function() {
   $('#rated table').dataTable( {
-    "sDom": "t<'row bot'<'search'f><'page'p>>",
-    "sPaginationType": "bootstrap",
+    "sDom": "<'search'f>t<'row bot'<'page'p>>",
+    "bPaginate": false,
     "bLengthChange": false,
     "bFilter": true,
     "bSort": true,

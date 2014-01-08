@@ -18,5 +18,6 @@ Orrore::Application.routes.draw do
 
   match "/map/:id" => "maps#map"
   match "/server/:name" => "servers#show"
+  match "/server/:name/all" => "servers#all"
   match "/user/delete" => "users#delete"
 end
