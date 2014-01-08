@@ -28,17 +28,6 @@ class ServersController < ApplicationController
     name = params[:name].titleize.sub("Of", "of")
     @server = find_server(name)
     @servers = servers
-
-    sorted = users_on_server(@server).collect do |user|
-      [
-        "<a href='/maps/#{user.map.id}'>#{user.name}</a>",
-        points_for_map(user.map),
-        time_ago(user.map.updated_at),
-        (Time.now-user.map.updated_at).to_i,
-        (user.map.updated_at < last_reset)
-      ]
-    end
-    @data = sorted
   end
 
   def rated

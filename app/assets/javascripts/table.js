@@ -144,4 +144,39 @@ if ( $.fn.DataTable.TableTools ) {
   } );
 }
 
-
+$(function() {
+  $('#rated table').dataTable( {
+      "sDom": "<'search'f>t<'row bot'<'page'p>>",
+      "bPaginate": false,
+      "bLengthChange": false,
+      "bFilter": true,
+      "bSort": true,
+      "bInfo": false,
+      "bAutoWidth": false,
+      "bRetrieve": true,
+      "sAjaxSource": "/rated",
+      "fnServerParams": function ( aoData ) {
+        aoData.push({ name: "server", value: $('#sidebar .chzn-default span').text() });
+      },
+      "aoColumns": [
+              { "asSorting": [ "desc", "asc" ] },
+              { "asSorting": [ "desc", "asc" ] },
+              { "iDataSort": 3, "asSorting": [ "desc", "asc" ] },
+              { "bVisible": false, "asSorting": [ "desc", "asc" ] }, 
+      ],
+      "aaSorting": [[3, 'asc']],
+      "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+        if(aData[4] == true)
+          $(nRow).css('opacity', '0.2');
+      },
+      "oLanguage": {
+        "sEmptyTable": "There are no maps with any points!",
+        "sLengthMenu": "_MENU_ records per page",
+        "oPaginate": {
+        "sPrevious": "" ,
+        "sNext": "" ,
+        },
+        "sSearch": "" 
+      }
+    } );
+});

@@ -1,4 +1,20 @@
-= render :partial => 'layouts/rated'
-
-:javascript
-  $('#rated').modal({show: true, keyboard: false, backdrop: "static"})  
+#main.rated{:role => "main"}
+  #map
+    #rated
+      %h1 Sorry, we couldn't find your map!
+      %p 
+        Unfortunately, I can no longer afford to pay for the extra space needed to store maps forever. Therefore, maps 2 weeks out of date are deleted. Please consider
+        %a{:target => "_blank", :href => "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=Q8FJSMSQHRMDA&lc=US&item_name=orrmaps&item_number=42&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"} donating
+        \- every little bit helps! 
+      .modal-header
+        %h3
+          = t("rated.header", :server => @server.name)
+          %span last reset #{last_reset.strftime("%m/%d")}
+      .modal-body
+        %table.table
+          %thead
+            %tr
+              %th= t("rated.table.name")
+              %th= t("rated.table.points")
+              %th Last updated 
+              %th= t("rated.table.updated_at")
