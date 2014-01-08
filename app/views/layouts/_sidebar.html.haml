@@ -54,9 +54,15 @@
           %i.icon-globe
           = t("navigation.server_map")
     %li
-      %a.map_list{:href => "/server/#{underscore(session[:server])}/all"}
-        %i.icon-air
-        Map list
+      - if session[:server]
+        %a.map_list{:href => "/server/#{underscore(session[:server])}/all"}
+          %i.icon-air
+          Map list
+      - else
+        %a.map_list{:href => "/server/jade_quarry/all"}
+          %i.icon-air
+          Map list
+
     - if current_user
       %li
         %a.your_map{:href => "/"}
