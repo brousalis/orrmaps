@@ -534,7 +534,7 @@ body {
 }
 
 .a-all .navbar { display: none; }
-#main.rated #map { background: #111; }
+#main.rated #map { background: #111; overflow-y: scroll }
 #rated {
   padding: 0;
   width:650px !important;
@@ -548,6 +548,7 @@ body {
   .modal-body {
     max-height: 480px;
     padding: 0;
+    overflow-y: visible;
     .row { margin: 15px 0 10px; padding: 0px 15px }
     .page { float:right; width:auto; }
     .search { float:right; margin-bottom: 20px; }
